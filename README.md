@@ -15,3 +15,7 @@ Understand the proofs of the theoretical garantees. Summarize the main steps and
 ### Experiments
 Implement the main probabilistic algorithms in Matlab. Identify interesting problems where these problems can be useful.
 Test theoretical guarantees experimentally to check how loose the bounds are. Test the main algorithms.
+- Stage A: Randomized Range Finder + Error Estimation
+- Stage B: Direct SVD
+- Stage A: Structure Random Matrix
+- Stage B: Row extraction

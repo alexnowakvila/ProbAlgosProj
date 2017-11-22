@@ -1,0 +1,605 @@
+\relax 
+\citation{DS00:Top-10}
+\citation{Ste00:Decompositional-Approach}
+\newlabel{sec:intro}{{1}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Overview}{1}}
+\citation{BMD09:Improved-Approximation,drineas_kannan_mahoney,kannan_vempala,random1,papadimitriou,tygert_szlam,2008_rokhlin_leastsquares,Sar06:Improved-Approximation,random2}
+\newlabel{remark:queasy}{{1.1}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Approximation by low-rank matrices}{2}}
+\citation{HTF08:Elements-Statistical}
+\citation{HTF08:Elements-Statistical}
+\citation{coifman_PNAS_diffusionmaps}
+\citation{2008_rokhlin_leastsquares}
+\citation{rokhlin1997}
+\citation{hackbusch2003}
+\citation{engquist_wavelethomogenization}
+\newlabel{eq:lowrank}{{1.1}{3}}
+\newlabel{sec:framework}{{1.2}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Matrix approximation framework}{3}}
+\newlabel{eqn:Q-form}{{1.2}{3}}
+\citation{Mir60:Symmetric-Gauge}
+\newlabel{sec:sketchofalgorithm}{{1.3}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Randomized algorithms}{4}}
+\newlabel{sec:modelproblem}{{1.3.1}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.1}Problem formulations}{4}}
+\newlabel{eq:fixed_precision}{{1.3}{4}}
+\newlabel{eqn:mirsky}{{1.4}{4}}
+\citation{golub}
+\citation{Sar06:Improved-Approximation,random1,papadimitriou}
+\newlabel{eq:fixed_rank}{{1.5}{5}}
+\newlabel{sec:intuition}{{1.3.2}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.2}Intuition}{5}}
+\newlabel{eq:samples}{{1.6}{5}}
+\newlabel{sec:proto-algorithm}{{1.3.3}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.3}A prototype algorithm}{5}}
+\citation{Bjo96:Numerical-Methods,golub,trefethen_bau}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}A comparison between randomized and traditional techniques}{6}}
+\citation{gu_rrqr}
+\citation{tygert_szlam}
+\newlabel{sec:intro_fits in RAM}{{1.4.1}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.4.1}A general dense matrix that fits in fast memory}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.4.2}A matrix for which matrix--vector products can be evaluated rapidly}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.4.3}A general dense matrix stored in slow memory or streamed}{7}}
+\citation{gu_rrqr}
+\citation{random1}
+\newlabel{sec:prototheorem}{{1.5}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Performance analysis}{8}}
+\newlabel{eq:intro_err_bd}{{1.8}{8}}
+\newlabel{eq:intro_err_prob}{{1.9}{8}}
+\citation{tygert_szlam}
+\newlabel{sec:pca}{{1.6}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.6}Example: Randomized SVD}{9}}
+\newlabel{eq:intro_pca_bd}{{1.10}{10}}
+\newlabel{eqn:pca_trunc}{{1.11}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.7}Outline of paper}{10}}
+\newlabel{sec:related}{{2}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related work and historical context}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Randomized matrix approximation}{10}}
+\citation{McS04:Spectral-Methods}
+\citation{Asp09:Subsampling-Algorithms}
+\citation{achlioptas_mcsherry}
+\citation{Kar99:Random-Sampling,Kar00:Minimum-Cuts}
+\citation{AHK06:Fast-Random}
+\citation{SS08:Graph-Sparsification,GT09:Error-Bounds}
+\citation{Rus64:Auerbachs-Theorem}
+\citation{CM09:Selecting-Maximum}
+\citation{gu_rrqr}
+\citation{FKV98:Fast-Monte-Carlo,kannan_vempala}
+\citation{DFKVV99:Clustering-Large,DFKVV04:Clustering-Large,drineas_kannan_mahoney}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Sparsification}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}Column selection methods}{11}}
+\newlabel{eqn:CSSP-rel}{{2.1}{11}}
+\citation{drineas_kannan_mahoney}
+\citation{RV07:Sampling-Large}
+\citation{DMMS09:Faster-Least}
+\citation{Tro08:Conditioning-Random}
+\citation{CR07:Sparsity-Incoherence}
+\citation{DRVW06:Matrix-Approximation,deshpande_vempala}
+\citation{Har06:Matrix-Approximation}
+\citation{DR10:Efficient-Volume}
+\citation{RV07:Sampling-Large}
+\citation{DMM06:Subspace-Sampling,DMM08:Relative-Error}
+\citation{BMD09:Improved-Approximation,BDM08:Unsupervised-Feature}
+\citation{BMD09:Improved-Approximation}
+\citation{PRTV98:Latent-Semantic,papadimitriou}
+\citation{kannan_vempala}
+\citation{Sar06:Improved-Approximation}
+\citation{AC06:Approximate-Nearest}
+\citation{NDT09:Fast-Efficient}
+\citation{RV07:Sampling-Large}
+\newlabel{eqn:CSSP-abs}{{2.2}{12}}
+\newlabel{eqn:colselect-rel}{{2.3}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.3}Approximation by dimension reduction}{12}}
+\citation{random2}
+\citation{liberty_diss,2007_PNAS}
+\citation{random1}
+\citation{tygert_szlam}
+\citation{2010_outofcore}
+\citation{Szlam10}
+\citation{roweis}
+\citation{2009_clarkson_woodruff}
+\citation{mskel,GTZ97:Theory-Pseudoskeleton,Ste99:Four-Algorithms}
+\citation{MD09:CUR-Matrix}
+\citation{DKM06:Fast-Monte-Carlo-III}
+\citation{DMM08:Relative-Error}
+\citation{SXZF08:Less-Is-More}
+\citation{random1,tygert_szlam}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.4}Approximation by submatrices}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.5}Other numerical problems}{13}}
+\citation{DM07:Randomized-Algorithm}
+\citation{DKM06:Fast-Monte-Carlo-I,Sar06:Improved-Approximation}
+\citation{BW08:Sparse-Representation}
+\citation{Nee09:Randomized-Kaczmarz,SV08:Randomized-Kaczmarz}
+\citation{DMMS09:Faster-Least,Sar06:Improved-Approximation}
+\citation{BD09:Random-Projections}
+\citation{2008_rokhlin_leastsquares}
+\citation{Cla05:Subgradient-Sampling}
+\citation{DDHKM09:Sampling-Algorithms}
+\citation{SV07:Efficient-Subspace}
+\citation{DVDD98:Data-Compression}
+\citation{CRT06:Robust-Uncertainty}
+\citation{Don06:Compressed-Sensing}
+\citation{RFP09:Guaranteed-Minimum}
+\citation{CR08:Exact-Matrix}
+\citation{CT09:Power-Convex}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.6}Compressive sampling}{14}}
+\citation{JL84:Extensions-Lipschitz}
+\citation{Bou85:Lipschitz-Embedding}
+\citation{IM98:Approximate-Nearest,Kle97:Two-Algorithms,KOR00:Efficient-Search}
+\citation{FKV98:Fast-Monte-Carlo,PRTV98:Latent-Semantic}
+\citation{DG99:Elementary-Proof,IM98:Approximate-Nearest,Mat02:Lectures-Discrete}
+\citation{Ach03:Database-Friendly}
+\citation{AC06:Approximate-Nearest}
+\citation{AL08:Fast-Dimension,LAS08:Dense-Fast}
+\citation{2007_PNAS,random2}
+\citation{Mut05:Data-Streams}
+\citation{DKM06:Fast-Monte-Carlo-I}
+\citation{2009_clarkson_woodruff}
+\citation{Mut05:Data-Streams}
+\citation{AMS96:Space-Complexity,AGMS99:Tracking-Join}
+\citation{NG47:Numerical-Inverting,NG51:Numerical-Inverting-II}
+\citation{Dix83:Estimating-Extremal}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Origins}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Random embeddings}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Data streams}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Numerical linear algebra}{15}}
+\citation{KW92:Estimating-Largest,LW98:Estimating-Largest}
+\citation{PP95:Randomizing-FFT}
+\citation{DDH07:Fast-Linear}
+\citation{Le_Parker_1999}
+\citation{metropolis_ulam}
+\citation{Bei00:Metropolis-Algorithm}
+\citation{Dvo61:Some-Results}
+\citation{Mil71:New-Proof}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}Scientific computing}{16}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.5}Geometric functional analysis}{16}}
+\citation{Kas77:Widths-Certain}
+\citation{GG84:Widths-Euclidean}
+\citation{Can06:Compressive-Sampling}
+\citation{JL84:Extensions-Lipschitz}
+\citation{Bou85:Lipschitz-Embedding}
+\citation{Car85:Inequalities-Bernstein-Jackson}
+\citation{Bar93:Universal-Approximation,LBW96:Efficient-Agnostic,SS08:Low-l1-Norm,RR08:Random-Features}
+\citation{DS02:Local-Operator}
+\citation{Rud99:Random-Vectors}
+\citation{RV07:Sampling-Large}
+\newlabel{sec:LA_prel}{{3}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Linear algebraic preliminaries}{17}}
+\newlabel{sec:basic_def}{{3.1}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Basic definitions}{17}}
+\citation{golub}
+\citation{golub}
+\citation{Mir60:Symmetric-Gauge}
+\newlabel{sec:standard_factorizations}{{3.2}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Standard matrix factorizations}{18}}
+\newlabel{sec:QR}{{3.2.1}{18}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}The pivoted QR factorization}{18}}
+\newlabel{sec:SVD}{{3.2.2}{18}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}The singular value decomposition (SVD)}{18}}
+\citation{golub}
+\citation{mskel,gu_rrqr}
+\citation{Pan00:Existence-Computation}
+\citation{CM09:Selecting-Maximum}
+\citation{golub,trefethen_bau}
+\citation{gu_rrqr,mskel}
+\newlabel{eq:svd_property}{{3.1}{19}}
+\newlabel{sec:ID}{{3.2.3}{19}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}The interpolative decomposition (ID)}{19}}
+\newlabel{sec:standard_techniques}{{3.3}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Techniques for computing standard factorizations}{19}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Computing the full decomposition}{19}}
+\newlabel{sec:partial_decomp}{{3.3.2}{19}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Computing partial decompositions}{19}}
+\citation{gu_rrqr}
+\citation{Mir60:Symmetric-Gauge}
+\citation{mskel}
+\newlabel{eq:QRE}{{3.2}{20}}
+\newlabel{sec:converting}{{3.3.3}{20}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Converting from one partial factorization to another}{20}}
+\citation{gu_rrqr}
+\newlabel{sec:krylov}{{3.3.4}{21}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Krylov-subspace methods}{21}}
+\newlabel{eq:Tkrylov}{{3.3}{21}}
+\newlabel{sec:algorithm}{{4}{21}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Stage A: Randomized schemes for approximating the range}{21}}
+\citation{bjorck94}
+\newlabel{sec:proto_revisited}{{4.1}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}The proto-algorithm revisited}{22}}
+\newlabel{eq:cost_basic}{{4.1}{22}}
+\newlabel{sec:howmuchoversampling}{{4.2}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}The number of samples required}{22}}
+\newlabel{eq:numsamperr}{{4.2}{22}}
+\citation{random1}
+\citation{Dix83:Estimating-Extremal}
+\citation{2007_PNAS,random2}
+\citation{random2}
+\newlabel{sec:aposteriori}{{4.3}{23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}A posteriori error estimation}{23}}
+\newlabel{eq:errorest}{{4.3}{23}}
+\citation{2007_PNAS}
+\newlabel{thm:aposteriori}{{4.1}{24}}
+\newlabel{remark:better_errorestimate}{{4.1}{24}}
+\newlabel{sec:algorithm1}{{4.4}{24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Error estimation (almost) for free}{24}}
+\newlabel{eqn:err_est_err_bd}{{4.4}{24}}
+\citation{Gu-personal,tygert_szlam}
+\citation{roweis}
+\citation{golub}
+\newlabel{sec:powerscheme}{{4.5}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}A modified scheme for matrices whose singular values decay slowly}{25}}
+\citation{stewart1969,Szlam10}
+\citation{random2}
+\citation{Sar06:Improved-Approximation}
+\citation{gu_rrqr}
+\newlabel{eq:svds_of_B}{{4.5}{26}}
+\newlabel{remark:roundoff_in_powerscheme}{{4.3}{26}}
+\newlabel{sec:ailonchazelle}{{4.6}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}An accelerated technique for general dense matrices}{26}}
+\citation{random2}
+\citation{liberty_diss}
+\citation{2008_rokhlin_leastsquares}
+\newlabel{eq:def_srft}{{4.6}{27}}
+\newlabel{eq:cost_SRFT}{{4.7}{27}}
+\citation{2008_rokhlin_leastsquares}
+\citation{golub}
+\newlabel{remark:SRFT_fixedaccuracy}{{4.4}{28}}
+\newlabel{remark:random_givens}{{4.6}{28}}
+\newlabel{eq:random_Givens}{{4.8}{28}}
+\newlabel{sec:otherfactorizations}{{5}{29}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Stage B: Construction of standard factorizations}{29}}
+\newlabel{eq:fixed_precision2}{{5.1}{29}}
+\newlabel{sec:postSVD}{{5.1}{29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Factorizations based on forming $\bm  {Q}^{*}\bm  {A}$ directly}{29}}
+\newlabel{eq:noworse}{{5.2}{29}}
+\newlabel{rem:truncation}{{5.1}{30}}
+\newlabel{sec:postrows}{{5.2}{30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Postprocessing via row extraction}{30}}
+\newlabel{eq:A_ID}{{5.3}{30}}
+\newlabel{eq:ID}{{5.4}{30}}
+\newlabel{eq:saathoff}{{5.5}{30}}
+\newlabel{lem:convert_ID}{{5.1}{30}}
+\newlabel{eq:IPA}{{5.6}{30}}
+\newlabel{eq:desch}{{5.7}{31}}
+\newlabel{eq:utes}{{5.8}{31}}
+\newlabel{eq:utes2}{{5.9}{31}}
+\newlabel{remark:use_Y_in rowextraction}{{5.2}{31}}
+\citation{DM05:Nystrom-Method}
+\newlabel{remark:errors}{{5.3}{32}}
+\newlabel{sec:postsym}{{5.3}{32}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Postprocessing an Hermitian matrix}{32}}
+\newlabel{eq:twoepsilon}{{5.10}{32}}
+\newlabel{sec:postpsd}{{5.4}{32}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Postprocessing a positive semidefinite matrix}{32}}
+\newlabel{eq:psd_standard}{{5.11}{32}}
+\newlabel{eq:psd_nystrom}{{5.12}{32}}
+\citation{DM05:Nystrom-Method}
+\citation{random2}
+\citation{2009_clarkson_woodruff}
+\newlabel{sec:onepass}{{5.5}{33}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Single-pass algorithms}{33}}
+\newlabel{eq:tuss}{{5.13}{34}}
+\newlabel{eq:milk1}{{5.14}{34}}
+\newlabel{eq:milk2}{{5.15}{34}}
+\citation{random2}
+\newlabel{sec:costs}{{6}{35}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Computational costs}{35}}
+\newlabel{sec:generalmat}{{6.1}{35}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}General matrices that fit in core memory}{35}}
+\newlabel{eq:fastalg-err-heur}{{6.1}{35}}
+\citation{rokhlin1997}
+\citation{golub}
+\citation{golub}
+\citation{2007_numerical_recipes}
+\newlabel{sec:fastmatvec}{{6.2}{36}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Matrices for which matrix--vector products can be rapidly evaluated}{36}}
+\newlabel{eq:sparsealg-cost}{{6.2}{36}}
+\newlabel{eq:sparsealg-error}{{6.3}{36}}
+\newlabel{eq:sparsealg-cost2}{{6.4}{36}}
+\newlabel{eq:sparsealg-error2}{{6.5}{36}}
+\citation{golub}
+\citation{papadimitriou,kannan_vempala,drineas_kannan_mahoney}
+\citation{2009_clarkson_woodruff}
+\newlabel{sec:outofcore}{{6.3}{37}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}General matrices stored in slow memory or streamed}{37}}
+\citation{2010_outofcore}
+\newlabel{sec:parallel}{{6.4}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Gains from parallelization}{38}}
+\newlabel{sec:numerics}{{7}{38}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Numerical examples}{38}}
+\newlabel{sec:example1}{{7.1}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Two matrices with rapidly decaying singular values}{38}}
+\newlabel{eq:int_op_laplace}{{7.1}{38}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces {\rm  Configurations for physical problems.} {\rm  (a)} The contours $\Gamma _{1}$ (red) and $\Gamma _{2}$ (blue) for the integral operator\nobreakspace  {}\textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 7.1\hbox {}\unskip \@@italiccorr )}}. {\rm  (b)} Geometry of the lattice problem associated with matrix $\bm  {B}$ in\nobreakspace  {}\S  7.1\hbox {}.}}{39}}
+\newlabel{fig:contours}{{7.1}{39}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces {\rm  Approximating a Laplace integral operator.} One execution of Algorithm 4.2\hbox {} for the $200\times 200$ input matrix $\bm  {A}$ described in \S  7.1\hbox {}. The number $\ell $ of random samples varies along the horizontal axis; the vertical axis measures the base-10 logarithm of error magnitudes. The dashed vertical lines mark the points during execution at which Figure\nobreakspace  {}7.3\hbox {} provides additional statistics.}}{40}}
+\newlabel{fig:laplace_fullrun}{{7.2}{40}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces {\rm  Error statistics for approximating a Laplace integral operator.} 2,000 trials of Algorithm\nobreakspace  {}4.2\hbox {} applied to a $200 \times 200$ matrix approximating the integral operator \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 7.1\hbox {}\unskip \@@italiccorr )}}. The panels isolate the moments at which $\ell = 25, 50, 75, 100$ random samples have been drawn. Each solid point compares the estimated error $f_{\ell }$ versus the actual error $e_{\ell }$ in one trial; the open circle indicates the trial detailed in Figure\nobreakspace  {}7.2\hbox {}. The dashed line identifies the minimal error $\sigma _{\ell +1}$, and the solid line marks the contour where the error estimator would equal the actual error.}}{40}}
+\newlabel{fig:laplace_stats}{{7.3}{40}}
+\citation{Szlam08,Shen08}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces {\rm  Approximating the inverse of a discrete Laplacian.} One execution of Algorithm 4.2\hbox {} for the $1596\times 532$ input matrix $\bm  {B}$ described in \S  7.1\hbox {}. See Figure\nobreakspace  {}7.2\hbox {} for notations.}}{41}}
+\newlabel{fig:lattice_fullrun}{{7.4}{41}}
+\newlabel{sec:graph_laplacian}{{7.2}{41}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}A large, sparse, noisy matrix arising in image processing}{41}}
+\citation{feret1,feret2}
+\citation{1987_eigenfaces}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces {\rm  Approximating a graph Laplacian.} For varying exponent $q$, one trial of the power scheme, Algorithm\nobreakspace  {}4.3\hbox {}, applied to the $9025 \times 9025$ matrix $\bm  {A}$ described in\nobreakspace  {}\S  7.2\hbox {}. {\rm  [Left]} Approximation errors as a function of the number $\ell $ of random samples. {\rm  [Right]} Estimates for the 100 largest eigenvalues given $\ell = 100$ random samples compared with the 100 largest eigenvalues of $\bm  {A}$.}}{42}}
+\newlabel{fig:Meyer}{{7.5}{42}}
+\newlabel{sec:eigenfaces}{{7.3}{42}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Eigenfaces}{42}}
+\newlabel{sec:num_SRFT}{{7.4}{43}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Performance of structured random matrices}{43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.6}{\ignorespaces {\rm  Computing eigenfaces.} For varying exponent $q$, one trial of the power scheme, Algorithm\nobreakspace  {}4.3\hbox {}, applied to the $98\tmspace  +\thinmuskip {.1667em}304 \times 7254$ matrix $\bm  {A}$ described in\nobreakspace  {}\S  7.3\hbox {}. {\rm  (Left)} Approximation errors as a function of the number $\ell $ of random samples. The red line indicates the minimal errors as estimated by the singular values computed using $\ell = 100$ and $q=3$. {\rm  (Right)} Estimates for the 100 largest eigenvalues given $\ell = 100$ random samples.}}{44}}
+\newlabel{fig:eigenfaces}{{7.6}{44}}
+\citation{id_dist}
+\citation{BMD09:Improved-Approximation}
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces {\rm  Computational times for a partial SVD.} The time, in seconds, required to compute the $\ell $ leading components in the SVD of an $n\times n$ matrix using each of the methods from\nobreakspace  {}\S  7.4\hbox {}. The last row indicates the time needed to obtain a full SVD.}}{45}}
+\newlabel{tab:runtimes}{{7.1}{45}}
+\newlabel{rem:fortran}{{7.1}{45}}
+\newlabel{eq:basicerror}{{7.2}{45}}
+\citation{Bha97:Matrix-Analysis,HJ85:Matrix-Analysis}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.7}{\ignorespaces {\rm  Acceleration factor.} The relative cost of computing an $\ell $-term partial SVD of an $n \times n$ Gaussian matrix using {\tt  direct}, a benchmark classical algorithm, versus each of the three competitors described in\nobreakspace  {}\S  7.4\hbox {}. The solid red curve shows the speedup using an SRFT test matrix, and the dotted blue curve shows the speedup with a Gaussian test matrix. The dashed green curve indicates that a full SVD computation using classical methods is substantially {\em  slower}. Table\nobreakspace  {}7.1\hbox {} reports the absolute runtimes that yield the circled data points.}}{46}}
+\newlabel{fig:speedup}{{7.7}{46}}
+\newlabel{sec:lin-alg-prelim}{{8}{46}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Theoretical preliminaries}{46}}
+\newlabel{sec:psd}{{8.1}{46}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Positive semidefinite matrices}{46}}
+\citation{HJ85:Matrix-Analysis}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.8}{\ignorespaces {\rm  Empirical probability density functions for the error in Algorithm 4.1\hbox {}.} As described in\nobreakspace  {}\S  7.4\hbox {}, the algorithm is implemented with four distributions for the random test matrix and used to approximate the $200\times 200$ input matrix obtained by discretizing the integral operator \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 7.1\hbox {}\unskip \@@italiccorr )}}. The four panels capture the empirical error distribution for each version of the algorithm at the moment when $\ell = 25, 50, 75, 100$ random samples have been drawn.}}{47}}
+\newlabel{fig:SRFT_errors}{{7.8}{47}}
+\newlabel{eq:norm_psd}{{8.1}{47}}
+\newlabel{eq:psdle_norm}{{8.2}{47}}
+\newlabel{prop:conjugation}{{8.1}{47}}
+\citation{HJ85:Matrix-Analysis}
+\citation{HJ85:Matrix-Analysis}
+\newlabel{prop:perturb-inv}{{8.2}{48}}
+\newlabel{prop:spec-norm-sum}{{8.3}{48}}
+\newlabel{eqn:M-matrix}{{8.3}{48}}
+\newlabel{sec:orthproj}{{8.2}{48}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Orthogonal projectors}{48}}
+\newlabel{eqn:orth-proj-form}{{8.3}{48}}
+\newlabel{prop:conj-proj}{{8.4}{48}}
+\citation{Bha97:Matrix-Analysis}
+\newlabel{prop:proj-range}{{8.5}{49}}
+\newlabel{prop:proj-power}{{8.6}{49}}
+\newlabel{eq:trivial}{{8.4}{49}}
+\newlabel{eqn:power-claim}{{8.5}{49}}
+\citation{BMD09:Improved-Approximation}
+\newlabel{sec:basic_err}{{9}{50}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Error bounds via linear algebra}{50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Setup}{50}}
+\newlabel{eq:mugpart}{{9.1}{50}}
+\newlabel{eq:def_Omegaj}{{9.2}{50}}
+\newlabel{eqn:X-struct}{{9.1}{50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}A deterministic error bound for the proto-algorithm}{50}}
+\citation{BMD09:Improved-Approximation}
+\citation{Ste77:Perturbation-Pseudoinverse}
+\newlabel{thm:main-error-bd}{{9.1}{51}}
+\newlabel{eq:main-error-bd}{{9.3}{51}}
+\newlabel{eqn:aux-matrices}{{9.4}{51}}
+\newlabel{eqn:A-to-A0}{{9.5}{51}}
+\newlabel{eqn:aux-error-bd}{{9.6}{51}}
+\newlabel{eqn:IPW}{{9.7}{52}}
+\newlabel{eqn:ZF-def}{{9.8}{52}}
+\newlabel{eqn:proj-norm-sq}{{9.9}{52}}
+\newlabel{eqn:block-proj}{{9.10}{52}}
+\citation{Gu-personal,tygert_szlam}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Analysis of the power scheme}{53}}
+\citation{Mir60:Symmetric-Gauge}
+\newlabel{thm:power-method}{{9.2}{54}}
+\newlabel{eq:simple}{{9.11}{54}}
+\newlabel{sec:truncation-analysis}{{9.4}{54}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Analysis of truncated SVD}{54}}
+\newlabel{thm:truncation}{{9.3}{54}}
+\newlabel{eqn:rand-pca-1}{{9.12}{54}}
+\citation{Gor85:Some-Inequalities,Gor88:Gaussian-Processes}
+\citation{Mui82:Aspects-Multivariate}
+\citation{CD05:Condition-Numbers}
+\citation{Bog98:Gaussian-Measures}
+\citation{LT91:Probability-Banach}
+\citation{Led01:Concentration-Measure}
+\newlabel{eqn:rand-pca-2}{{9.13}{55}}
+\newlabel{sec:gaussians}{{10}{55}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Gaussian test matrices}{55}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Technical background}{55}}
+\newlabel{prop:scaled-gauss}{{10.1}{55}}
+\newlabel{eqn:avg-fnormsq}{{10.1}{55}}
+\newlabel{eqn:avg-specnorm}{{10.2}{55}}
+\newlabel{prop:gauss-inv-expect}{{10.2}{55}}
+\newlabel{eqn:avg-inv-fnormsq}{{10.3}{55}}
+\newlabel{eqn:avg-inv-specnorm}{{10.4}{55}}
+\citation{CD05:Condition-Numbers}
+\citation{EY36:Approximation-One}
+\newlabel{prop:gauss-tail}{{10.3}{56}}
+\newlabel{prop:gauss-inv-tails}{{10.4}{56}}
+\newlabel{eqn:tail-inv-fnormsq}{{10.5}{56}}
+\newlabel{eqn:tail-inv-specnorm}{{10.6}{56}}
+\newlabel{sec:gauss-avg-case}{{10.2}{56}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Average-case analysis of Algorithm\nobreakspace  {}4.1\hbox {}}{56}}
+\newlabel{thm:avg-frob-error-gauss}{{10.5}{56}}
+\citation{Mir60:Symmetric-Gauge}
+\newlabel{thm:avg-spec-error-gauss}{{10.6}{57}}
+\newlabel{sec:prob-failure}{{10.3}{58}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Probabilistic error bounds for Algorithm\nobreakspace  {}4.1\hbox {}}{58}}
+\newlabel{thm:tail-frob-error-gauss}{{10.7}{58}}
+\citation{random1}
+\newlabel{thm:tail-spec-error-gauss}{{10.8}{59}}
+\newlabel{cor:tail-spec-error-gauss}{{10.9}{59}}
+\newlabel{sec:avg-power-method}{{10.4}{60}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Analysis of the power scheme}{60}}
+\newlabel{cor:power-method-spec-gauss}{{10.10}{60}}
+\newlabel{eqn:power-method-weak-bd}{{10.4}{61}}
+\newlabel{sec:SRFTs}{{11}{61}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}SRFT test matrices}{61}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Construction and Properties}{61}}
+\citation{Tro10:Improved-Analysis}
+\citation{Tro10:Improved-Analysis}
+\citation{MR95:Randomized-Algorithms}
+\newlabel{thm:SRFT-spec-bd}{{11.1}{62}}
+\newlabel{rem:coupon}{{11.2}{62}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Performance guarantees}{62}}
+\newlabel{thm:SRFT}{{11.2}{62}}
+\citation{Gor85:Some-Inequalities,Gor88:Gaussian-Processes}
+\citation{LT91:Probability-Banach}
+\citation{DS02:Local-Operator}
+\citation{CD05:Condition-Numbers}
+\citation{random1}
+\newlabel{app:gauss}{{A}{64}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Expectation of norms}{64}}
+\newlabel{prop:gauss-frob-expect}{{A.1}{64}}
+\newlabel{prop:gauss-spec-expect}{{A.2}{64}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Spectral norm of pseudoinverse}{64}}
+\newlabel{prop:inv-gauss-spec-tail}{{A.3}{64}}
+\newlabel{eqn:gauss-lower-bd-2}{{A.3}{64}}
+\citation{Mui82:Aspects-Multivariate}
+\newlabel{prop:inv-gauss-spec-expect}{{A.4}{65}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Frobenius norm of pseudoinverse}{65}}
+\newlabel{prop:inv-gauss-frob-expect}{{A.5}{65}}
+\newlabel{thm:inv-gauss-frob-tail}{{A.6}{65}}
+\citation{Ede89:Eigenvalues-Condition}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.3.1}Technical background}{66}}
+\newlabel{prop:bidiag}{{A.7}{66}}
+\newlabel{eqn:bidiag}{{A.1}{66}}
+\newlabel{prop:chisq-moment-exact}{{A.8}{66}}
+\citation{Sza90:Spaces-Large}
+\newlabel{lem:chisq-moment}{{A.9}{67}}
+\newlabel{lem:inv-chisq-moment}{{A.10}{67}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.3.2}Proof of Theorem\nobreakspace  {}A.6\hbox {}}{68}}
+\bibdata{matrix-approx-revised-bib}
+\bibcite{Ach03:Database-Friendly}{1}
+\bibcite{achlioptas_mcsherry}{2}
+\bibcite{AC06:Approximate-Nearest}{3}
+\bibcite{AL08:Fast-Dimension}{4}
+\bibcite{AGMS99:Tracking-Join}{5}
+\bibcite{AMS96:Space-Complexity}{6}
+\bibcite{AHK06:Fast-Random}{7}
+\bibcite{Bar93:Universal-Approximation}{8}
+\bibcite{Bei00:Metropolis-Algorithm}{9}
+\bibcite{BW08:Sparse-Representation}{10}
+\bibcite{Bha97:Matrix-Analysis}{11}
+\bibcite{bjorck94}{12}
+\bibcite{Bjo96:Numerical-Methods}{13}
+\bibcite{Bog98:Gaussian-Measures}{14}
+\bibcite{Bou85:Lipschitz-Embedding}{15}
+\bibcite{BD09:Random-Projections}{16}
+\bibcite{BMD09:Improved-Approximation}{17}
+\bibcite{BDM08:Unsupervised-Feature}{18}
+\bibcite{CR07:Sparsity-Incoherence}{19}
+\bibcite{CRT06:Robust-Uncertainty}{20}
+\bibcite{Can06:Compressive-Sampling}{21}
+\bibcite{CR08:Exact-Matrix}{22}
+\bibcite{CT09:Power-Convex}{23}
+\bibcite{Car85:Inequalities-Bernstein-Jackson}{24}
+\bibcite{CD05:Condition-Numbers}{25}
+\bibcite{mskel}{26}
+\bibcite{CM09:Selecting-Maximum}{27}
+\bibcite{Cla05:Subgradient-Sampling}{28}
+\bibcite{2009_clarkson_woodruff}{29}
+\bibcite{coifman_PNAS_diffusionmaps}{30}
+\bibcite{DDHKM09:Sampling-Algorithms}{31}
+\bibcite{DG99:Elementary-Proof}{32}
+\bibcite{Asp09:Subsampling-Algorithms}{33}
+\bibcite{DS02:Local-Operator}{34}
+\bibcite{DDH07:Fast-Linear}{35}
+\bibcite{DR10:Efficient-Volume}{36}
+\bibcite{DRVW06:Matrix-Approximation}{37}
+\bibcite{deshpande_vempala}{38}
+\bibcite{Dix83:Estimating-Extremal}{39}
+\bibcite{DS00:Top-10}{40}
+\bibcite{Don06:Compressed-Sensing}{41}
+\bibcite{DVDD98:Data-Compression}{42}
+\bibcite{DFKVV04:Clustering-Large}{43}
+\bibcite{DFKVV99:Clustering-Large}{44}
+\bibcite{DKM06:Fast-Monte-Carlo-I}{45}
+\bibcite{drineas_kannan_mahoney}{46}
+\bibcite{DKM06:Fast-Monte-Carlo-III}{47}
+\bibcite{DM05:Nystrom-Method}{48}
+\bibcite{DM07:Randomized-Algorithm}{49}
+\bibcite{DMM06:Subspace-Sampling}{50}
+\bibcite{DMM08:Relative-Error}{51}
+\bibcite{DMMS09:Faster-Least}{52}
+\bibcite{Dvo61:Some-Results}{53}
+\bibcite{EY36:Approximation-One}{54}
+\bibcite{Ede89:Eigenvalues-Condition}{55}
+\bibcite{engquist_wavelethomogenization}{56}
+\bibcite{FKV98:Fast-Monte-Carlo}{57}
+\bibcite{kannan_vempala}{58}
+\bibcite{GG84:Widths-Euclidean}{59}
+\bibcite{GT09:Error-Bounds}{60}
+\bibcite{golub}{61}
+\bibcite{Gor85:Some-Inequalities}{62}
+\bibcite{Gor88:Gaussian-Processes}{63}
+\bibcite{GTZ97:Theory-Pseudoskeleton}{64}
+\bibcite{hackbusch2003}{65}
+\bibcite{rokhlin1997}{66}
+\bibcite{Gu-personal}{67}
+\bibcite{gu_rrqr}{68}
+\bibcite{2010_outofcore}{69}
+\bibcite{Har06:Matrix-Approximation}{70}
+\bibcite{HTF08:Elements-Statistical}{71}
+\bibcite{HJ85:Matrix-Analysis}{72}
+\bibcite{IM98:Approximate-Nearest}{73}
+\bibcite{JL84:Extensions-Lipschitz}{74}
+\bibcite{Kar99:Random-Sampling}{75}
+\bibcite{Kar00:Minimum-Cuts}{76}
+\bibcite{Kas77:Widths-Certain}{77}
+\bibcite{Kle97:Two-Algorithms}{78}
+\bibcite{KW92:Estimating-Largest}{79}
+\bibcite{KOR00:Efficient-Search}{80}
+\bibcite{Le_Parker_1999}{81}
+\bibcite{Led01:Concentration-Measure}{82}
+\bibcite{LT91:Probability-Banach}{83}
+\bibcite{LBW96:Efficient-Agnostic}{84}
+\bibcite{LW98:Estimating-Largest}{85}
+\bibcite{liberty_diss}{86}
+\bibcite{LAS08:Dense-Fast}{87}
+\bibcite{2007_PNAS}{88}
+\bibcite{MD09:CUR-Matrix}{89}
+\bibcite{id_dist}{90}
+\bibcite{random1}{91}
+\bibcite{Szlam10}{92}
+\bibcite{Mat02:Lectures-Discrete}{93}
+\bibcite{McS04:Spectral-Methods}{94}
+\bibcite{metropolis_ulam}{95}
+\bibcite{Mil71:New-Proof}{96}
+\bibcite{Mir60:Symmetric-Gauge}{97}
+\bibcite{MR95:Randomized-Algorithms}{98}
+\bibcite{Mui82:Aspects-Multivariate}{99}
+\bibcite{Mut05:Data-Streams}{100}
+\bibcite{Nee09:Randomized-Kaczmarz}{101}
+\bibcite{NDT09:Fast-Efficient}{102}
+\bibcite{Pan00:Existence-Computation}{103}
+\bibcite{PRTV98:Latent-Semantic}{104}
+\bibcite{papadimitriou}{105}
+\bibcite{PP95:Randomizing-FFT}{106}
+\bibcite{feret1}{107}
+\bibcite{feret2}{108}
+\bibcite{2007_numerical_recipes}{109}
+\bibcite{RR08:Random-Features}{110}
+\bibcite{RFP09:Guaranteed-Minimum}{111}
+\bibcite{tygert_szlam}{112}
+\bibcite{2008_rokhlin_leastsquares}{113}
+\bibcite{roweis}{114}
+\bibcite{Rud99:Random-Vectors}{115}
+\bibcite{RV07:Sampling-Large}{116}
+\bibcite{Rus64:Auerbachs-Theorem}{117}
+\bibcite{Sar06:Improved-Approximation}{118}
+\bibcite{SS08:Low-l1-Norm}{119}
+\bibcite{Shen08}{120}
+\bibcite{SV07:Efficient-Subspace}{121}
+\bibcite{1987_eigenfaces}{122}
+\bibcite{SS08:Graph-Sparsification}{123}
+\bibcite{stewart1969}{124}
+\bibcite{Ste77:Perturbation-Pseudoinverse}{125}
+\bibcite{Ste99:Four-Algorithms}{126}
+\bibcite{Ste00:Decompositional-Approach}{127}
+\bibcite{SV08:Randomized-Kaczmarz}{128}
+\bibcite{SXZF08:Less-Is-More}{129}
+\bibcite{Sza90:Spaces-Large}{130}
+\bibcite{Szlam08}{131}
+\bibcite{trefethen_bau}{132}
+\bibcite{Tro08:Conditioning-Random}{133}
+\bibcite{Tro10:Improved-Analysis}{134}
+\bibcite{NG47:Numerical-Inverting}{135}
+\bibcite{NG51:Numerical-Inverting-II}{136}
+\bibcite{random2}{137}
+\bibstyle{siam}

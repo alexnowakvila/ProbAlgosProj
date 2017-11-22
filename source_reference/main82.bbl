@@ -1,0 +1,645 @@
+\begin{thebibliography}{100}
+
+\bibitem{Ach03:Database-Friendly}
+{\sc D.~Achlioptas}, {\em Database-friendly random projections:
+  {J}ohnson--{L}indenstrauss with binary coins}, J. Comput. System Sci., 66
+  (2003), pp.~671--687.
+
+\bibitem{achlioptas_mcsherry}
+{\sc D.~Achlioptas and F.~McSherry}, {\em Fast computation of low-rank matrix
+  approximations}, J. Assoc. Comput. Mach., 54 (2007), pp.~Art. 9, 19 pp.
+\newblock (electronic).
+
+\bibitem{AC06:Approximate-Nearest}
+{\sc N.~Ailon and B.~Chazelle}, {\em Approximate nearest neighbors and the fast
+  {J}ohnson--{L}indenstrauss transform}, in STOC '06: Proc. 38th Ann. ACM Symp.
+  Theory of Computing, 2006, pp.~557--563.
+
+\bibitem{AL08:Fast-Dimension}
+{\sc N.~Ailon and E.~Liberty}, {\em Fast dimension reduction using {R}ademacher
+  series on dual {BCH} codes}, in STOC '08: Proc. 40th Ann. ACM Symp. Theory of
+  Computing, 2008.
+
+\bibitem{AGMS99:Tracking-Join}
+{\sc N.~Alon, P.~Gibbons, Y.~Matias, and M.~Szegedy}, {\em Tracking join and
+  self-join sizes in limited storage}, in Proc. 18th ACM Symp. Principles of
+  Database Systems (PODS), 1999, pp.~10--20.
+
+\bibitem{AMS96:Space-Complexity}
+{\sc N.~Alon, Y.~Matias, and M.~Szegedy}, {\em The space complexity of
+  approximating frequency moments}, in STOC '96: Proc. 28th Ann. ACM Symp.
+  Theory of Algorithms, 1996, pp.~20--29.
+
+\bibitem{AHK06:Fast-Random}
+{\sc S.~Arora, E.~Hazan, and S.~Kale}, {\em A fast random sampling algorithm
+  for sparsifying matrices}, in Approximation, randomization and combinatorial
+  optimization: Algorithms and Techniques, Springer, Berlin, 2006,
+  pp.~272--279.
+
+\bibitem{Bar93:Universal-Approximation}
+{\sc A.~R. Barron}, {\em Universal approximation bounds for superpositions of a
+  sigmoidal function}, IEEE Trans. Inform. Theory, 39 (1993), pp.~930--945.
+
+\bibitem{Bei00:Metropolis-Algorithm}
+{\sc I.~Beichl}, {\em The {M}etropolis algorithm}, Comput. Sci. Eng.,  (2000),
+  pp.~65--69.
+
+\bibitem{BW08:Sparse-Representation}
+{\sc M.-A. Bellabas and P.~J. Wolfe}, {\em On sparse representations of linear
+  operators and the approximation of matrix products}, in Proc. 42nd Ann. Conf.
+  Information Sciences and Systems (CISS), 2008, pp.~258--263.
+
+\bibitem{Bha97:Matrix-Analysis}
+{\sc R.~Bhatia}, {\em Matrix Analysis}, no.~169 in GTM, Springer, Berlin, 1997.
+
+\bibitem{bjorck94}
+{\sc {\AA}.~Bj{\"o}rck}, {\em Numerics of {Gram--Schmidt} orthogonalization},
+  Linear Algebra Appl., 197--198 (1994), pp.~297--316.
+
+\bibitem{Bjo96:Numerical-Methods}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Numerical Methods
+  for Least Squares Problems}, SIAM, Philadelphia, PA, 1996.
+
+\bibitem{Bog98:Gaussian-Measures}
+{\sc V.~Bogdanov}, {\em Gaussian Measures}, American Mathematical Society,
+  Providence, RI, 1998.
+
+\bibitem{Bou85:Lipschitz-Embedding}
+{\sc J.~Bourgain}, {\em On {L}ipschitz embedding of finite metric spaces in
+  {H}ilbert space}, Israel J. Math., 52 (1985), pp.~46--52.
+
+\bibitem{BD09:Random-Projections}
+{\sc C.~Boutsidis and P.~Drineas}, {\em Random projections for nonnegative
+  least squares}, Linear Algebra Appl., 431 (2009), pp.~760--771.
+
+\bibitem{BMD09:Improved-Approximation}
+{\sc C.~Boutsidis, P.~Drineas, and M.~W. Mahoney}, {\em An improved
+  approximation algorithm for the column subset selection problem}, in Proc.
+  20th Ann. ACM--SIAM Symp. Discrete Algorithms (SODA), 2009.
+
+\bibitem{BDM08:Unsupervised-Feature}
+{\sc C.~Boutsidis, M.~W. Mahoney, and P.~Drineas}, {\em Unsupervised feature
+  selection for principal components analysis}, in Proc. ACM SIGKDD Intl. Conf.
+  Knowledge Discovery and Data Mining (KDD), Aug. 2008.
+
+\bibitem{CR07:Sparsity-Incoherence}
+{\sc E.~Cand{\`e}s and J.~K. Romberg}, {\em Sparsity and incoherence in
+  compressive sampling}, Inverse Problems, 23 (2007), pp.~969--985.
+
+\bibitem{CRT06:Robust-Uncertainty}
+{\sc E.~Cand{\`e}s, J.~K. Romberg, and T.~Tao}, {\em Robust uncertainty
+  principles: {E}xact signal reconstruction from highly incomplete {F}ourier
+  information}, IEEE Trans. Inform. Theory, 52 (2006), pp.~489--509.
+
+\bibitem{Can06:Compressive-Sampling}
+{\sc E.~J. Cand{\`e}s}, {\em Compressive sampling}, in Proc. 2006 Intl. Cong.
+  Mathematicians, Madrid, 2006.
+
+\bibitem{CR08:Exact-Matrix}
+{\sc E.~J. Cand{\`e}s and B.~Recht}, {\em Exact matrix completion via convex
+  optimization}, Found. Comput. Math., 9 (2009), pp.~717--772.
+
+\bibitem{CT09:Power-Convex}
+{\sc E.~J. Cand{\`e}s and T.~Tao}, {\em The power of convex relaxation:
+  {N}ear-optimal matrix completion}, IEEE Trans. Inform. Theory, 56 (2010),
+  pp.~2053--2080.
+
+\bibitem{Car85:Inequalities-Bernstein-Jackson}
+{\sc B.~Carl}, {\em Inequalities of {B}ernstein--{J}ackson-type and the degree
+  of compactness in {B}anach spaces}, Ann. Inst. Fourier (Grenoble), 35 (1985),
+  pp.~79--118.
+
+\bibitem{CD05:Condition-Numbers}
+{\sc Z.~Chen and J.~J. Dongarra}, {\em Condition numbers of {G}aussian random
+  matrices}, SIAM J. Matrix Anal. Appl., 27 (2005), pp.~603--620.
+
+\bibitem{mskel}
+{\sc H.~Cheng, Z.~Gimbutas, P.-G. Martinsson, and V.~Rokhlin}, {\em On the
+  compression of low rank matrices}, SIAM J. Sci. Comput., 26 (2005),
+  pp.~1389--1404 (electronic).
+
+\bibitem{CM09:Selecting-Maximum}
+{\sc A.~{\c C}ivril and M.~Magdon-Ismail}, {\em On selecting a maximum volume
+  sub-matrix of a matrix and related problems}, Theoret. Comput. Sci., 410
+  (2009), pp.~4801--4811.
+
+\bibitem{Cla05:Subgradient-Sampling}
+{\sc K.~L. Clarkson}, {\em Subgradient and sampling algorithms for $\ell_1$
+  regression}, in Proc. 16th Ann. ACM--SIAM Symp. Discrete Algorithms (SODA),
+  2005, pp.~257--266.
+
+\bibitem{2009_clarkson_woodruff}
+{\sc K.~L. Clarkson and D.~P. Woodruff}, {\em Numerical linear algebra in the
+  streaming model}, in STOC '09: Proc. 41st Ann. ACM Symp. Theory of Computing,
+  2009.
+
+\bibitem{coifman_PNAS_diffusionmaps}
+{\sc R.~R. Coifman, S.~Lafon, A.~B. Lee, M.~Maggioni, B.~Nadler, F.~Warner, and
+  S.~W. Zucker}, {\em {Geometric diffusions as a tool for harmonic analysis and
+  structure definition of data: Diffusion maps}}, Proc. Natl. Acad. Sci. USA,
+  102 (2005), pp.~7426--7431.
+
+\bibitem{DDHKM09:Sampling-Algorithms}
+{\sc A.~Dasgupta, P.~Drineas, B.~Harb, R.~Kumar, and M.~W. Mahoney}, {\em
+  Sampling algorithms and coresets for $\ell_p$ regression}, SIAM J. Comput.,
+  38 (2009), pp.~2060--2078.
+
+\bibitem{DG99:Elementary-Proof}
+{\sc S.~Dasgupta and A.~Gupta}, {\em An elementary proof of the
+  {J}ohnson--{L}indenstrauss lemma}, Computer Science Dept. Tech. Report
+  99-006, Univ. California at Berkeley, Mar. 1999.
+
+\bibitem{Asp09:Subsampling-Algorithms}
+{\sc A.~d'Aspremont}, {\em Subsampling algorithms for semidefinite
+  programming}.
+\newblock Available at \url{arXiv:0803.1990}, Apr. 2009.
+
+\bibitem{DS02:Local-Operator}
+{\sc K.~R. Davidson and S.~J. Szarek}, {\em Local operator theory, random
+  matrices, and {B}anach spaces}, in Handbook of Banach Space Geometry, W.~B.
+  Johnson and J.~Lindenstrauss, eds., Elsevier, 2002, pp.~317--366.
+
+\bibitem{DDH07:Fast-Linear}
+{\sc J.~Demmel, I.~Dumitriu, and O.~Holtz}, {\em Fast linear algebra is
+  stable}, Numer. Math., 108 (2007), pp.~59--91.
+
+\bibitem{DR10:Efficient-Volume}
+{\sc A.~Deshpande and L.~Rademacher}, {\em Efficient volume sampling for
+  row/column subset selection}.
+\newblock Available at \url{arXiv:1004.4057}, Apr. 2010.
+
+\bibitem{DRVW06:Matrix-Approximation}
+{\sc A.~Deshpande, L.~Rademacher, S.~Vempala, and G.~Wang}, {\em Matrix
+  approximation and projective clustering via volume sampling}, in Proc. 17th
+  Ann. ACM--SIAM Symp. Discrete Algorithms (SODA), 2006, pp.~1117--1126.
+
+\bibitem{deshpande_vempala}
+{\sc A.~Deshpande and S.~Vempala}, {\em Adaptive sampling and fast low-rank
+  matrix approximation}, in Approximation, randomization and combinatorial
+  optimization, vol.~4110 of LNCS, Springer, Berlin, 2006, pp.~292--303.
+
+\bibitem{Dix83:Estimating-Extremal}
+{\sc J.~D. Dixon}, {\em Estimating extremal eigenvalues and condition numbers
+  of matrices}, SIAM J. Numer. Anal., 20 (1983), pp.~812--814.
+
+\bibitem{DS00:Top-10}
+{\sc J.~Dongarra and F.~Sullivan}, {\em The top 10 algorithms}, Comput. Sci.
+  Eng.,  (2000), pp.~22--23.
+
+\bibitem{Don06:Compressed-Sensing}
+{\sc D.~L. Donoho}, {\em Compressed sensing}, IEEE Trans. Inform. Theory, 52
+  (2006), pp.~1289--1306.
+
+\bibitem{DVDD98:Data-Compression}
+{\sc D.~L. Donoho, M.~Vetterli, R.~A. DeVore, and I.~Daubechies}, {\em Data
+  compression and harmonic analysis}, IEEE Trans. Inform. Theory, 44 (1998),
+  pp.~2433--2452.
+
+\bibitem{DFKVV04:Clustering-Large}
+{\sc P.~Drineas, A.~Frieza, R.~Kannan, S.~Vempala, and V.~Vinay}, {\em
+  Clustering of large graphs via the singular value decomposition}, Machine
+  Learning, 56 (2004), pp.~9--33.
+
+\bibitem{DFKVV99:Clustering-Large}
+{\sc P.~Drineas, A.~Frieze, R.~Kannan, S.~Vempala, and V.~Vinay}, {\em
+  Clustering in large graphs and matrices}, in Proc. 10th Ann. ACM Symp. on
+  Discrete Algorithms (SODA), 1999, pp.~291--299.
+
+\bibitem{DKM06:Fast-Monte-Carlo-I}
+{\sc P.~Drineas, R.~Kannan, and M.~W. Mahoney}, {\em Fast {M}onte {C}arlo
+  algorithms for matrices. {I}. {A}pproximating matrix multiplication}, SIAM J.
+  Comput., 36 (2006), pp.~132--157.
+
+\bibitem{drineas_kannan_mahoney}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Fast {M}onte {C}arlo
+  algorithms for matrices. {II}. {C}omputing a low-rank approximation to a
+  matrix}, SIAM J. Comput., 36 (2006), pp.~158--183 (electronic).
+
+\bibitem{DKM06:Fast-Monte-Carlo-III}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Fast {M}onte {C}arlo
+  algorithms for matrices. {III}. {C}omputing a compressed approximate matrix
+  decomposition}, SIAM J. Comput., 36 (2006), pp.~184--206.
+
+\bibitem{DM05:Nystrom-Method}
+{\sc P.~Drineas and M.~W. Mahoney}, {\em On the {N}ystr{\"o}m method for
+  approximating a {G}ram matrix for improved kernel-based learning}, J. Mach.
+  Learn. Res., 6 (2005), pp.~2153--2175.
+
+\bibitem{DM07:Randomized-Algorithm}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A randomized
+  algorithm for a tensor-based generalization of the singular value
+  decomposition}, Linear Algebra Appl., 420 (2007), pp.~553--571.
+
+\bibitem{DMM06:Subspace-Sampling}
+{\sc P.~Drineas, M.~W. Mahoney, and S.~Muthukrishnan}, {\em Subspace sampling
+  and relative-error matrix approximation: Column-based methods}, in APPROX and
+  RANDOM 2006, J.~Diaz et~al., ed., no.~4110 in LNCS, Springer, Berlin, 2006,
+  pp.~321--326.
+
+\bibitem{DMM08:Relative-Error}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Relative-error {CUR}
+  matrix decompositions}, SIAM J. Matrix Anal. Appl., 30 (2008), pp.~844--881.
+
+\bibitem{DMMS09:Faster-Least}
+{\sc P.~Drineas, M.~W. Mahoney, S.~Muthukrishnan, and T.~Sarl{\'o}s}, {\em
+  Faster least squares approximation}, Num. Math.,  (2009).
+\newblock To appear. Available at \url{arXiv:0710.1435}.
+
+\bibitem{Dvo61:Some-Results}
+{\sc A.~Dvoretsky}, {\em Some results on convex bodies and {B}anach spaces}, in
+  Proc. Intl. Symp. Linear Spaces, Jerusalem, 1961, pp.~123--160.
+
+\bibitem{EY36:Approximation-One}
+{\sc C.~Eckart and G.~Young}, {\em The approximation of one matrix by another
+  of lower rank}, Psychometrika, 1 (1936), pp.~211--218.
+
+\bibitem{Ede89:Eigenvalues-Condition}
+{\sc A.~Edelman}, {\em Eigenvalues and condition numbers of random matrices},
+  {P}h.{D}. thesis, {M}athematics {D}ept., Massachusetts Inst. Tech., Boston,
+  MA, May 1989.
+
+\bibitem{engquist_wavelethomogenization}
+{\sc B.~Engquist and O.~Runborg}, {\em Wavelet-based numerical homogenization
+  with applications}, in Multiscale and Multiresolution Methods: Theory and
+  Applications, T.~J.~Barth et~al., ed., vol.~20 of LNCSE, Springer, Berlin,
+  2001, pp.~97--148.
+
+\bibitem{FKV98:Fast-Monte-Carlo}
+{\sc A.~Frieze, R.~Kannan, and S.~Vempala}, {\em Fast {M}onte {C}arlo
+  algorithms for finding low-rank approximations}, in Proc. 39th Ann. IEEE
+  Symp. Foundations of Computer Science (FOCS), 1998, pp.~370--378.
+
+\bibitem{kannan_vempala}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Fast {M}onte {C}arlo
+  algorithms for finding low-rank approximations}, J. Assoc. Comput. Mach., 51
+  (2004), pp.~1025--1041.
+\newblock (electronic).
+
+\bibitem{GG84:Widths-Euclidean}
+{\sc A.~Yu. Garnaev and E.~D. Gluskin}, {\em The widths of a {E}uclidean ball},
+  Dokl. Akad. Nauk. SSSR, 277 (1984), pp.~1048--1052.
+\newblock In Russian.
+
+\bibitem{GT09:Error-Bounds}
+{\sc A.~Gittens and J.~A. Tropp}, {\em Error bounds for random matrix
+  approximation schemes}.
+\newblock Available at \url{arXiv:0911.4108}.
+
+\bibitem{golub}
+{\sc G.~H. Golub and C.~F. van Loan}, {\em Matrix Computations}, Johns Hopkins
+  Studies in the Mathematical Sciences, Johns Hopkins Univ. Press, Baltimore,
+  MD, 3rd~ed., 1996.
+
+\bibitem{Gor85:Some-Inequalities}
+{\sc Y.~Gordon}, {\em Some inequalities for {G}aussian processes and
+  applications}, Israel J. Math., 50 (1985), pp.~265--289.
+
+\bibitem{Gor88:Gaussian-Processes}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em {G}aussian processes
+  and almost spherical sections of convex bodies}, Ann. Probab., 16 (1988),
+  pp.~180--188.
+
+\bibitem{GTZ97:Theory-Pseudoskeleton}
+{\sc S.~A. Goreinov, E.~E. Tyrtyshnikov, and N.~L. Zamarashkin}, {\em Theory of
+  pseudo-skeleton matrix approximations}, Linear Algebra Appl., 261 (1997),
+  pp.~1--21.
+
+\bibitem{hackbusch2003}
+{\sc L.~Grasedyck and W.~Hackbusch}, {\em Construction and arithmetics of
+  {$\mathcal{H}$}-matrices}, Computing, 70 (2003), pp.~295--334.
+
+\bibitem{rokhlin1997}
+{\sc L.~Greengard and V.~Rokhlin}, {\em A new version of the fast multipole
+  method for the {L}aplace equation in three dimensions}, Acta Numer., 17
+  (1997), pp.~229--269.
+
+\bibitem{Gu-personal}
+{\sc M.~Gu}, 2007.
+\newblock Personal communication.
+
+\bibitem{gu_rrqr}
+{\sc M.~Gu and S.~C. Eisenstat}, {\em Efficient algorithms for computing a
+  strong rank-revealing {QR} factorization}, SIAM J. Sci. Comput., 17 (1996),
+  pp.~848--869.
+
+\bibitem{2010_outofcore}
+{\sc N.~Halko, P.-G. Martinsson, Y.~Shkolnisky, and M.~Tygert}, {\em An
+  algorithm for the principal component analysis of large data sets}, 2010.
+
+\bibitem{Har06:Matrix-Approximation}
+{\sc S.~Har-Peled}, {\em Matrix approximation in linear time}.
+\newblock Manuscript. Available at
+  \url{http://valis.cs.uiuc.edu/~sariel/research/papers/05/lrank/}, 2006.
+
+\bibitem{HTF08:Elements-Statistical}
+{\sc T.~Hastie, R.~Tibshirani, and J.~Friedman}, {\em The Elements of
+  Statistical Learning: Data Mining, Inference, and Prediction}, Springer,
+  Berlin, 2nd~ed., 2008.
+
+\bibitem{HJ85:Matrix-Analysis}
+{\sc R.~A. Horn and C.~R. Johnson}, {\em Matrix Analysis}, Cambridge Univ.
+  Press, Cambridge, 1985.
+
+\bibitem{IM98:Approximate-Nearest}
+{\sc P.~Indyk and R.~Motwani}, {\em Approximate nearest neighbors: {T}oward
+  removing the curse of dimensionality}, in STOC '98: Proc. 30th Ann. ACM Symp.
+  Theory of Computing, 1998, pp.~604--613.
+
+\bibitem{JL84:Extensions-Lipschitz}
+{\sc W.~B. Johnson and J.~Lindenstrauss}, {\em Extensions of {L}ipschitz
+  mappings into a {H}ilbert space}, Contemp. Math., 26 (1984), pp.~189--206.
+
+\bibitem{Kar99:Random-Sampling}
+{\sc D.~R. Karger}, {\em Random sampling in cut, flow, and network design
+  problems}, Math. Oper. Res., 24 (1999), pp.~383--413.
+
+\bibitem{Kar00:Minimum-Cuts}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Minimum cuts in
+  near-linear time}, J. ACM, 47 (2000), pp.~46--76.
+
+\bibitem{Kas77:Widths-Certain}
+{\sc B.~S. Ka{\v s}in}, {\em On the widths of certain finite-dimensional sets
+  and classes of smooth functions}, Izv. Akad. Nauk. SSSR Ser. Mat., 41 (1977),
+  pp.~334--351, 478.
+\newblock In Russian.
+
+\bibitem{Kle97:Two-Algorithms}
+{\sc J.~Kleinberg}, {\em Two algorithms for nearest neighbor search in high
+  dimensions}, in STOC '97: Proc. 29th ACM Symp. Theory of Computing, 1997,
+  pp.~599--608.
+
+\bibitem{KW92:Estimating-Largest}
+{\sc J.~Kuczy{\'n}ski and H.~Wo{\'z}niakowski}, {\em Estimating the largest
+  eigenvalue by the power and {L}anczos algorithms with a random start}, SIAM
+  J. Matrix Anal. Appl., 13 (1992), pp.~1094--1122.
+
+\bibitem{KOR00:Efficient-Search}
+{\sc E.~Kushilevitz, R.~Ostrovski, and Y.~Rabani}, {\em Efficient search for
+  approximate nearest neighbor in high-dimensional spaces}, SIAM J. Comput., 30
+  (2000), pp.~457--474.
+
+\bibitem{Le_Parker_1999}
+{\sc D.~Le and D.~S. Parker}, {\em Using randomization to make recursive matrix
+  algorithms practical}, J. Funct. Programming, 9 (1999), pp.~605--624.
+
+\bibitem{Led01:Concentration-Measure}
+{\sc M.~Ledoux}, {\em The Concentration of Measure Phenomenon}, no.~89 in MSM,
+  American Mathematical Society, Providence, RI, 2001.
+
+\bibitem{LT91:Probability-Banach}
+{\sc M.~Ledoux and M.~Talagrand}, {\em Probability in Banach Spaces:
+  Isoperimetry and Processes}, Springer, Berlin, 1991.
+
+\bibitem{LBW96:Efficient-Agnostic}
+{\sc W.~S. Lee, P.~L. Bartlett, and R.~C. Williamson}, {\em Efficient agnostic
+  learning of neural networks with bounded fan-in}, IEEE Trans. Inform. Theory,
+  42 (1996), pp.~2118--2132.
+
+\bibitem{LW98:Estimating-Largest}
+{\sc Z.~Leyk and H.~Wo{\'z}niakowski}, {\em Estimating the largest eigenvector
+  by {L}anczos and polynomial algorithms with a random start}, Num. Linear
+  Algebra Appl., 5 (1998), pp.~147--164.
+
+\bibitem{liberty_diss}
+{\sc E.~Liberty}, {\em Accelerated dense random projections}, {P}h.{D}. thesis,
+  {C}omputer {S}cience {D}ept., Yale University, New Haven, CT, 2009.
+
+\bibitem{LAS08:Dense-Fast}
+{\sc E.~Liberty, N.~Ailon, and A.~Singer}, {\em Dense fast random projections
+  and lean {W}alsh transforms}, in APPROX and RANDOM 2008, A.~Goel et~al., ed.,
+  no.~5171 in LNCS, Springer, Berlin, 2008, pp.~512--522.
+
+\bibitem{2007_PNAS}
+{\sc E.~Liberty, F.~F.~Woolfe, P.-G. Martinsson, V.~Rokhlin, and M.~Tygert},
+  {\em Randomized algorithms for the low-rank approximation of matrices}, Proc.
+  Natl. Acad. Sci. USA, 104 (2007), pp.~20167--20172.
+
+\bibitem{MD09:CUR-Matrix}
+{\sc M.~W. Mahoney and P.~Drineas}, {\em {CUR} matrix decompositions for
+  improved data analysis}, Proc. Natl. Acad. Sci. USA, 106 (2009),
+  pp.~697--702.
+
+\bibitem{id_dist}
+{\sc P.-G. Martinsson, V.~Rokhlin, Y.~Shkolnisky, and M.~Tygert}, {\em {ID}: A
+  software package for low-rank approximation of matrices via interpolative
+  decompositions, version 0.2}, 2008.
+
+\bibitem{random1}
+{\sc P.-G. Martinsson, V.~Rokhlin, and M.~Tygert}, {\em A randomized algorithm
+  for the approximation of matrices}, Computer Science Dept. Tech. Report 1361,
+  Yale Univ., New Haven, CT, 2006.
+
+\bibitem{Szlam10}
+{\sc P.-G. Martinsson, A.~Szlam, and M.~Tygert}, {\em Normalized power
+  iterations for the computation of {SVD}}.
+\newblock Manuscript., Nov. 2010.
+
+\bibitem{Mat02:Lectures-Discrete}
+{\sc J.~Matou{\v s}ek}, {\em Lectures on Discrete Geometry}, Springer, Berlin,
+  2002.
+
+\bibitem{McS04:Spectral-Methods}
+{\sc F.~McSherry}, {\em Spectral Methods in Data Analysis}, {P}h.{D}. thesis,
+  {C}omputer {S}cience {D}ept., Univ. Washington, Seattle, WA, 2004.
+
+\bibitem{metropolis_ulam}
+{\sc N.~Metropolis and S.~Ulam}, {\em The {M}onte {C}arlo method}, J. Amer.
+  Statist. Assoc., 44 (1949), pp.~335--341.
+
+\bibitem{Mil71:New-Proof}
+{\sc V.~D. Milman}, {\em A new proof of {A.}~{D}voretsky's theorem on
+  cross-sections of convex bodies}, Funkcional. Anal. i Prilo{\v z}en, 5
+  (1971), pp.~28--37.
+
+\bibitem{Mir60:Symmetric-Gauge}
+{\sc L.~Mirsky}, {\em Symmetric gauge functions and unitarily invariant norms},
+  Quart. J. Math. Oxford Ser. (2), 11 (1960), pp.~50--59.
+
+\bibitem{MR95:Randomized-Algorithms}
+{\sc R.~Motwani and P.~Raghavan}, {\em Randomized Algorithms}, Cambridge Univ.
+  Press, Cambridge, 1995.
+
+\bibitem{Mui82:Aspects-Multivariate}
+{\sc R.~J. Muirhead}, {\em Aspects of Multivariate Statistical Theory}, Wiley,
+  New York, NY, 1982.
+
+\bibitem{Mut05:Data-Streams}
+{\sc S.~Muthukrishnan}, {\em Data Streams: Algorithms and Applications}, Now
+  Publ., Boston, MA, 2005.
+
+\bibitem{Nee09:Randomized-Kaczmarz}
+{\sc D.~Needell}, {\em Randomized {K}aczmarz solver for noisy linear systems},
+  BIT, 50 (2010), pp.~395--403.
+
+\bibitem{NDT09:Fast-Efficient}
+{\sc N.~H. Nguyen, T.~T. Do, and T.~D. Tran}, {\em A fast and efficient
+  algorithm for low-rank approximation of a matrix}, in STOC '09: Proc. 41st
+  Ann. ACM Symp. Theory of Computing, 2009.
+
+\bibitem{Pan00:Existence-Computation}
+{\sc C.-T. Pan}, {\em On the existence and computation of rank-revealing {LU}
+  factorizations}, Linear Algebra Appl., 316 (2000), pp.~199--222.
+
+\bibitem{PRTV98:Latent-Semantic}
+{\sc C.~H. Papadimitriou, P.~Raghavan, H.~Tamaki, and S.~Vempala}, {\em Latent
+  semantic indexing: {A} probabilistic analysis}, in Proc. 17th ACM Symp.
+  Principles of Database Systems (PODS), 1998.
+
+\bibitem{papadimitriou}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Latent semantic
+  indexing: {A} probabilistic analysis}, J. Comput. System Sci., 61 (2000),
+  pp.~217--235.
+
+\bibitem{PP95:Randomizing-FFT}
+{\sc D.~S. Parker and B.~Pierce}, {\em The randomizing {FFT}: {A}n alternative
+  to pivoting in {G}aussian elimination}, Computer Science Dept. Tech. Report
+  CSD 950037, Univ. California at Los Angeles, 1995.
+
+\bibitem{feret1}
+{\sc P.~J. Phillips, H.~Moon, S.A. Rizvi, and P.J. Rauss}, {\em The {FERET}
+  evaluation methodology for face recognition algorithms}, IEEE Trans. Pattern
+  Anal. Mach. Intelligence, 22 (2000), pp.~1090--1104.
+
+\bibitem{feret2}
+{\sc P.~J. Phillips, H.~Wechsler, J.~Huang, and P.~Rauss}, {\em The {FERET}
+  database and evaluation procedure for face recognition algorithms}, Image
+  Vision Comput., 16 (1998), pp.~295--306.
+
+\bibitem{2007_numerical_recipes}
+{\sc W.~H. Press, S.~A. Teukolsky, W.~T. Vetterling, and B.~P. Flannery}, {\em
+  Numerical Recipes: The Art of Scientific Computing}, Cambridge University
+  Press, Cambridge, 3rd~ed., 2007.
+
+\bibitem{RR08:Random-Features}
+{\sc A.~Rahimi and B.~Recht}, {\em Random features for large-scale kernel
+  machines}, in Proc. 21st Ann. Conf. Advances in Neural Information Processing
+  Systems (NIPS), 2007.
+
+\bibitem{RFP09:Guaranteed-Minimum}
+{\sc B.~Recht, M.~Fazel, and P.~Parillo}, {\em Guaranteed minimum-rank
+  solutions ot matrix equations via nuclear-norm minimization}, SIAM Rev., 52
+  (2010), pp.~471--501.
+
+\bibitem{tygert_szlam}
+{\sc V.~Rokhlin, A.~Szlam, and M.~Tygert}, {\em A randomized algorithm for
+  principal component analysis}, SIAM J. Matrix Anal. Appl., 31 (2009),
+  pp.~1100--1124.
+
+\bibitem{2008_rokhlin_leastsquares}
+{\sc V.~Rokhlin and M.~Tygert}, {\em A fast randomized algorithm for
+  overdetermined linear least-squares regression}, Proc. Natl. Acad. Sci. USA,
+  105 (2008), pp.~13212--13217.
+
+\bibitem{roweis}
+{\sc S.~Roweis}, {\em {EM} algorithms for {PCA} and {SPCA}}, in Proc. 10th Ann.
+  Conf. Advances in Neural Information Processing Systems (NIPS), MIT Press,
+  1997, pp.~626--632.
+
+\bibitem{Rud99:Random-Vectors}
+{\sc M.~Rudelson}, {\em Random vectors in the isotropic position}, J. Funct.
+  Anal., 164 (1999), pp.~60--72.
+
+\bibitem{RV07:Sampling-Large}
+{\sc M.~Rudelson and R.~Vershynin}, {\em Sampling from large matrices: {A}n
+  approach through geometric functional analysis}, J. Assoc. Comput. Mach., 54
+  (2007), pp.~Art. 21, 19 pp.
+\newblock (electronic).
+
+\bibitem{Rus64:Auerbachs-Theorem}
+{\sc A.~F. Ruston}, {\em Auerbach's theorem}, Math. Proc. Cambridge Philos.
+  Soc., 56 (1964), pp.~476--480.
+
+\bibitem{Sar06:Improved-Approximation}
+{\sc T.~Sarl{\'o}s}, {\em Improved approximation algorithms for large matrices
+  via random projections}, in Proc. 47th Ann. IEEE Symp. Foundations of
+  Computer Science (FOCS), 2006, pp.~143--152.
+
+\bibitem{SS08:Low-l1-Norm}
+{\sc S.~Shalev-Shwartz and N.~Srebro}, {\em Low $\ell_1$-norm and guarantees on
+  sparsifiability}, in ICML/COLT/UAI Sparse Optimization and Variable Selection
+  Workshop, July 2008.
+
+\bibitem{Shen08}
+{\sc X.~Shen and F.~G. Meyer}, {\em Low-dimensional embedding of {fMRI}
+  datasets}, Neuroimage, 41 (2008), pp.~886--902.
+
+\bibitem{SV07:Efficient-Subspace}
+{\sc N.~D. Shyamalkumar and K.~Varadarajaran}, {\em Efficient subspace
+  approximation algorithms}, in Proc. 18th Ann. ACM--SIAM Symp. Discrete
+  Algorithms (SODA), 2007, pp.~532--540.
+
+\bibitem{1987_eigenfaces}
+{\sc L.~Sirovich and M.~Kirby}, {\em Low-dimensional procedure for the
+  characterization of human faces.}, J. Optical Soc. Amer. A, 4 (1987),
+  pp.~519--524.
+
+\bibitem{SS08:Graph-Sparsification}
+{\sc D.~Spielman and N.~Srivastasa}, {\em Graph sparsification by effective
+  resistances}, in STOC '08: Proc. 40th Ann. ACM Symp. Theory of Computing,
+  2008.
+
+\bibitem{stewart1969}
+{\sc G.~Stewart}, {\em Accelerating the orthogonal iteration for the
+  eigenvectors of a {H}ermitian matrix}, Num. Math., 13 (1969), pp.~362--376.
+\newblock 10.1007/BF02165413.
+
+\bibitem{Ste77:Perturbation-Pseudoinverse}
+{\sc G.~W. Stewart}, {\em Perturbation of pseudo-inverses, projections, and
+  linear least squares problems}, SIAM Rev., 19 (1977), pp.~634--662.
+
+\bibitem{Ste99:Four-Algorithms}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Four algorithms for
+  the efficient computation of truncated pivoted {QR} approximations to a
+  sparse matrix}, Numer. Math., 83 (1999), pp.~313--323.
+
+\bibitem{Ste00:Decompositional-Approach}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em The decompositional
+  approach to matrix computation}, Comput. Sci. Eng.,  (2000), pp.~50--59.
+
+\bibitem{SV08:Randomized-Kaczmarz}
+{\sc T.~Strohmer and R.~Vershynin}, {\em A randomized {K}aczmarz algorithm with
+  exponential convergence}, J. Fourier Anal. Appl., 15 (2009), pp.~262--278.
+
+\bibitem{SXZF08:Less-Is-More}
+{\sc J.~Sun, Y.~Xie, H.~Zhang, and C.~Faloutsos}, {\em Less is more: {C}ompact
+  matrix decomposition for large sparse graphs}, Stat. Anal. Data Min., 1
+  (2008), pp.~6--22.
+
+\bibitem{Sza90:Spaces-Large}
+{\sc S.~J. Szarek}, {\em Spaces with large distance from $\ell^n_\infty$ and
+  random matrices}, Amer. J. Math., 112 (1990), pp.~899--942.
+
+\bibitem{Szlam08}
+{\sc A.~Szlam, M.~Maggioni, and R.~R. Coifman}, {\em Regularization on graphs
+  with function-adapted diffsion processes}, J. Mach. Learn. Res., 9 (2008),
+  pp.~1711--1739.
+
+\bibitem{trefethen_bau}
+{\sc L.~N. Trefethen and D.~Bau III}, {\em Numerical Linear Algebra}, SIAM,
+  Philadelphia, PA, 1997.
+
+\bibitem{Tro08:Conditioning-Random}
+{\sc J.~A. Tropp}, {\em On the conditioning of random subdictionaries}, Appl.
+  Comput. Harmon. Anal., 25 (2008), pp.~1--24.
+
+\bibitem{Tro10:Improved-Analysis}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Improved analysis of
+  the subsampled randomized {H}adamard transform}, Adv. Adaptive Data Anal., 3
+  (2011).
+\newblock To appear. Available at \url{arXiv:1011.1595}.
+
+\bibitem{NG47:Numerical-Inverting}
+{\sc J.~von Neumann and H.~H. Goldstine}, {\em Numerical inverting of matrices
+  of high order}, Bull. Amer. Math. Soc., 53 (1947), pp.~1021--1099.
+
+\bibitem{NG51:Numerical-Inverting-II}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em Numerical inverting
+  of matrices of high order. {II}}, Proc. Amer. Math. Soc., 2 (1952),
+  pp.~188--202.
+
+\bibitem{random2}
+{\sc F.~Woolfe, E.~Liberty, V.~Rokhlin, and M.~Tygert}, {\em A fast randomized
+  algorithm for the approximation of matrices}, Appl. Comp. Harmon. Anal., 25
+  (2008), pp.~335--366.
+
+\end{thebibliography}

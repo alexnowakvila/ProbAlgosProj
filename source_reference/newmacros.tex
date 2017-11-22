@@ -1,0 +1,378 @@
+
+\newcommand{\lsp}{\vspace{3mm}}
+\newcounter{remark}[section]
+%\usepackage[dvips]{color}
+
+%\usepackage[top=26mm, bottom=26mm, left=32mm, right=32mm]{geometry}
+
+
+
+%&LaTeX
+
+%%% This document contains macros that will be used throughout
+%%% It is very neatly organized.
+
+
+%%%%% Packages
+
+%\usepackage[notcite]{showkeys}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage[dvips]{graphicx}
+%\usepackage{stmaryrd}
+%\usepackage{wasysym}
+
+\usepackage{color}
+
+%\usepackage{url}
+%\usepackage{citesort}
+
+%\usepackage{supertabular}
+
+
+%%% Algorithm package
+
+%\usepackage{alg}
+
+%\renewcommand{\thealgorithmfloat}{\thesection.\arabic{algorithmfloat}}
+
+%% Commands dealing with alg.sty
+\makeatletter
+%\def\algspacing{\alg@unmargin}
+\makeatother
+
+\newcommand{\algfor}[1]{\textbf{for} #1\\\algbegin}
+
+
+%%% Theorem setup
+
+\newtheorem{fact}{Fact}
+
+%\theoremstyle{plain}
+
+%\newtheorem{bigthm}{Theorem}
+%\renewcommand{\thebigthm}{\Alph{bigthm}}    % Number with A, B, C, etc.
+%\newtheorem{thm}{Theorem}
+%\newtheorem{cor}[thm]{Corollary}
+%\newtheorem{lemma}[thm]{Lemma}
+%\newtheorem{prop}[thm]{Proposition}
+
+%\theoremstyle{definition}
+%\newtheorem{defn}[thm]{Definition}
+
+%\newtheorem{algorithm}[thm]{Algorithm}
+
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Remark}
+
+%\newtheorem*{notation}{Notation}
+
+%\numberwithin{equation}{section}
+%\numberwithin{thm}{section}
+
+%\numberwithin{figure}{chapter}
+%\numberwithin{table}{chapter}
+
+
+%%% Typesetting
+
+\DeclareMathAlphabet{\mathsfsl}{OT1}{cmss}{m}{sl}
+
+
+%%% Other font changes
+
+\newcommand{\lang}{\textit}
+\newcommand{\titl}{\textsl}
+\newcommand{\term}{\emph}
+
+%\newcommand{\algname}{\textsc}
+
+\newcommand{\cnst}[1]{\mathrm{#1}}
+
+
+%%% New environments
+
+\newenvironment{inputs}%
+    {\makebox{\phantom{}} \\ %
+        \textsc{Input:}\begin{itemize}}%
+    {\end{itemize}}
+
+\newenvironment{outputs}%
+    {\textsc{Output:}\begin{itemize}}%
+    {\end{itemize}}
+
+\newenvironment{procedure}%
+    {\textsc{Procedure:}\begin{enumerate}}%
+    {\end{enumerate}}
+
+
+%%% Old symbols with new names
+
+\newcommand{\oldphi}{\phi}
+\renewcommand{\phi}{\varphi}
+
+\newcommand{\eps}{\varepsilon}
+
+
+%%% New symbols
+
+\newcommand{\defby}{\overset{\mathrm{\scriptscriptstyle{def}}}{=}}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\third}{\tfrac{1}{3}}
+
+
+
+%%% Constants
+
+\newcommand{\econst}{\mathrm{e}}
+\newcommand{\iunit}{\mathrm{i}}
+
+\newcommand{\onevct}{\mathbf{e}}
+\newcommand{\zerovct}{\vct{0}}
+
+%\newcommand{\Id}{\mathsf{I}}
+%\newcommand{\onemtx}{\mathsf{1}}
+%\newcommand{\zeromtx}{\mathsf{0}}
+
+\newcommand{\Id}{\mathbf{I}}
+\newcommand{\onemtx}{\bm{1}}
+\newcommand{\zeromtx}{\bm{0}}
+
+
+%%% Sets
+
+\newcommand{\coll}[1]{\mathscr{#1}}
+
+\newcommand{\Sspace}[1]{\mathbb{S}^{#1}}
+
+\newcommand{\Rplus}{\mathbb{R}_{+}}
+\newcommand{\Rspace}[1]{\mathbb{R}^{#1}}
+\newcommand{\Cspace}[1]{\mathbb{C}^{#1}}
+
+\newcommand{\RPspace}[1]{\mathbb{P}^{#1}(\mathbb{R})}
+\newcommand{\CPspace}[1]{\mathbb{P}^{#1}(\mathbb{C})}
+\newcommand{\FPspace}[1]{\mathbb{P}^{#1}(\mathbb{F})}
+
+\newcommand{\RGspace}[2]{\mathbb{G}( {#1}, \Rspace{#2} )}
+\newcommand{\CGspace}[2]{\mathbb{G}( {#1}, \Cspace{#2} )}
+\newcommand{\FGspace}[2]{\mathbb{G}( {#1}, \mathbb{F}^{#2} )}
+
+\newcommand{\RR}{$\Rspace{}$}
+\newcommand{\CC}{$\Cspace{}$}
+
+\newcommand{\Mset}[1]{\mathbb{M}_{#1}}
+
+\newcommand{\oneton}[1]{\left\llbracket {#1} \right\rrbracket}
+
+
+%%% Real and complex analysis
+
+\newcommand{\abs}[1]{\left\vert {#1} \right\vert}
+\newcommand{\abssq}[1]{{\abs{#1}}^2}
+
+\newcommand{\sgn}[1]{\operatorname{sgn}{#1}}
+\newcommand{\real}{\operatorname{Re}}
+\newcommand{\imag}{\operatorname{Im}}
+
+\newcommand{\diff}[1]{\mathrm{d}{#1}}
+\newcommand{\idiff}[1]{\, \diff{#1}}
+
+%\newcommand{\grad}{\nabla}
+\newcommand{\subdiff}{\partial}
+
+\newcommand{\argmin}{\operatorname*{arg\; min}}
+\newcommand{\argmax}{\operatorname*{arg\; max}}
+
+\newcommand{\psdge}{\succcurlyeq}
+\newcommand{\psdle}{\preccurlyeq}
+
+%%% Probability
+
+\newcommand{\Probe}[1]{\mathbb{P}\left({#1}\right)}
+\newcommand{\Prob}[1]{\mathbb{P}\left\{ {#1} \right\}}
+\newcommand{\Expect}{\operatorname{\mathbb{E}}}
+\newcommand{\Var}{\operatorname{Var}}
+
+\newcommand{\normal}{\textsc{normal}}
+\newcommand{\erf}{\operatorname{erf}}
+
+
+
+%%% Vector and matrix operators
+
+\newcommand{\vct}[1]{\bm{#1}}
+\newcommand{\mtx}[1]{\bm{#1}}
+%\newcommand{\mtx}[1]{\mathsf{#1}}
+%\newcommand{\mtx}[1]{\mathsfsl{#1}}
+
+
+\newcommand{\transp}{\mathrm{T}}
+\newcommand{\adj}{*}
+\newcommand{\psinv}{\dagger}
+
+\newcommand{\lspan}[1]{\operatorname{span}{#1}}
+
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\colspan}{\operatorname{colspan}}
+
+%\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\strank}{\operatorname{st.rank}}
+
+%\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\trace}{\operatorname{trace}}
+
+%\newcommand{\supp}[1]{\operatorname{supp}(#1)}
+
+\newcommand{\smax}{\sigma_{\max}}
+\newcommand{\smin}{\sigma_{\min}}
+
+
+%%% Mensuration: inner products and norms
+
+\newcommand{\ip}[2]{\left\langle {#1},\ {#2} \right\rangle}
+\newcommand{\absip}[2]{\abs{\ip{#1}{#2}}}
+\newcommand{\abssqip}[2]{\abssq{\ip{#1}{#2}}}
+\newcommand{\tworealip}[2]{2 \, \real{\ip{#1}{#2}}}
+
+\newcommand{\norm}[1]{\left\Vert {#1} \right\Vert}
+\newcommand{\normsq}[1]{\norm{#1}^2}
+
+    % Fixed-size inner products and norms are useful sometimes
+
+\newcommand{\smip}[2]{\bigl\langle {#1}, \ {#2} \bigr\rangle}
+\newcommand{\smabsip}[2]{\bigl\vert \smip{#1}{#2} \bigr\vert}
+\newcommand{\smnorm}[2]{{\bigl\Vert {#2} \bigr\Vert}_{#1}}
+
+\newcommand{\enorm}[1]{\norm{#1}_2}
+\newcommand{\enormsq}[1]{\enorm{#1}^2}
+
+\newcommand{\fnorm}[1]{\norm{#1}_{\mathrm{F}}}
+\newcommand{\fnormsq}[1]{\fnorm{#1}^2}
+
+\newcommand{\pnorm}[2]{\norm{#2}_{#1}}
+\newcommand{\infnorm}[1]{\norm{#1}_{\infty}}
+
+\newcommand{\iinorm}[1]{\pnorm{\infty,\infty}{#1}}
+
+\newcommand{\rxnorm}[1]{\pnorm{\mathrm{rx}}{#1}}
+
+\newcommand{\dist}{\operatorname{dist}}
+
+\newcommand{\triplenorm}[1]{\left\vert\!\left\vert\!\left\vert {#1} \right\vert\!\right\vert\!\right\vert}
+
+\newcommand{\smtriplenorm}[1]{\big\vert\!\big\vert\!\big\vert {#1} \big\vert\!\big\vert\!\big\vert}
+
+%%% Unusual operators
+
+\newcommand{\cover}{\operatorname{cover}}
+\newcommand{\pack}{\operatorname{pack}}
+\newcommand{\maxcor}{\operatorname{maxcor}}
+\newcommand{\ERC}{\operatorname{ERC}}
+\newcommand{\quant}{\operatorname{quant}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\spark}{\operatorname{spark}}
+
+%%% Problem Names
+
+\newcommand{\exactprob}{\textsc{(exact)}}
+\newcommand{\rexact}{\textsc{(r-exact)}}
+\newcommand{\errorprob}{\textsc{(error)}}
+\newcommand{\rerror}{\textsc{(r-error)}}
+\newcommand{\sparseprob}{\textsc{(sparse)}}
+\newcommand{\subsetprob}{\textsc{(subset)}}
+\newcommand{\rsubset}{\textsc{(r-subset)}}
+
+\newcommand{\lonepen}{\textsc{($\ell_1$-penalty)}}
+\newcommand{\loneerr}{\textsc{($\ell_1$-error)}}
+
+
+%%% Things that get typed a lot
+
+\newcommand{\Dict}{\coll{D}}
+
+\newcommand{\opt}{\mathrm{opt}}
+\newcommand{\bad}{\mathrm{bad}}
+\newcommand{\err}{\mathrm{err}}
+\newcommand{\alt}{\mathrm{alt}}
+\newcommand{\good}{\mathrm{good}}
+
+\newcommand{\subjto}{\quad\text{subject to}\quad}
+\newcommand{\etal}{et al.\ }
+
+\newcommand{\cost}[2]{\operatorname{cost}_{#1}(#2)}
+
+\newcommand{\TF}{\mathrm{TF}}
+
+\newcommand{\chord}{\mathrm{chord}}
+\newcommand{\proj}{\mathrm{spec}}
+\newcommand{\fs}{\mathrm{FS}}
+
+\newcommand{\bigO}{\mathrm{O}}
+
+
+%%% Constants, vectors and matrices with names
+
+\newcommand{\atom}{\vct{\phi}}
+\newcommand{\Fee}{\mtx{\Phi}}
+
+\newcommand{\Lamopt}{\Lambda_{\opt}}
+
+\newcommand{\astar}{\vct{a}_{\star}}
+\newcommand{\aLam}{\vct{a}_{\Lambda}}
+\newcommand{\aopt}{\vct{a}_{\opt}}
+
+\newcommand{\Astar}{\mtx{A}_{\star}}
+\newcommand{\ALam}{\mtx{A}_{\Lambda}}
+\newcommand{\Aopt}{\mtx{A}_{\opt}}
+
+\newcommand{\cLam}{\vct{c}_{\Lambda}}
+\newcommand{\copt}{\vct{c}_{\opt}}
+
+\newcommand{\CLam}{\mtx{C}_{\Lambda}}
+\newcommand{\Copt}{\mtx{C}_{\opt}}
+
+\newcommand{\bstar}{\vct{b}_{\star}}
+\newcommand{\bLam}{\vct{b}_{\Lambda}}
+\newcommand{\bbad}{\vct{b}_{\bad}}
+\newcommand{\balt}{\vct{b}_{\alt}}
+\newcommand{\bopt}{\vct{c}_{\opt}}
+
+\newcommand{\Bstar}{\mtx{B}_{\star}}
+\newcommand{\BLam}{\mtx{B}_{\Lambda}}
+\newcommand{\Bopt}{\mtx{B}_{\opt}}
+\newcommand{\Balt}{\mtx{B}_{\alt}}
+
+\newcommand{\Ropt}{\mtx{R}_{\opt}}
+
+
+\newcommand{\gamstar}{\gamma_{\star}}
+
+\newcommand{\PhiLam}{\mtx{\Phi}_{\Lambda}}
+\newcommand{\Phiopt}{\mtx{\Phi}_{\opt}}
+\newcommand{\Phialt}{\mtx{\Phi}_{\alt}}
+\newcommand{\Psiopt}{\mtx{\Psi}}
+\newcommand{\PsiLam}{\mtx{\Psi}_{\Lambda}}
+
+
+\newcommand{\Popt}{{\mtx{P}_{\opt}}}
+\newcommand{\PLam}{{\mtx{P}_{\Lambda}}}
+
+\newcommand{\GLam}{{\mtx{G}_{\Lambda}}}
+
+\newcommand{\rhoerr}{\rho_{\err}}
+\newcommand{\rhoopt}{\rho_{\opt}}
+
+\newcommand{\success}{\mathrm{succ}}
+\newcommand{\failure}{\mathrm{fail}}
+
+\newcommand{\restrict}[1]{\vert_{#1}}
+
+
+\newcommand{\anum}[1]{{\footnotesize{#1}\quad}}
+
+%%%%% Stupid LaTeX tricks
+
+\newcommand{\forcetall}{\phantom{\frac{1}{\frac{1}{1}}}}

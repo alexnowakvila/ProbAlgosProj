@@ -1,6 +1,5 @@
 clear all;
 addpath('stageA/');
-addpath('stageB/');
 
 disp('');
 disp('« Project: Probabilistic Algorithms for Constructing Approximate');

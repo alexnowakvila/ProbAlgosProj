@@ -14,9 +14,11 @@
 %\input{algorithm_labels.aux}
 %     If your article includes graphics, uncomment this command.
 \usepackage{graphicx}
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex}
+\usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex}
 % Use the bibtex backend with the authoryear citation style (which resembles APA)
-
+\usepackage{url}
+\usepackage{citesort}
+\usepackage{rotating}
 \addbibresource{mainbib.bib} % The filename of the bibliography
 
 \newtheorem{theorem}{Theorem}[section]
@@ -45,16 +47,18 @@
     \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
   }%
 }
+\usepackage{geometry}
+\geometry{left=30mm, top=20mm}
 
 \begin{document}
 
-\title{Probabilistic Algorithms for Finding Matrix Decompositions}
+\title{Probabilistic Algorithms for Finding \\ Matrix Decompositions}
 
 %    Information for first author
 \author{Alex Nowak}
 %    Address of record for the research reported here
-% \address{Department of Mathematics, Louisiana State University, Baton
-% Rouge, Louisiana 70803}
+\address{Department of Mathematics \\
+\'Ecole Normale Sup\'erieure de Cachan}
 %    Current address
 % \curraddr{Department of Mathematics and Statistics,
 % Case Western Reserve University, Cleveland, Ohio 43403}
@@ -79,17 +83,41 @@
 % \keywords{Differential geometry, algebraic geometry}
 
 \begin{abstract}
-This paper is a sample prepared to illustrate the use of the American
-Mathematical Society's \LaTeX{} document class \texttt{amsart} and
-publication-specific variants of that class for AMS-\LaTeX{} version 2.
+Low-rank matrix approximations are obliquous in many areas ranging
+from data analysis to scientific computing. From a data science point of
+view, probably the most important application is due to Principal
+Component Analysis (PCA), which aims to reveal hidden linear structure in
+massive datasets through a low-rank matrix decomposition. 
+Consequently, the complexity of the algorithm plays a central role in the
+applicability of the algorithms to big data. The most common
+approximative factorization
+is the so-called truncated singular value decomposition (k-SVD) which can be 
+computed in $\mathcal{O}(mnk)$ floating-point operations, where $k$ is the target rank
+of the decomposition and $m$ and $n$ are the corresponding dimensions of the 
+matrix.
+In this review, we introduce to the reader randomized algorithms 
+that can achieve the aforementioned task with numerous advantadges compared
+to the classical algorithms. These algorithms are based on the fact that the
+image of a low-rank matrix can be approximated by the action
+of the matrix to a reasonable amount of random vectors from the input space.
+Starting from this point, it is possible to develop
+algorithms that achieve a complexity of $\mathcal{O}(mn\log{k})$ for 
+dense-matrices, matches the flop count of classical
+Krylov subspace methods for sparse matrices with a gain in robustness, and
+for large matrices that can not be stored in memory (RAM), they
+achieve a constant number of passes compared to the 
+$\mathcal{O}(k)$ for classical algorithms.
 \end{abstract}
 
 \maketitle
 
+\input{sections/introduction}
 \input{sections/theory}
 \input{sections/algorithms}
 
 \printbibliography[heading=bibintoc]
+% \bibliographystyle{siam}
+
 % \bibliographystyle{amsplain}
 \end{document}
 

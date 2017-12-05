@@ -198,14 +198,14 @@ $$
 $$
 Then, we condition on $\mtx{\Omega}_1$ and use proposition~\ref{prop:scaled-gauss}
 and first part of proposition~\ref{prop:gauss-inv-expect}
-\begin{multline*}
+$$
 \Expect \smnorm{\rm F}{ \mtx{\Sigma}_2 \mtx{\Omega}_2 \mtx{\Omega}_1^\psinv }^2
     = \Expect \left( \Expect \left[ \smnorm{\rm F}{ \mtx{\Sigma}_2 \mtx{\Omega}_2
 \mtx{\Omega}_1^\psinv }^2 \ \big\vert \ \mtx{\Omega}_1 \right] \right)
-    = \Expect \left( \fnormsq{\mtx{\Sigma}_2} \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2 \right) \\
+    = \Expect \left( \fnormsq{\mtx{\Sigma}_2} \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2 \right)
     = \fnormsq{\mtx{\Sigma}_2} \cdot \Expect \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2
     = \frac{k}{p-1} \cdot \fnormsq{\mtx{\Sigma}_2},
-\end{multline*}
+$$
 Putting everything together
 $$
 \Expect \fnorm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
@@ -222,14 +222,14 @@ $$
 $$
 Conditioning again on $\mtx{\Omega}_1$, we can bound the expectation w.r.t
  $\mtx{\Omega}_2$
-\begin{align*}
+$$
 \Expect \smnorm{}{ \mtx{\Sigma}_2 \mtx{\Omega}_2
 \mtx{\Omega}_1^\psinv }
-    &\leq \Expect \left( \norm{\mtx{\Sigma}_2} \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}
-        + \fnorm{\mtx{\Sigma}_2} \smnorm{}{\mtx{\Omega}_1^\psinv} \right) \\
-    &\leq \norm{\mtx{\Sigma}_2} \left( \Expect \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2 \right)^{1/2}
+    \leq \Expect \left( \norm{\mtx{\Sigma}_2} \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}
+        + \fnorm{\mtx{\Sigma}_2} \smnorm{}{\mtx{\Omega}_1^\psinv} \right)
+    \leq \norm{\mtx{\Sigma}_2} \left( \Expect \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2 \right)^{1/2}
         + \fnorm{\mtx{\Sigma}_2} \cdot \Expect \smnorm{}{\mtx{\Omega}_1^\psinv}.
-\end{align*}
+$$
 Finally applying proposition~\ref{prop:gauss-inv-expect}, we get to the final
 result
 $$
@@ -263,6 +263,9 @@ $$
         + 3 \sqrt{k+p} \left( \sum\nolimits_{j > k} \sigma_j^2 \right)^{1/2},
 $$
 with failure probability at most $6 p^{-p}$.
-Similar bounds can also be proven \cite{halko2011finding}.
 \end{theorem}
+Similar bounds can also be proven for the power scheme 
+\cite{halko2011finding} that give a high probability guarantee for 
+the bound \ref{thm:power-method}.
+
 

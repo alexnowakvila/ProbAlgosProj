@@ -71,10 +71,10 @@ qs = 0:5;
 figure(4);
 hold on;
 for l = 100:20:200
-  error = []
+  error = [];
   for q = qs
     A0 = randn(m, n)/(sqrt(m)+sqrt(n));
-    Q0 = randomized_subspace_iteration(A0, l, q);
+    [Q0, ~] = randomized_subspace_iteration(A0, l, q);
     error = [error norm(A0-Q0*Q0'*A0)];
   end
   plot(qs, error, 'DisplayName',int2str(l)); 

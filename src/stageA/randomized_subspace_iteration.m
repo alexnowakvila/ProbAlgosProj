@@ -1,4 +1,4 @@
-function [Q] = randomized_subspace_iteration(A, l, q)
+function [Q, Y] = randomized_subspace_iteration(A, l, q)
 %
 % Randomized Subspace Iteration (Algorithm 4.3)
 %   [Q] = randomized_power_iteration(A, l, q) with [m,n] = size(A) returns

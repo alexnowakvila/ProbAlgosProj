@@ -1,0 +1,268 @@
+\section*{Theory}
+\subsection{Analysis of stage A} 
+This section focuses on assessing the quality of the basis given
+by ALGO. More precisely, we want to prove rigorous bounds on the
+approximation error
+$$ \|\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\| $$
+where $\|\cdot\|$ denotes either the operator norm or Frobenius norm.
+
+We will split the argument into two parts \footnote{The authors
+argue that this bipartite proof
+is common in the literature of randomized linear algebra}:
+\begin{enumerate}
+  \item Provide a generic error bound that depends on the interaction
+  between the test matrix $\mtx{\Omega}$ and the right and left
+  singular values of $\mtx{A}$. \footnote{Note that we do not deal
+  with randomness yet.} 
+  \item Estimate the error using the distribution of the random matrix.
+  We provide both expectation and probability tail bounds for the error.
+\end{enumerate}
+
+\subsubsection{(1) Error bounds via Linear Algebra}
+As we aim to compute a rank-$k$ approximation of $\mtx{A}$, we appropiately
+partition the exact SVD as
+\begin{equation}
+\label{eq:part}
+\begin{array}{@{}c@{}r@{}c@{}c@{}c@{}c@{}c}
+        && k & n - k && n & \\
+    \mtx{A} = \mtx{U} &\left. \begin{array}{c} \\ \\ \end{array} \!\!\! \right[ &
+    \begin{array}{c} \mtx{\Sigma}_1 \\ \phantom{\mtx{\Sigma}_2} \end{array} &
+    \begin{array}{c} \phantom{\mtx{\Sigma}_1} \\ \mtx{\Sigma}_2 \end{array} &
+    \left] \!\!\! \begin{array}{c} \\ \\ \end{array} \right. &
+    \left[\begin{array}{c} \mtx{V}_{1}^{\adj} \\ \mtx{V}_{2}^{\adj}\end{array}\right]\,
+    & \begin{array}{c} k \\ n - k \\ \end{array}
+\end{array}
+\end{equation}
+
+Now, let $\mtx{\Omega}_i=\mtx{V}_i\mtx{\Omega}$ for $i=1,2$. Express
+$\mtx{Y}=\mtx{A}\mtx{\Omega}$ as
+\begin{equation*} \label{eqn:X-struct}
+    \begin{array}{@{}c@{}c@{}c}
+    & \ell & \\
+    \mtx{Y} = \mtx{A}\mtx{\Omega} =
+        \mtx{U} \left. \begin{array}{@{}c} \\ \\ \end{array} \right[ &
+    \begin{array}{c} \mtx{\Sigma}_1 \mtx{\Omega}_1 \\
+    \mtx{\Sigma}_2 \mtx{\Omega}_2 \end{array} &
+    \left] \begin{array}{c} k \\ n - k \end{array} \right.
+    \end{array}
+\end{equation*}
+where $\mtx{\Sigma}_1\mtx{\Omega}_1$ controls most of the action of $\mtx{Y}$,
+and $\mtx{\Sigma}_2\mtx{\Omega}_2$ is a small perturbation.
+
+The ALGO computes an orthogonal basis $\mtx{Q}$ of $\Ima(\mtx{Y})$. In other
+words, we can express the orthogonal projection to $\Ima(\mtx{Y})$ as
+$\mtx{P}_{\mtx{Y}} = \mtx{P}_{\Ima(\mtx{Y})} = \mtx{Q}\mtx{Q}^\adj$
+\footnote{We simplify the notation of the orthogonal projectoin to
+$\mtx{P}_{\mtx{Y}}$}.
+The following theorem \ref{thm:main-error-bd} bounds the squared
+error provides a deterministic error bound to the squared error.
+\begin{theorem}[Deterministic error bound] \label{thm:main-error-bd} %\\
+We have that
+\begin{equation}
+\label{eq:main-error-bd}
+\triplenorm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A} }^2
+    \leq \triplenorm{\mtx{\Sigma}_2}^2 + 
+    \smtriplenorm{\mtx{\Sigma}_2\mtx{\Omega}_2 \mtx{\Omega}_1^\psinv}^2,
+\end{equation}
+where $\triplenorm{\cdot}$ denotes either the spectral norm or the
+Frobenius norm.
+\end{theorem}
+
+\begin{remark} \rm
+ Note that $\mtx{\Sigma}_1$ does not appear in the error bound.
+EXPLAIN
+\end{remark}
+\begin{remark} \rm
+The first term is a deterministic
+clean error term; we want to compute a rank-$k$
+approximation so the error can not be smaller than this term.
+The second term is a random term that depends on the interaction of
+the right singular values of $\mtx{A}$ amplified by $\mtx{\Sigma}_2$.
+\end{remark}
+
+We would also like to be able to analyze the power scheme described in REF,
+i.e, 
+$\mtx{B}=(\mtx{A}\mtx{A}^\adj)\mtx{A}=\mtx{U}\mtx{\Sigma}^{2q+1}\mtx{V}^\adj$.
+The rationale behind the power scheme was that the random approximation
+of the $k$-dimensional gross action of $\mtx{A}$ can be improved if we amplify
+$\mtx{\Sigma}_1 - \mtx{\Sigma}_2$ by power iteration. This can be easily
+verified by this simple theorem \ref{thm:power-method}.
+\begin{theorem}[Power scheme] \label{thm:power-method}
+%Let $m$, $n$, and $\ell$ be positive integers such that $\ell < n \leq m$.
+Let $\mtx{A}$ be an $m\times n$ matrix, and let $\mtx{\Omega}$ be an $n\times \ell$
+matrix. Fix a nonnegative integer $q$, form $\mtx{B} = {(\mtx{A}^\adj \mtx{A})}^q \mtx{A}$,
+and compute the sample matrix $\mtx{Z} = \mtx{B\Omega}$.  Then
+$$
+\norm{ (\Id - \mtx{P}_{\mtx{Z}}) \mtx{A} }
+    \leq \norm{ (\Id - \mtx{P}_{\mtx{Z}}) \mtx{B} }^{1/(2q+1)}.
+$$
+\end{theorem}
+\begin{remark} \rm
+Let's consider the operator norm, i.e, $\|\mtx{\Sigma}_1\|=\sigma_{k+1}$.
+Then $$
+\norm{ (\Id - \mtx{P}_{\mtx{Z}}) \mtx{A} }
+    \leq \norm{ (\Id - \mtx{P}_{\mtx{Z}}) \mtx{B} }^{1/(2q+1)}
+    \leq \left( 1 + \smnorm{}{\mtx{\Omega}_2 \mtx{\Omega}_1^\psinv}^2 \right)^{1/(4q+2)}
+        \sigma_{k+1} $$
+so the power scheme shrinks the suboptimality exponentially fast.
+\end{remark}
+
+Finally, we can ask what are the consequences of truncating the SVD
+of $\mtx{P}_{\mtx{Z}}\mtx{A}$, i.e, compute its best rank-$k$ approximation.
+\begin{theorem}[Analysis of Truncated SVD] \label{thm:truncation}
+Let $\mtx{A}$ be an $m \times n$ matrix with singular values $\sigma_1 \geq \sigma_2 \geq \sigma_3 \geq \dots$,
+and let $\mtx{Z}$ be an $m \times \ell$ matrix, where $\ell \geq k$.
+Suppose that $\widehat{\mtx{A}}_{(k)}$ is a best rank-$k$ approximation of $\mtx{P}_{\mtx{Z}} \mtx{A}$ with respect to the spectral norm.  Then
+$$
+\smnorm{}{ \mtx{A} - \widehat{\mtx{A}}_{(k)} }
+  \leq \sigma_{k+1} + \norm{(\Id - \mtx{P}_{\mtx{Z}}) \mtx{A}}.
+$$
+\end{theorem}
+\begin{remark} \rm
+The result of theorem \ref{thm:truncation} is quite pessimistic, and
+in practice we observe that truncating the SVD is not that damaging in
+the randomized setting.
+\end{remark}
+
+\subsubsection{(2) Bounds on the gaussian setting} 
+First we start by providing a bunch of results on gaussian matrices
+that will are key to prove the bounds on expectation and probability tails.
+%% TECHNICAL BACKGROUND
+\begin{proposition}[Expected norm of a scaled Gaussian matrix] 
+\label{prop:scaled-gauss}
+Fix matrices $\mtx{S}, \mtx{T}$, and draw a standard Gaussian matrix $\mtx{G}$.  Then
+\begin{gather}
+\left( \Expect \fnormsq{ \mtx{SGT} } \right)^{1/2}
+    = \fnorm{\mtx{S}} \fnorm{\mtx{T}}
+    \quad\text{and}\quad
+\Expect \norm{ \mtx{SGT} }
+    \leq \norm{\mtx{S}} \fnorm{\mtx{T}} + \fnorm{\mtx{S}} \norm{\mtx{T}}.
+    \label{eqn:avg-specnorm}
+\end{gather}
+\end{proposition}
+%
+\begin{proposition}[Expected norm of a pseudo-inverted Gaussian matrix] 
+\label{prop:gauss-inv-expect}
+Draw a $k \times (k + p)$ standard Gaussian matrix $\mtx{G}$ with $k \geq 2$ and $p \geq 2$.  Then
+\begin{gather}
+\left( \Expect \fnormsq{ \mtx{G}^\psinv } \right)^{1/2} = \sqrt{\frac{k}{p-1}}
+  \quad\text{and}\quad
+\Expect \norm{ \mtx{G}^\psinv } \leq \frac{\econst\sqrt{k+p}}{p}
+    \label{eqn:avg-inv-specnorm}.
+\end{gather}
+\end{proposition}
+% 
+\begin{proposition}[Concentration for functions of a Gaussian matrix] 
+
+\label{prop:gauss-tail}
+Suppose that $h$ is a Lipschitz function on matrices:
+$$
+\abs{ h(\mtx{X}) - h(\mtx{Y}) } \leq L \fnorm{ \mtx{X} - \mtx{Y} }
+\quad\text{for all $\mtx{X}, \mtx{Y}$.}
+$$
+Draw a standard Gaussian matrix $\mtx{G}$.  Then
+$$
+\Prob{ h(\mtx{G}) \geq \Expect h(\mtx{G}) + Lt } \leq \econst^{-t^2/2}.
+$$
+\end{proposition}
+Now, we are ready to state and proof the main theorems in expectations,
+and afterwards we will confirm that the error does not oscillate too
+much around the mean by proving the corresponing bounds on the tails of the
+distribution.
+
+\begin{theorem}[Average Frobenius error] \label{thm:avg-frob-error-gauss}
+The expected approximation error can be bounded as follows
+\begin{enumerate}
+  \item
+$$
+\Expect \fnorm{(\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
+    \leq \left( 1 + \frac{k}{p-1} \right)^{1/2}
+    \left( \sum\nolimits_{j>k} \sigma_j^2 \right)^{1/2}.
+$$
+\item 
+$$
+\Expect \norm{(\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
+    \leq \left(1 + \sqrt{\frac{k}{p-1}} \right) \sigma_{k+1}
+        + \frac{\econst\sqrt{k+p}}{p}
+        \left(\sum\nolimits_{j>k} \sigma_{j}^2 \right)^{1/2}.
+$$
+ \end{enumerate}
+\end{theorem}
+\begin{proof}
+H{\"o}lder's inequality and theorem \ref{thm:main-error-bd} give 
+$$
+\Expect \fnorm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
+    \leq \left( \Expect \fnormsq{(\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}} \right)^{1/2}
+    \leq \left( \smnorm{\rm F}{\mtx{\Sigma}_2}^2 + \Expect \smnorm{\rm F}{ \mtx{\Sigma}_2
+                \mtx{\Omega}_2 \mtx{\Omega}_1^\psinv }^2 \right)^{1/2}.
+$$
+Then, we condition on $\mtx{\Omega}_1$ and use proposition~\ref{prop:scaled-gauss}
+and first part of proposition~\ref{prop:gauss-inv-expect}
+\begin{multline*}
+\Expect \smnorm{\rm F}{ \mtx{\Sigma}_2 \mtx{\Omega}_2 \mtx{\Omega}_1^\psinv }^2
+    = \Expect \left( \Expect \left[ \smnorm{\rm F}{ \mtx{\Sigma}_2 \mtx{\Omega}_2
+\mtx{\Omega}_1^\psinv }^2 \ \big\vert \ \mtx{\Omega}_1 \right] \right)
+    = \Expect \left( \fnormsq{\mtx{\Sigma}_2} \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2 \right) \\
+    = \fnormsq{\mtx{\Sigma}_2} \cdot \Expect \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2
+    = \frac{k}{p-1} \cdot \fnormsq{\mtx{\Sigma}_2},
+\end{multline*}
+Putting everything together
+$$
+\Expect \fnorm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
+    \leq \left(1 + \frac{k}{p-1}\right)^{1/2} \fnorm{ \mtx{\Sigma}_2 }.
+$$
+and the first part if proved. \\
+The bound on the operator norm is very similar, theorem~\ref{thm:main-error-bd}
+implies that
+$$
+\Expect \norm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A} }
+    \leq \Expect \left( \normsq{\mtx{\Sigma}_2}
+        + \smnorm{}{\mtx{\Sigma}_2 \mtx{\Omega}_2 \mtx{\Omega}_1^\psinv }^2 \right)^{1/2}
+    \leq \norm{\mtx{\Sigma}_2} + \Expect \smnorm{}{ \mtx{\Sigma}_2 \mtx{\Omega}_2 \mtx{\Omega}_1^\psinv }.
+$$
+Conditioning again on $\mtx{\Omega}_1$, we can bound the expectation w.r.t
+ $\mtx{\Omega}_2$
+\begin{align*}
+\Expect \smnorm{}{ \mtx{\Sigma}_2 \mtx{\Omega}_2
+\mtx{\Omega}_1^\psinv }
+    &\leq \Expect \left( \norm{\mtx{\Sigma}_2} \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}
+        + \fnorm{\mtx{\Sigma}_2} \smnorm{}{\mtx{\Omega}_1^\psinv} \right) \\
+    &\leq \norm{\mtx{\Sigma}_2} \left( \Expect \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2 \right)^{1/2}
+        + \fnorm{\mtx{\Sigma}_2} \cdot \Expect \smnorm{}{\mtx{\Omega}_1^\psinv}.
+\end{align*}
+Finally applying proposition~\ref{prop:gauss-inv-expect}, we get to the final
+result
+$$
+\Expect \smnorm{}{ \mtx{\Sigma}_2 \mtx{\Omega}_2
+\mtx{\Omega}_1^\psinv }
+    \leq \sqrt{\frac{k}{p-1}} \norm{\mtx{\Sigma}_2}
+    + \frac{\econst\sqrt{k+p}}{p} \fnorm{\mtx{\Sigma}_2}.
+$$
+\end{proof}
+
+Finally, we will state the bounds on the tails that prove that the 
+previously expectation bounds are representative of the random behavior.
+
+\begin{theorem}[Deviation bounds for the Frobenius error] \label{thm:tail-frob-error-gauss}
+Frame the hypotheses of Theorem~\ref{thm:avg-frob-error-gauss}.
+Assume further that $p \geq 4$.  For all $u, t \geq 1$,
+$$
+\fnorm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A} }
+    \leq \left( 1 + t \cdot \sqrt{12k/p} \right)
+    \left( \sum\nolimits_{j > k} \sigma_j^2 \right)^{1/2}
+    + ut \cdot \frac{\econst\sqrt{k+p}}{p+1} \cdot \sigma_{k+1},
+$$
+with failure probability at most $5 t^{-p} + 2 \econst^{-u^2/2}$.
+\end{theorem}
+
+\begin{theorem}[Deviation bounds for the spectral error] \label{thm:tail-spec-error-gauss}
+Frame the hypotheses of Theorem~\ref{thm:avg-frob-error-gauss}, and assume further that $p \geq 4$.  Then
+$$
+\norm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A} }
+    \leq \left( 1 + 8 \sqrt{(k + p) \cdot p \log p} \right) \sigma_{k+1}
+        + 3 \sqrt{k+p} \left( \sum\nolimits_{j > k} \sigma_j^2 \right)^{1/2},
+$$
+with failure probability at most $6 p^{-p}$.
+Similar bounds can also be proven \cite{halko2011finding}.
+\end{theorem}
+

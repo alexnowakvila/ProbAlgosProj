@@ -14,9 +14,14 @@
 %\input{algorithm_labels.aux}
 %     If your article includes graphics, uncomment this command.
 \usepackage{graphicx}
+\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex}
+% Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\addbibresource{mainbib.bib} % The filename of the bibliography
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -81,170 +86,11 @@ publication-specific variants of that class for AMS-\LaTeX{} version 2.
 
 \maketitle
 
-\section*{Theory}
+\input{sections/theory}
+\input{sections/algorithms}
 
-\section{Fixed rank problem}
-
-\begin{figure}[h]
-\begin{center}
-\framebox{\begin{minipage}{.9\textwidth}
-\begin{center}
-\textsc{Proto-Algorithm: Solving the Fixed-Rank Problem}
-\end{center}
-
-\lsp
-
-\textit{Given an $m\times n$ matrix $\mtx{A}$, a target rank $k$, and an oversampling parameter $p$,
-this procedure computes an $m\times (k+p)$ matrix $\mtx{Q}$ whose columns are orthonormal and whose range
-approximates the range of $\mtx{A}$.}
-
-\lsp
-\begin{tabbing}
-\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
-
-\anum{1} \>Draw a random $n \times (k + p)$ test matrix $\mtx{\Omega}$.\\
-
-\anum{2} \>Form the matrix product $\mtx{Y} = \mtx{A\Omega}$.\\
-
-\anum{3} \>Construct a matrix $\mtx{Q}$ whose columns form an orthonormal basis for \\
-         \>the range of $\mtx{Y}$.
-\end{tabbing}
-\end{minipage}}
-\end{center}
-\end{figure}
-
-
-\begin{theorem} %\label{thm:intro}
-Suppose that $\mtx{A}$ is a real $m \times n$ matrix.  Select
-a target rank $k \geq 2$ and an oversampling parameter $p \geq 2$,
-where $k + p \leq \min\{m,n\}$.
-Execute the proto-algorithm with
-a standard Gaussian test matrix to obtain an
-$m \times (k + p)$ matrix $\mtx{Q}$ with orthonormal columns.  Then
-\begin{equation}
-\label{eq:intro_err_bd}
-\Expect \norm{ \mtx{A} - \mtx{QQ}^\adj \mtx{A} }
-    \leq \left[ 1 + \frac{4 \sqrt{k+p}}{p-1} \cdot\sqrt{\min\{m,n\}} \right] \sigma_{k+1},
-\end{equation}
-where $\Expect$ denotes expectation with respect to the
-random test matrix and $\sigma_{k+1}$ is the $(k+1)$th
-singular value of $\mtx{A}$.
-\end{theorem}
-
-The probability that the error satisfies
-\begin{equation} \label{eq:intro_err_prob}
-\norm{ \mtx{A} - \mtx{QQ}^\adj \mtx{A} }
-    \leq \left[ 1 + 11 \sqrt{k+p} \cdot\sqrt{\min\{m,n\}} \right] \sigma_{k+1}
-\end{equation}
-is at least $1 - 6 \cdot p^{-p}$ under very mild assumptions on $p$.
-
-\section{Randomized SVD}
-
-The Randomized SVD procedure requires %\pgnotate{Changed ''performs'' to ``requires''.}
-only $2(q+1)$ passes over the matrix, so it is
-efficient even for matrices stored out-of-core.
-The flop count satisfies
-$$
-T_{\rm rand SVD} = (2q+2)\,k \, T_{\rm mult} + \bigO(k^2 (m + n)),
-$$
-where $T_{\rm mult}$ is the flop count of a matrix--vector multiply
-with $\mtx{A}$ or $\mtx{A}^\adj$.
-
-\begin{figure}[h]
-\begin{center}
-\framebox{\begin{minipage}{.9\textwidth}
-\begin{center}
-\textsc{Prototype for Randomized SVD}
-\end{center}
-
-\lsp
-
-\textit{Given an $m\times n$ matrix $\mtx{A}$, a target number $k$ of singular vectors,
-and an exponent $q$ (say $q=1$ or $q=2$), this procedure computes an approximate
-rank-$2k$ factorization $\mtx{U\Sigma V}^\adj$, where $\mtx{U}$ and $\mtx{V}$
-are orthonormal, and $\mtx{\Sigma}$ is nonnegative and diagonal.}
-
-\lsp
-
-{\bf Stage A:}
-
-\begin{tabbing}
-\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
-\anum{1} \>Generate an $n \times 2k$ Gaussian test matrix $\mtx{\Omega}$.\\
-
-\anum{2} \>Form $\mtx{Y} = (\mtx{AA}^\adj)^q \mtx{A\Omega}$ by multiplying alternately with $\mtx{A}$ and $\mtx{A}^\adj$.\\
-
-\anum{3} \>Construct a matrix $\mtx{Q}$ whose columns form an orthonormal basis for \\
-         \>the range of $\mtx{Y}$.
-\end{tabbing}
-
-\lsp
-
-{\bf Stage B:}
-
-\begin{tabbing}
-\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
-\anum{4}    \>Form $\mtx{B} = \mtx{Q}^{\adj}\mtx{A}$.\\
-
-\anum{5}    \>Compute an SVD of the small matrix: $\mtx{B} = \widetilde{\mtx{U}}\mtx{\Sigma}\mtx{V}^{\adj}$.\\
-
-\anum{6}    \>Set $\mtx{U} = \mtx{Q}\widetilde{\mtx{U}}$.
-\end{tabbing}
-
-\lsp
-
-{\bf Note:} The computation of $\mtx{Y}$ in Step 2 is vulnerable to round-off errors.
-When high accuracy is required, we must incorporate an orthonormalization
-step between each application of $\mtx{A}$
-and $\mtx{A}^{\adj}$; see Algorithm \ref{alg:subspaceiteration}.
-\end{minipage}}
-\end{center}
-\end{figure}
-
-\begin{theorem}
-Suppose that $\mtx{A}$ is a real $m \times n$ matrix.  Select
-an exponent $q$ and a target number $k$ of singular vectors,
-where $2 \leq k \leq 0.5 \min\{m,n\}$.
-%$ \leq k \leq 0.5 \min\{m,n\}$.
-Execute the Randomized SVD algorithm to obtain a rank-$2k$
-factorization $\mtx{U\Sigma V}^\adj$.  Then
-\begin{equation}
-\label{eq:intro_pca_bd}
-\Expect \norm{ \mtx{A} - \mtx{U\Sigma V}^\adj }
-    \leq \left[ 1 + 4 \sqrt{\frac{2\min\{m,n\}}{k-1}} \right]^{1/(2q+1)} \sigma_{k+1},
-\end{equation}
-where $\Expect$ denotes expectation with respect to the
-random test matrix and $\sigma_{k+1}$ is the $(k+1)$th
-singular value of $\mtx{A}$.
-\end{theorem}
-
-In practice, we can truncate the approximate SVD, retaining only the
-first $k$ singular values and vectors.  Equivalently, we
-replace the diagonal factor $\mtx{\Sigma}$ by the matrix
-$\mtx{\Sigma}_{(k)}$ formed by zeroing out all but the
-largest $k$ entries of $\mtx{\Sigma}$.  For this truncated SVD, we have the error bound
-\begin{equation} \label{eqn:pca_trunc}
-\Expect \norm{ \mtx{A} - \mtx{U} \mtx{\Sigma}_{(k)} \mtx{V}^\adj }
-  \leq \sigma_{k+1} + \left[ 1 + 4 \sqrt{\frac{2\min\{m,n\}}{k-1}} \right]^{1/(2q+1)} \sigma_{k+1}.
-\end{equation}
-
-
-\bibliographystyle{amsplain}
-\begin{thebibliography}{10}
-
-\bibitem {A} T. Aoki, \textit{Calcul exponentiel des op\'erateurs
-microdifferentiels d'ordre infini.} I, Ann. Inst. Fourier (Grenoble)
-\textbf{33} (1983), 227--250.
-
-\bibitem {B} R. Brown, \textit{On a conjecture of Dirichlet},
-Amer. Math. Soc., Providence, RI, 1993.
-
-\bibitem {D} R. A. DeVore, \textit{Approximation of functions},
-Proc. Sympos. Appl. Math., vol. 36,
-Amer. Math. Soc., Providence, RI, 1986, pp. 34--56.
-
-\end{thebibliography}
-
+\printbibliography[heading=bibintoc]
+% \bibliographystyle{amsplain}
 \end{document}
 
 %------------------------------------------------------------------------------

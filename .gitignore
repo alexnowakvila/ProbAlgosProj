@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# latex
+.aux
+.blg
+.bbl
+.run.xml
+-blx.bib
+

@@ -101,9 +101,9 @@ ENV/
 .mypy_cache/
 
 # latex
-.aux
-.blg
-.bbl
-.run.xml
--blx.bib
+*.aux
+*.blg
+*.bbl
+*.run.xml
+*-blx.bib
 

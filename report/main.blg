@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: biblatex.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: main-blx.bib
+Database file #2: mainbib.bib
+Biblatex version: 3.3
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+You've used 4 entries,
+            6047 wiz_defined-function locations,
+            1148 strings with 8536 characters,
+and the built_in function-call counts, 10928 in all, are:
+= -- 405
+> -- 400
+< -- 99
++ -- 140
+- -- 153
+* -- 816
+:= -- 858
+add.period$ -- 0
+call.type$ -- 4
+change.case$ -- 45
+chr.to.int$ -- 34
+cite$ -- 6
+duplicate$ -- 1097
+empty$ -- 1102
+format.name$ -- 210
+if$ -- 2474
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 0
+newline$ -- 103
+num.names$ -- 144
+pop$ -- 991
+preamble$ -- 1
+purify$ -- 54
+quote$ -- 0
+skip$ -- 651
+stack$ -- 0
+substring$ -- 288
+swap$ -- 390
+text.length$ -- 105
+text.prefix$ -- 3
+top$ -- 1
+type$ -- 140
+warning$ -- 0
+while$ -- 107
+width$ -- 0
+write$ -- 98

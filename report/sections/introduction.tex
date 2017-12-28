@@ -105,7 +105,7 @@ and we will provide to the reader the basic aspects and insights of both stages,
 which will be further studied in depth in the main body.
 
 
-\subsection*{Approximating the range of a matrix via randomness}
+\subsection{Approximating the range of a matrix via randomness}
 
 The problem of finding the best $\epsilon$-approximation of a given matrix $\mtx{A}$
  is called the \textit{fixed-precision problem}. More concretely, we are given
@@ -123,7 +123,7 @@ Another closely related problem is the so-called \textit{fixed-rank problem},
 which seeks to find the best rank-$k$ approximation of the matrix.
 
 \begin{equation}
-\label{eqn:fixed-rank}
+\label{eq:fixed-rank}
 \min_{{\rm rank}(\mtx{X}) \leq j}\norm{ \mtx{A} - \mtx{X} }.
 \end{equation}
 
@@ -171,7 +171,7 @@ where $p$ is called the oversampling parameter.
 
 EXPLICACIO
 
-\subsection*{Intuition of the randomized method to find $\mtx{Q}$}
+\subsection{Intuition of the randomized method to find Q} \label{alg:proto-algorithm}
 
 The key observation that leverage these methods is the fact that the matrix
 $\mtx{Q}$ can be found by sampling, and now the reader will obtain intuition
@@ -226,9 +226,10 @@ $p$ can be quite small. In practice, $p=5$ is more than enough.
 \end{tabbing}
 \end{minipage}}
 \end{center}
+% \caption{}
 \end{figure}
 
-\subsection*{Construction of standard matrix factorizations from $\mtx{Q}$}
+\subsection{Construction of standard matrix factorizations from Q}
 
 This corresponds to \textbf{Stage 2} of the algorithm. Once we have $\mtx{Q}$
 such that $\mtx{A}\approx\mtx{Q}\mtx{Q}^\adj\mtx{A}$, taking 

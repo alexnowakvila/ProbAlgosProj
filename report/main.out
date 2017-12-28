@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section*.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.0.1}{0.1. Approximating the range of a matrix via randomness}{section*.1}% 2
+\BOOKMARK [2][-]{subsection.0.2}{0.2. Intuition of the randomized method to find Q}{section*.1}% 3
+\BOOKMARK [2][-]{subsection.0.3}{0.3. Construction of standard matrix factorizations from Q}{section*.1}% 4
+\BOOKMARK [1][-]{section*.2}{Algorithms}{}% 5
+\BOOKMARK [1][-]{section.1}{1. Stage 1}{}% 6
+\BOOKMARK [1][-]{section.2}{2. Stage 2}{}% 7
+\BOOKMARK [1][-]{section.3}{3. Full algorithms}{}% 8
+\BOOKMARK [1][-]{section*.3}{Theory}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{3.1. Analysis of Stage 1}{section*.3}% 10
+\BOOKMARK [1][-]{section*.4}{Experiments}{}% 11
+\BOOKMARK [2][-]{subsection.3.2}{3.2. Reproducibility and general overview of the implementation}{section*.4}% 12
+\BOOKMARK [2][-]{subsection.3.3}{3.3. Gaussian Matrices}{section*.4}% 13
+\BOOKMARK [2][-]{subsection.3.4}{3.4. Real Dataset}{section*.4}% 14
+\BOOKMARK [1][-]{section*.5}{Conclusion}{}% 15
+\BOOKMARK [1][-]{section*.6}{References}{}% 16
+\BOOKMARK [1][-]{section*.6}{References}{}% 17

@@ -1,7 +1,7 @@
 \section*{Theory}
-\subsection{Analysis of stage A} 
+\subsection{Analysis of Stage \ref{sec:stage1}} 
 This section focuses on assessing the quality of the basis given
-by ALGO. More precisely, we want to prove rigorous bounds on the
+by Proto-Algorithm \ref{alg:proto-algorithm}. More precisely, we want to prove rigorous bounds on the
 approximation error
 $$ \|\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\| $$
 where $\|\cdot\|$ denotes either the operator norm or Frobenius norm.
@@ -49,12 +49,13 @@ $\mtx{Y}=\mtx{A}\mtx{\Omega}$ as
 where $\mtx{\Sigma}_1\mtx{\Omega}_1$ controls most of the action of $\mtx{Y}$,
 and $\mtx{\Sigma}_2\mtx{\Omega}_2$ is a small perturbation.
 
-The ALGO computes an orthogonal basis $\mtx{Q}$ of $\Ima(\mtx{Y})$. In other
+The Proto-Algorithm \ref{alg:proto-algorithm}
+ computes an orthogonal basis $\mtx{Q}$ of $\Ima(\mtx{Y})$. In other
 words, we can express the orthogonal projection to $\Ima(\mtx{Y})$ as
 $\mtx{P}_{\mtx{Y}} = \mtx{P}_{\Ima(\mtx{Y})} = \mtx{Q}\mtx{Q}^\adj$
 \footnote{We simplify the notation of the orthogonal projectoin to
 $\mtx{P}_{\mtx{Y}}$}.
-The following theorem \ref{thm:main-error-bd} bounds the squared
+The following Theorem \ref{thm:main-error-bd} bounds the squared
 error provides a deterministic error bound to the squared error.
 \begin{theorem}[Deterministic error bound] \label{thm:main-error-bd} %\\
 We have that
@@ -86,7 +87,7 @@ $\mtx{B}=(\mtx{A}\mtx{A}^\adj)\mtx{A}=\mtx{U}\mtx{\Sigma}^{2q+1}\mtx{V}^\adj$.
 The rationale behind the power scheme was that the random approximation
 of the $k$-dimensional gross action of $\mtx{A}$ can be improved if we amplify
 $\mtx{\Sigma}_1 - \mtx{\Sigma}_2$ by power iteration. This can be easily
-verified by this simple theorem \ref{thm:power-method}.
+verified by this simple Theorem \ref{thm:power-method}.
 \begin{theorem}[Power scheme] \label{thm:power-method}
 %Let $m$, $n$, and $\ell$ be positive integers such that $\ell < n \leq m$.
 Let $\mtx{A}$ be an $m\times n$ matrix, and let $\mtx{\Omega}$ be an $n\times \ell$
@@ -119,7 +120,7 @@ $$
 $$
 \end{theorem}
 \begin{remark} \rm
-The result of theorem \ref{thm:truncation} is quite pessimistic, and
+The result of Theorem \ref{thm:truncation} is quite pessimistic, and
 in practice we observe that truncating the SVD is not that damaging in
 the randomized setting.
 \end{remark}
@@ -176,28 +177,40 @@ The expected approximation error can be bounded as follows
   \item
 $$
 \Expect \fnorm{(\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
-    \leq \left( 1 + \frac{k}{p-1} \right)^{1/2}
-    \left( \sum\nolimits_{j>k} \sigma_j^2 \right)^{1/2}.
+    \leq \sigma_{k+1}\sqrt{\left( 1 + \frac{k}{p-1} \right)r(\mtx{\Sigma_2})}
 $$
 \item 
 $$
 \Expect \norm{(\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
-    \leq \left(1 + \sqrt{\frac{k}{p-1}} \right) \sigma_{k+1}
-        + \frac{\econst\sqrt{k+p}}{p}
-        \left(\sum\nolimits_{j>k} \sigma_{j}^2 \right)^{1/2}.
+    \leq  \sigma_{k+1}\left(1 + \sqrt{\frac{k}{p-1}}
+    +  \frac{\econst\sqrt{k+p}}{p}\sqrt{r(\mtx{\Sigma_2})}\right)
 $$
  \end{enumerate}
 \end{theorem}
+One interesting quantity is worth examining is
+$\norm{(\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}/\sigma_{k+1}$ to check
+the factor that tells how far the
+approximation is from the optimal rank-$k$ approximation \ref{eq:fixed-rank}.
+We observe that the suboptimality term increases
+essentially as $~\sim\sqrt{k/p}$ and has a term corresponding to the 
+numerical rank \ref{eq:num-rank} of the singular values corresponding
+to the perturbation.
+\footnote{The original statement of Theorem \ref{thm:avg-frob-error-gauss}
+from \cite{halko2011finding} does not explicitly write $r(\mtx{\Sigma_2})$.
+However, given that we introduced the concept of numerical rank 
+\ref{eq:num-rank} and its interpretation, I found interesting to highlight its
+appearance in the theorem.}
+
 \begin{proof}
-H{\"o}lder's inequality and theorem \ref{thm:main-error-bd} give 
+H{\"o}lder's inequality and Theorem \ref{thm:main-error-bd} give 
 $$
 \Expect \fnorm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}}
     \leq \left( \Expect \fnormsq{(\Id - \mtx{P}_{\mtx{Y}}) \mtx{A}} \right)^{1/2}
     \leq \left( \smnorm{\rm F}{\mtx{\Sigma}_2}^2 + \Expect \smnorm{\rm F}{ \mtx{\Sigma}_2
                 \mtx{\Omega}_2 \mtx{\Omega}_1^\psinv }^2 \right)^{1/2}.
 $$
-Then, we condition on $\mtx{\Omega}_1$ and use proposition~\ref{prop:scaled-gauss}
-and first part of proposition~\ref{prop:gauss-inv-expect}
+Then, we condition on $\mtx{\Omega}_1$ and use Proposition~\ref{prop:scaled-gauss}
+and first part of Proposition~\ref{prop:gauss-inv-expect}
 $$
 \Expect \smnorm{\rm F}{ \mtx{\Sigma}_2 \mtx{\Omega}_2 \mtx{\Omega}_1^\psinv }^2
     = \Expect \left( \Expect \left[ \smnorm{\rm F}{ \mtx{\Sigma}_2 \mtx{\Omega}_2
@@ -212,7 +225,7 @@ $$
     \leq \left(1 + \frac{k}{p-1}\right)^{1/2} \fnorm{ \mtx{\Sigma}_2 }.
 $$
 and the first part if proved. \\
-The bound on the operator norm is very similar, theorem~\ref{thm:main-error-bd}
+The bound on the operator norm is very similar, Theorem~\ref{thm:main-error-bd}
 implies that
 $$
 \Expect \norm{ (\Id - \mtx{P}_{\mtx{Y}}) \mtx{A} }
@@ -230,7 +243,7 @@ $$
     \leq \norm{\mtx{\Sigma}_2} \left( \Expect \smnorm{\rm F}{\mtx{\Omega}_1^\psinv}^2 \right)^{1/2}
         + \fnorm{\mtx{\Sigma}_2} \cdot \Expect \smnorm{}{\mtx{\Omega}_1^\psinv}.
 $$
-Finally applying proposition~\ref{prop:gauss-inv-expect}, we get to the final
+Finally applying Proposition~\ref{prop:gauss-inv-expect}, we get to the final
 result
 $$
 \Expect \smnorm{}{ \mtx{\Sigma}_2 \mtx{\Omega}_2

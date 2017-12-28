@@ -7,9 +7,30 @@ As Stewart ~\cite{stewart2000decompositional} argues, the principle of the
 decompositional approach aims to construct computational platforms from
 which a variety of problems can be solved.
 
-Although the decompositional approach to matrix computational remains
-fundamental, nowadays in the era of big data most of the classical algorithms
-are inadequate to tackle most of the problems. 
+Although the decompositional approach to matrix computation remains
+fundamental, nowadays in the era of big data, most of the classical algorithms
+are inadequate to tackle most of the problems.
+
+The empirical covariance matrices derived from datasets are now incredibly
+big, making most of the classical approaches too expensive in terms
+of computation. Moreover, it is common in information sciences to have
+data which is missing or innaccurate. This gives the opportunity to sacrify
+some accuracy on the algorithm to gain on computation, which classical 
+algorithms are not able to do. Another important aspect is the role
+of data transfer in the computational cost of a given algorithm, i.e, 
+techniques that may perform fewer passes over the data may be substantially
+faster in practice. 
+
+In this review, we present, analyse and test \textit{randomized} algorithms
+for matrix factorizations. This set of novel techniques addresses the issues
+stated above, i.e, can trade-off computation and accuracy to an arbitrary
+precision, gain on robustness, and reduce the number of passes on big datasets
+when data transfer is expensive.
+
+The purpose of approximated low-rank matrix factorization is to factorize
+a given matrix $\mtx{A}\in\Rspace{m\times n}$ into a product of
+two smaller matrices $\mtx{B}\in\Rspace{m\times k}$ and
+$\mtx{C}\in\Rspace{k\times n}$. 
 
 \begin{equation}
 \label{eq:lowrank}
@@ -18,3 +39,206 @@ are inadequate to tackle most of the problems.
 m\times n && m \times k & k\times n.
 \end{array}
 \end{equation}
+
+The matrix $\mtx{B}\times\mtx{C}$ in \ref{eq:lowrank} is called a rank-$k$ approximation of the
+matrix $\mtx{A}$.
+
+The inner dimension $k$ is called the \textit{numerical rank}
+of the matrix. This
+quantity differs from the \textit{algebraic rank}, which is defined as the 
+dimension of the image. The numerical rank is commonly defined as follows
+
+\begin{equation}\label{eq:num-rank}
+r(\mtx{A})\defeq\frac{\|\mtx{A}\|_F^2}{\|\mtx{A}\|^2}
+= \sum_{j=1}^{\min(m,n)}\left(\frac{\sigma_j}{\sigma_1}\right)^2
+\end{equation}
+
+and it gives a better understanding of how accurate a rank-$k$ approximation
+can be. Note that we always have $r(\mtx{A})\leq\text{rank}(\mtx{A})$. The notion
+of numerical rank appears in ~\cite{vershynin2016high} and has been studied at the Theory Reading Group
+course of the master in depth
+\footnote{The comparison between both notions of rank can be better understood
+through the following caracterization. 
+$\text{rank}(\mtx{A})=\dim(\textbf{A}B_2^n)$ and $r(\mtx{A})=d(\mtx{A}B_2^n)$
+where $B_2^n$ is the euclidean ball, hence, $\mtx{A}B_2^n$ is the ellipsoid with
+the axis of magnitude the singular values $\sigma_j$'s.
+Here, $\dim(\cdot)$ denotes the algebraic dimension and
+$d(\cdot)$ denotes the \textit{statistical dimension}.
+The statistical dimension is defined as $d(T)\defeq \frac{h(T-T)^2}{\text{diam}(T)^2}
+\sim \frac{w(T)^2}{\text{diam}(T)^2}$ where $h(T)^2=\Expect\sup_{t\in T}\la g, t\ra^2$
+and $w(T)=\Expect\sup_{t\in T}\la g, t\ra$ is the gaussian width.
+As discussed in ~\cite{vershynin2016high}, the statistical dimension is a more stable notion
+of dimension, in the same way that the numerical rank is more stable than the
+algebraic rank.
+}.
+
+The task of computing a low-rank approximation to a given matrix can be split into
+two computational stages. The first is to construct a low dimensional subspace that
+can capture the action of the matrix. The second is to restrict the matrix to the
+low dimensional subspace and then compute a standard factorization (QR, SVD, etc)
+of the reduced matrix.
+
+\begin{itemize}
+  \item\textbf{Stage 1:} Compute an approximate basis for the range of the input
+  matrix $\mtx{A}$. We want to find a matrix $\mtx{Q}$ with a small
+  number of orthonormal columns such that
+
+  \begin{equation}\label{eq:app-basis}
+    \mtx{A}\approx \mtx{Q}\mtx{Q}^\adj\mtx{A}
+  \end{equation}
+
+  The main idea is to approximate the range of the matrix via a randomized
+  method. This can be accomplised by iteratively computing the image of
+  random vectors from the input space and then orthogonalizing.
+  All the randomness of the algorithms will belong to this first stage.
+
+  \item\textbf{Stage 2:} Given a matrix $\mtx{Q}$ that satisfies \ref{eq:app-basis},
+  compute a standard factorization (QR, SVD, etc.) of $\mtx{A}$.  Note that
+  taking $\mtx{B}=\mtx{Q}$ and $\mtx{C}=\mtx{Q}^\adj\mtx{A}$ we already have
+  a low rank approximation of the matrix.
+   There is no randomness at this stage and only classical linear algebra computations are
+  incolved.
+\end{itemize}
+
+During the rest of the introduction, we will review some basics about matrix approximation
+and we will provide to the reader the basic aspects and insights of both stages, 
+which will be further studied in depth in the main body.
+
+
+\subsection*{Approximating the range of a matrix via randomness}
+
+The problem of finding the best $\epsilon$-approximation of a given matrix $\mtx{A}$
+ is called the \textit{fixed-precision problem}. More concretely, we are given
+ a tolerance $\epsilon$ and the goal is to find a matrix $\mtx{Q}$
+ with $k=k(\epsilon)$ columns such that
+
+\begin{equation}\label{eq:fixed-precision}
+\|\mtx{A} - \mtx{Q}\mtx{Q}^\adj\mtx{A}\|\leq\epsilon
+\end{equation}
+
+The goal here is to find a $\mtx{Q}$ with the smaller number of columns
+possible.
+
+Another closely related problem is the so-called \textit{fixed-rank problem}, 
+which seeks to find the best rank-$k$ approximation of the matrix.
+
+\begin{equation}
+\label{eqn:fixed-rank}
+\min_{{\rm rank}(\mtx{X}) \leq j}\norm{ \mtx{A} - \mtx{X} }.
+\end{equation}
+
+The Singular Value Decomposition (SVD) is key to analyze this problem. Recall that
+the SVD of a matrix $\mtx{A}$ is the following decomposition
+
+\begin{equation}\label{eq:svd}
+\mtx{A} = \mtx{U}\mtx{\Sigma}\mtx{V}^\adj
+= \sum_{j=1}^{\text{rank}(\mtx{A})}\sigma_j\mtx{u}_j\mtx{v}_j^\adj
+\end{equation}
+
+where $\{\mtx{u}_k\}_k, \{\mtx{v}_k\}_k$ are orthonormal basis on the output and input
+space respectively, $\sigma_1\geq\sigma_2,\ldots,\sigma_{\text{rank}(\mtx{A})}\geq 0$
+are the ordered singular values.
+
+ The SVD provides an optimal answer to the
+ \textit{fixed precision problem} ~\cite{mirsky1960symmetric} through the following
+ important observation
+ \footnote{This is a direct consequence of the Courant-Fisher's
+ \textit{min-max theorem}. This theorem offers a variational
+ characterization of the singular values of a given matrix $\mtx{A}$.
+ $$ \sigma_i(A) = \min_{E,\dim E=i}\max_{\mtx{x}\in S(E)}\|\mtx{A}\mtx{x}\| $$
+ FER UNA MINI-DEMO}.
+
+\begin{equation}
+\label{eqn:mirsky}
+\min_{{\rm rank}(\mtx{X}) \leq k}\norm{ \mtx{A} - \mtx{X} } = \sigma_{j+1}.
+\end{equation}
+
+It is straightforward to check that the optimum is attained at
+ $\mtx{X}_{*} = \sum_{j=1}^k\sigma_j\mtx{u}_j\mtx{v}_j^\adj$, namely, the $k$-truncated
+ SVD of the matrix $\mtx{A}$. More precisely, we have that
+$\mtx{B}=\mtx{U}\mtx{\Sigma}_{[j]}^{1/2}$ and $\mtx{C} = \mtx{\Sigma}_{[j]}^{1/2}\mtx{V}^\adj$
+are the best solutions \ref{eq:lowrank} when the rank is fixed.
+
+Let's suppose now that we know the desired rank $k$ in advance. The goal is 
+to find a matrix $\mtx{Q}$ with $k+p$ orthonormal columns such that
+
+\begin{equation}\label{eq:fixed-rank-app}
+\|\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\| \approx
+\min_{{\rm rank}(\mtx{X}) \leq k}\norm{ \mtx{A} - \mtx{X} }
+\end{equation}
+
+where $p$ is called the oversampling parameter.
+
+EXPLICACIO
+
+\subsection*{Intuition of the randomized method to find $\mtx{Q}$}
+
+The key observation that leverage these methods is the fact that the matrix
+$\mtx{Q}$ can be found by sampling, and now the reader will obtain intuition
+on how this can be done.
+
+Suppose we seek a basis for the range of a matrix $\mtx{A}$ with algebraic rank
+$k$. Random elements $\mtx{y}^{(i)}$ from the range can be computed by computing the image
+of random vectors $\mtx{w}^{(i)}$ of the input space. Let us repeat this
+process $k$ times:
+
+\begin{equation}\label{eq:iter-range}
+\mtx{y}^{(i)} = \mtx{A}\mtx{w}^{(i)}, \hspace{0.5cm}i=1,\ldots,k
+\end{equation} 
+
+Thanks to the randomness, the set $\{\mtx{w}^{(i)}\}_{i=1}^k$ is likely to be
+in general linear position and no vector will fall in $\ker\mtx{A}$
+if this is a set of measure zero under the probability measure we sampled from.
+Therefore, an orthogonalization procedure gives the desired orthonormal basis.
+
+What happens if the matrix $\mtx{A}$ has not exact algebraic rank equal to $k$?
+Write $\mtx{A} = \mtx{B} + \mtx{E}$ where $\mtx{B}$ is a rank-$k$ matrix containing
+the information we seek and $\mtx{E}$ a small perturbation.
+We want a basis that covers the range of $\mtx{B}$, however, if we repeat
+procedure \ref{eq:iter-range}, the vectors will be affected by the perturbation
+and the $\{\mtx{y}^{(i)}\}_{i=1}^k$ will have small components that will make
+them fall outside the desired space.
+
+To overcome this issue, the idea is to take $p$ more samples:
+
+\begin{equation}\label{eq:iter-range}
+\mtx{y}^{(i)} = \mtx{A}\mtx{w}^{(i)} = \mtx{B}\mtx{w}^{(i)}
++ \mtx{E}\mtx{w}^{(i)}, \hspace{0.5cm}i=1,\ldots,k+p
+\end{equation}
+
+The enriched set $\{\mtx{y}^{(i)}\}_{i=1}^{k+p}$ has much more chance
+of spanning the desired subspace, and this is grounded with some
+theoretical results holding in high probability. The theory also shows that
+$p$ can be quite small. In practice, $p=5$ is more than enough.
+
+\begin{figure}[ht]
+\begin{center}
+\framebox{\begin{minipage}{.9\textwidth}
+\begin{center}
+\textsc{Proto-Algorithm: Solving the Fixed-Rank Problem}
+\end{center}
+\begin{tabbing}
+\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
+\anum{1} \>Draw a random $n \times (k + p)$ test matrix $\mtx{\Omega}$.\\
+\anum{2} \>Form the matrix product $\mtx{Y} = \mtx{A\Omega}$.\\
+\anum{3} \>Construct a matrix $\mtx{Q}$ whose columns form an orthonormal basis for \\
+         \>the range of $\mtx{Y}$.
+\end{tabbing}
+\end{minipage}}
+\end{center}
+\end{figure}
+
+\subsection*{Construction of standard matrix factorizations from $\mtx{Q}$}
+
+This corresponds to \textbf{Stage 2} of the algorithm. Once we have $\mtx{Q}$
+such that $\mtx{A}\approx\mtx{Q}\mtx{Q}^\adj\mtx{A}$, taking 
+$\mtx{B}=\mtx{Q}$ and $\mtx{C}=\mtx{Q}^\adj\mtx{A}$ we produce a low rank
+matrix decomposition $\mtx{A}\approx\mtx{B}\mtx{C}$.
+
+
+
+A lot of questions need to be addressed in order to turn these methods into
+a technology or \textit{off-the-shelf} algorithms, namely, 
+theoretical guarantees on the accuracy of the approximate factorization and
+experimentally study the gap between theory and practice, i.e, how these
+methods perform in practice.

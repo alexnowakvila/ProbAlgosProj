@@ -2,9 +2,23 @@ function [Q] = adaptive_randomized_range_finder(A, tol, r)
 %
 % Adaptive Randomized Range Finder Algorithm (Algorithm 4.2).
 %     [Q] = adaptive_randomized_range_finder(A, tol, r) with [m, n] = size(A)
-%     returns a [m, l] orthonormal matrix Q such that norm(A-Q*Q'*A)<tol
-%     with probabilty 1-min(m,n)*10e-r.
+%     returns a (m x l) orthonormal matrix Q such that norm(A-Q*Q'*A)<tol
+%     with probabilty at least 1-min(m,n)*10e-r.
 %
+%     Input
+%     A:
+%         (m x n) matrix.
+%     tol:
+%         target tolerance of the error.
+%     r:
+%         Want norm(A-Q*Q'*A)<tol with probabilty at least 1-min(m,n)*10e-r.
+%
+%     Output
+%     Q:
+%         (m x l whose columns form an orthogonal basis of a rank-l
+%         approximation of the image of A with an error less than tol 
+%         with probabilty at least 1-min(m,n)*10e-r.
+
 [m, n] = size(A);
 Omega = randn(n, r);
 Y = A * Omega;

@@ -2,6 +2,7 @@
 
 ALL=$(wildcard *.tex content/*.tex defense/index.html figures/svg/*.svg)
 MAIN=main.tex
+MAIN_PDF=main.pdf
 LATEX=rubber --pdf
 SHELL=/bin/bash
 
@@ -13,6 +14,7 @@ all: #  $(FIGURES_PDF) $(FIGURES_PNG)  ## Build full thesis (LaTeX + figures)
 	$(LATEX) $(MAIN)                # main run
 	bibtex $(MAIN:.tex=)            # bibliography
 	$(LATEX) $(MAIN)                # incremental run
+	gnome-open $(MAIN_PDF)
 
 clean:  ## Clean LaTeX and output figure files
 	rubber --clean $(MAIN)

@@ -23,6 +23,7 @@ plot(diag(S1), 'DisplayName', 'approximated');
 plot(diag(S0), 'DisplayName', 'exact');
 hold off;
 error = norm(A0 - U1*S1*V1')
+pause;
 
 % ------------------------------------------------------------------------
 disp('testing svd_via_row_extraction.m... (does not work...)');

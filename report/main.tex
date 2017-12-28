@@ -34,6 +34,14 @@
 \newtheorem{remark}[theorem]{Remark}
 \numberwithin{equation}{section}
 
+
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+                     =}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
 %    Absolute value notation
 \newcommand{\abs}[1]{\lvert#1\rvert}
 
@@ -112,8 +120,11 @@ $\mathcal{O}(k)$ for classical algorithms.
 \maketitle
 
 \input{sections/introduction}
-\input{sections/theory}
 \input{sections/algorithms}
+\input{sections/theory}
+\input{sections/experiments}
+
+\section*{Conclusion}
 
 \printbibliography[heading=bibintoc]
 % \bibliographystyle{siam}
@@ -124,3 +135,4 @@ $\mathcal{O}(k)$ for classical algorithms.
 %------------------------------------------------------------------------------
 % End of journal.tex
 %------------------------------------------------------------------------------
+\grid

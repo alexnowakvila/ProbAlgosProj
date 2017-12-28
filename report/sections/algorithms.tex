@@ -1,147 +1,311 @@
 \section*{Algorithms}
 
+In this section we will describe the randomized algorithms in detail, provide the
+corresponding computational complexity analysis, and state the main theoretical results
+that guarantee the accuracy of the approximation.
 
-\section{Fixed rank problem}
+\section{Stage 1}
+In the introductory section, we provided some intuition on the randomized procedure
+and we developed a general proto-algorithm \ref{alg:basic} to find
+the matrix $\mtx{Q}$. However, Algorithm \ref{alg:basic} is very general and can be
+tunned depending on the problem requirements.
+The number $T_{\rm basic}$ of flops required by Algorithm \ref{alg:basic} satisfies
+\begin{equation}
+\label{eq:cost_basic}
+T_{\rm basic} \sim \ell n \, T_{\rm rand} + \ell\,T_{\rm mult} + \ell^{2}m %\,T_{\rm flop},
+\end{equation}
+where $T_{\rm rand}$ is the cost of generating a Gaussian random number
+and $T_{\rm mult}$ is the cost of multiplying $\mtx{A}$ by a vector.
 
-\begin{figure}[h]
+We will now describe some specific realizations of Algorithm \ref{alg:basic} 
+that will be intended for problems with different requirements.
+
+%%%%%%%%%%%%%%%%%% RANDOMIZED RANGE FINDER %%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Randomized Range Finder}
+This is the most naive and simplest implementation of Algorithm \ref{alg:basic}.
+Given an oversampling parameter $p$, the \textit{Randomized Range Finder}
+performs Algorithm \ref{alg:basic} with a gaussian test matrix 
+$\mtx{\Omega}\in\Rspace{n\times l}$ with $l=k+p$ and $k$ being a pre-specified
+target rank. Then, it orthogonalizes the rows of the resulting matrix $\mtx{Y}$ by computing
+a QR decomposition. A numerical issue arises when computing the orthogonalization
+procedure due to the fact that the columns of $\mtx{Y}$ are almost linearly
+dependent. The authors in ~\cite{halko2011finding} found that
+using the \textit{double orthogonalization} 
+~\cite{bjorck1994numerics} was enough to guarantee stability
+of the procedure.
+
+\begin{figure}[ht]
 \begin{center}
-\framebox{\begin{minipage}{.9\textwidth}
+\fbox{
+\begin{minipage}{.9\textwidth}
 \begin{center}
-\textsc{Proto-Algorithm: Solving the Fixed-Rank Problem}
+\textsc{Randomized Range Finder}
 \end{center}
-
-\lsp
-
-\textit{Given an $m\times n$ matrix $\mtx{A}$, a target rank $k$, and an oversampling parameter $p$,
-this procedure computes an $m\times (k+p)$ matrix $\mtx{Q}$ whose columns are orthonormal and whose range
-approximates the range of $\mtx{A}$.}
-
-\lsp
 \begin{tabbing}
 \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
+\anum{1} \>Draw an $n\times \ell$ Gaussian random matrix $\mtx{\Omega}$.\\
+\anum{2} \>Form the $m\times \ell$ matrix $\mtx{Y} = \mtx{A}\mtx{\Omega}$.\\
+\anum{3} \>Construct an $m \times \ell$ matrix $\mtx{Q}$ whose columns form an orthonormal\\
+         \> basis for the range of $\mtx{Y}$, e.g., using the QR factorization $\mtx{Y} = \mtx{Q}\mtx{R}$.
+\end{tabbing}
+\end{minipage}}
+\end{center}
+\end{figure}
 
-\anum{1} \>Draw a random $n \times (k + p)$ test matrix $\mtx{\Omega}$.\\
+The complexity analysis gives
 
-\anum{2} \>Form the matrix product $\mtx{Y} = \mtx{A\Omega}$.\\
+\begin{equation}\label{eq:analysis-rand-finder}
+T_{\text{Randomized Range Finder}}\sim \mathcal{O}(mnl)
+\end{equation}
 
-\anum{3} \>Construct a matrix $\mtx{Q}$ whose columns form an orthonormal basis for \\
-         \>the range of $\mtx{Y}$.
+this is because generating a gaussian random number is $\mathcal{O}(1)$
+and computing a matrix vector multiplication is $\mathcal{O}(mn)$.
+
+%%%%%%%%%%%%%%%%%% ADAPTIVE RANDOMIZED RANGE FINDER %%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Adaptive Randomized Range Finder}
+
+One important pitfall of the \textit{Randomized Range Finder} is that it
+requires to know in advance the target rank $k$. However, if we intend
+to solve the \textit{fixed-precision problem}, we need a scheme to estimate
+the error $\|\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\|$ during the algorithm
+in order to match the requited tolerance $\epsilon$.
+
+This scheme is possible and it is direct consequence of the following lemma.
+\begin{lemma}
+\label{thm:aposteriori}
+Let $\mtx{B}$ be a real $m\times n$ matrix.
+Fix a positive integer $r$ and a real number $\alpha > 1$.
+Draw an independent family $\{ \vct{\omega}^{(i)} : i = 1, 2, \dots, r \}$
+of standard Gaussian vectors.  Then
+\begin{equation*}
+\norm{\mtx{B}}
+    \leq \alpha \sqrt{\frac{2}{\pi}} \max_{i = 1, \dots, r}
+    \smnorm{}{\mtx{B}\vct{\omega}^{(i)} }
+\end{equation*}
+except with probability $\alpha^{-r}$.
+\end{lemma}
+
+Lemma \ref{thm:aposteriori} says that we can bound the error with high
+probability using inexpensive computations in an online manner. 
+The Lemma \ref{thm:aposteriori} applied to our problem reads
+
+\begin{equation}
+\label{eq:errorest}
+\norm{ (\Id - \mtx{Q}\mtx{Q}^{\adj})\mtx{A}}
+    \leq 10 \sqrt{\frac{2}{\pi}} \max_{i = 1, \dots, r}
+    \smnorm{}{ (\Id - \mtx{Q}\mtx{Q}^{\adj}) \mtx{A}\vct{\omega}^{(i)} }
+\end{equation}
+with probability at least $1 - 10^{-r}$.
+
+The high probability bound \ref{eq:errorest} gives a simple online scheme
+to decide when we have a good enough $\mtx{Q}$ that matches the pre-specified
+tolerance. The goal here is to find an integer $l$ and a $m\times l$
+orthonormal matrix $\mtx{Q}^{(l)}$ such that
+\begin{equation} \label{eqn:err_est_err_bd}
+\smnorm{}{ \big(\Id - \mtx{Q}^{(\ell)} (\mtx{Q}^{(\ell)})^{\adj} \big)\mtx{A} } \leq \eps.
+\end{equation}
+
+We call \textit{Adaptive Randomized Range Finder} to the
+algorithm derived from Lemma \ref{thm:aposteriori} that solves this
+problem.
+
+\begin{figure}[ht]
+\begin{center}
+\fbox{
+\begin{minipage}{.9\textwidth}
+\begin{center}
+\textsc{Adaptive Randomized Range Finder}
+\end{center}
+\begin{tabbing}
+\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
+\anum   {1} \> Draw standard Gaussian vectors $\vct{\omega}^{(1)}, \dots, \vct{\omega}^{(r)}$ of length $n$.\\
+\anum{2} \> For $i = 1,2,\dots,r$, compute $\vct{y}^{(i)} = \mtx{A}\vct{\omega}^{(i)}$.\\
+\anum{3} \> $j=0$.\\
+\anum{4} \> $\mtx{Q}^{(0)} = [\ ]$, the $m\times 0$ empty matrix. \\
+\anum{5} \> \textbf{while} $\displaystyle
+         \max\left\{\smnorm{}{\vct{y}^{(j+1)}},\smnorm{}{\vct{y}^{(j+2)}},\dots,\smnorm{}{\vct{y}^{(j+r)}} \right\} >
+\varepsilon/(10\sqrt{2/\pi})$,\\
+\anum{6} \> \> $j = j + 1$.\\
+\anum{7} \> \> Overwrite $\vct{y}^{(j)}$ by $\bigl(\Id - \mtx{Q}^{(j-1)}(\mtx{Q}^{(j-1)})^{\adj}\bigr)\vct{y}^{(j)}$.\\
+\anum{8} \> \> $\vct{q}^{(j)} = \vct{y}^{(j)}/\norm{\vct{y}^{(j)}}$.\\
+\anum{9} \> \> $\mtx{Q}^{(j)} = [\mtx{Q}^{(j-1)}\ \vct{q}^{(j)}]$.\\
+\anum{10} \> \> Draw a standard Gaussian vector $\vct{\omega}^{(j+r)}$ of length $n$.\\
+\anum{11} \> \> $\vct{y}^{(j+r)} = \left(\Id - \mtx{Q}^{(j)}(\mtx{Q}^{(j)})^{\adj}\right)\mtx{A}\vct{\omega}^{(j+r)}$.\\
+\anum{12} \> \> \textbf{for} $i = (j+1),(j+2),\dots,(j+r-1)$,\\
+\anum{13} \> \> \> Overwrite $\vct{y}^{(i)}$ by $\vct{y}^{(i)} - \vct{q}^{(j)}\ip{\vct{q}^{(j)}}{\vct{y}^{(i)}}$.\\
+\anum{14} \> \> \textbf{end for}\\
+\anum{15} \> \textbf{end while}\\
+\anum{16} \> $\mtx{Q} = \mtx{Q}^{(j)}$.
+\end{tabbing}
+\end{minipage}}
+\end{center}
+\end{figure}
+
+One important question is how good the bound given by Lemma \ref{thm:aposteriori}
+is in practice. If there is a significant gap between theory and practice
+the optimal $l$ will be overestimated. This question will be addressed in the experimental section
+REF.
+
+%%%%%%%%%%%%%%%%%% RANDOMIZED POWER ITERATION %%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Randomized Power Iteration}
+
+The \textit{Randomized Range Finder} algorithm assumes that the singular values
+of the matrix decay fast. This can be seen from equation \ref{eq:iter-range},
+where the small singular
+values interfere with the calculation of the range. This intuition is made precise 
+in THEOREM, where the error of the approximation depends on
+the $k+1$-th singular value.
+
+The goal here is to reduce the weight of the
+small singular values by taking powers of the matrix whose range we want
+to approximate. Instead of applying the sampling scheme to $\mtx{A}$, we will
+apply it to $\mtx{B}=(\mtx{A}\mtx{A}^\adj)^q\mtx{A}$ where $q>0$ is a small
+integer.
+
+The matrix $\mtx{B}$ has the same singular vectors than $\mtx{A}$ (hence, 
+the same range), but its singular values decay much more quickly.
+
+\begin{equation}\label{eq:sing-values-power}
+\sigma_j(\mtx{B}) = \sigma_j(\mtx{A})^{2q+1},
+\hspace{0.5cm} j=1,2,3,\ldots
+\end{equation}
+
+The \textit{Randomized Power Iteration} algorithm is the same 
+as the \textit{Randomized Range Finder} but replacing the formula
+$\mtx{Y}=\mtx{A}\mtx{\Omega}$ by $\mtx{Y}=\mtx{B}\mtx{\Omega}$.
+
+\begin{figure}[ht]
+\begin{center}
+\fbox{
+\begin{minipage}{.9\textwidth}
+\begin{center}
+\textsc{Randomized Power Iteration}
+\end{center}
+\begin{tabbing}
+\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
+\anum{1} \>Draw an $n\times \ell$ Gaussian random matrix $\mtx{\Omega}$.\\
+\anum{2} \>Form the $m\times \ell$ matrix $\mtx{Y} = (\mtx{A}\mtx{A}^{\adj})^{q}\mtx{A}\mtx{\Omega}$ via alternating application\\
+         \>of $\mtx{A}$ and $\mtx{A}^{\adj}$.\\
+\anum{3} \>Construct an $m \times \ell$ matrix $\mtx{Q}$ whose columns form an orthonormal\\
+         \> basis for the range of $\mtx{Y}$, e.g., via the QR factorization $\mtx{Y} = \mtx{Q}\mtx{R}$.
+\end{tabbing}
+\lsp
+{\bf Note:} This procedure is vulnerable to round-off errors; see Remark \ref{remark:roundoff_in_powerscheme}.
+The recommended implementation appears as Algorithm~\ref{alg:subspaceiteration}.
+\end{minipage}}
+\end{center}
+\end{figure}
+
+The computational complexity of the algorithm is essentially the same because
+it only requires $2q+1$ as many matrix-multiplications as ALGORITHM
+but the number $q$ is in practice 2,3 or 4. This can be seen from 
+THEOREM, which shows that the power iteration drives the approximation
+gap to 1 exponentially fast.
+
+
+%%%%%%%%%%%%%%%%%% FAST RANDOMIZED RANGE FINDER %%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Fast Randomized Range Finder}
+
+A simple inspection to equation \ref{eq:cost_basic} reveals the computational
+bottleneck of the sampling procedure. This is the matrix multiplication
+$\mtx{Y}=\mtx{A}\mtx{\Omega}$ that takes $\mathcal{O}(mnl)$ operations
+for dense matrices, which is the same as the $l$-SVD (computed
+after a prior rank-revealing QR factorization
+~\cite{gu1996efficient}).
+
+The key idea is to use a \textit{structured} random matrix that allows us 
+to compute the product in $\mathcal{O}(mn\log(l))$ operations.
+
+The simplest structured random matrix that meets our goals is the so-called
+\textit{subsampled random Fourier transform} (SRFT).
+
+An SRFT is an $n \times \ell$ matrix of the form
+\begin{equation}
+\label{eq:def_srft}
+\mtx{\Omega} = \sqrt{\frac{n}{\ell}} \, \mtx{DFR},
+\end{equation}
+where
+\lsp
+\begin{itemize}
+\item   $\mtx{D}$ is an $n \times n$ diagonal matrix whose entries are
+independent random variables uniformly distributed on the complex unit circle,
+
+\item   $\mtx{F}$ is the $n \times n$ unitary discrete Fourier transform (DFT),
+whose entries take the values $f_{pq} = n^{-1/2} \, \econst^{-2\pi\iunit (p-1)(q-1)/n}$ for $p, q = 1, 2, \dots, n$, and
+
+\item   $\mtx{R}$ is an $n \times \ell$ matrix that samples $\ell$ coordinates
+from $n$ uniformly at random, i.e., its $\ell$ columns are drawn randomly
+without replacement from the columns of the $n \times n$ identity matrix.
+\end{itemize}
+\lsp
+
+Now, via a subsampled FFT ~\cite{woolfe2008fast}, we can compute the
+sample matrix $\mtx{Y}=\mtx{A}\mtx{\Omega}$ with
+$\mathcal{O}(mn\log(l))$ operations.
+
+Now, the total number of operations required by this procedure is reduced to
+\begin{equation}
+\label{eq:cost_SRFT}
+T_{\rm struct} \sim mn \log(\ell) + \ell^2 n
+\end{equation}
+
+
+\begin{figure}[ht]
+\begin{center}
+\fbox{
+\begin{minipage}{.9\textwidth}
+\begin{center}
+\textsc{Fast Randomized Range Finder}
+\end{center}
+\begin{tabbing}
+\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
+\anum{1} \>Draw an $n\times \ell$ SRFT test matrix $\mtx{\Omega}$, as defined by \eqref{eq:def_srft}. \\
+%\pgnotate{Added reference.}\\
+\anum{2} \>Form the $m\times \ell$ matrix $\mtx{Y} = \mtx{A}\mtx{\Omega}$ using a (subsampled) FFT.\\
+\anum{3} \>Construct an $m \times \ell$ matrix $\mtx{Q}$ whose columns form an orthonormal\\
+         \> basis for the range of $\mtx{Y}$, e.g., using the QR factorization $\mtx{Y} = \mtx{Q}\mtx{R}$.
 \end{tabbing}
 \end{minipage}}
 \end{center}
 \end{figure}
 
 
-\begin{theorem} %\label{thm:intro}
-Suppose that $\mtx{A}$ is a real $m \times n$ matrix.  Select
-a target rank $k \geq 2$ and an oversampling parameter $p \geq 2$,
-where $k + p \leq \min\{m,n\}$.
-Execute the proto-algorithm with
-a standard Gaussian test matrix to obtain an
-$m \times (k + p)$ matrix $\mtx{Q}$ with orthonormal columns.  Then
-\begin{equation}
-\label{eq:intro_err_bd}
-\Expect \norm{ \mtx{A} - \mtx{QQ}^\adj \mtx{A} }
-    \leq \left[ 1 + \frac{4 \sqrt{k+p}}{p-1} \cdot\sqrt{\min\{m,n\}} \right] \sigma_{k+1},
-\end{equation}
-where $\Expect$ denotes expectation with respect to the
-random test matrix and $\sigma_{k+1}$ is the $(k+1)$th
-singular value of $\mtx{A}$.
-\end{theorem}
+\section{Stage 2}
+\subsubsection{Compute standard QR and SVD from a general factorization}
+Now we will specify how we can compute the standards SVD and QR decompositions
+from a general low rank decomposition $\|\mtx{A} - \mtx{B}\mtx{C}\|\leq\epsilon$.
 
-The probability that the error satisfies
-\begin{equation} \label{eq:intro_err_prob}
-\norm{ \mtx{A} - \mtx{QQ}^\adj \mtx{A} }
-    \leq \left[ 1 + 11 \sqrt{k+p} \cdot\sqrt{\min\{m,n\}} \right] \sigma_{k+1}
-\end{equation}
-is at least $1 - 6 \cdot p^{-p}$ under very mild assumptions on $p$.
-
-\section{Randomized SVD}
-
-The Randomized SVD procedure requires %\pgnotate{Changed ''performs'' to ``requires''.}
-only $2(q+1)$ passes over the matrix, so it is
-efficient even for matrices stored out-of-core.
-The flop count satisfies
-$$
-T_{\rm rand SVD} = (2q+2)\,k \, T_{\rm mult} + \bigO(k^2 (m + n)),
-$$
-where $T_{\rm mult}$ is the flop count of a matrix--vector multiply
-with $\mtx{A}$ or $\mtx{A}^\adj$.
-
-\begin{figure}[h]
-\begin{center}
-\framebox{\begin{minipage}{.9\textwidth}
-\begin{center}
-\textsc{Prototype for Randomized SVD}
-\end{center}
-
+\begin{itemize}
+  \item \textit{SVD decomposition:}
 \lsp
-
-\textit{Given an $m\times n$ matrix $\mtx{A}$, a target number $k$ of singular vectors,
-and an exponent $q$ (say $q=1$ or $q=2$), this procedure computes an approximate
-rank-$2k$ factorization $\mtx{U\Sigma V}^\adj$, where $\mtx{U}$ and $\mtx{V}$
-are orthonormal, and $\mtx{\Sigma}$ is nonnegative and diagonal.}
-
+\begin{enumerate}
+\item Compute a QR factorization of $\mtx{B}$ so that $\mtx{B} = \mtx{Q}_{1}\mtx{R}_{1}$.
+\item Form the product $\mtx{D} = \mtx{R}_{1}\mtx{C}$, and compute an SVD:
+      $\mtx{D} = \mtx{U}_{2}\mtx{\Sigma}\mtx{V}^{\adj}$.
+\item Form the product $\mtx{U} = \mtx{Q}_{1}\mtx{U}_{2}$.
+\end{enumerate}
 \lsp
+The result is a diagonal matrix $\mtx{\Sigma}$ and orthonormal matrices $\mtx{U}$ and $\mtx{V}$
+such that $\norm{\mtx{A} - \mtx{U}\mtx{\Sigma}\mtx{V}^{\adj}} \leq \varepsilon$.
 
-{\bf Stage A:}
-
-\begin{tabbing}
-\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
-\anum{1} \>Generate an $n \times 2k$ Gaussian test matrix $\mtx{\Omega}$.\\
-
-\anum{2} \>Form $\mtx{Y} = (\mtx{AA}^\adj)^q \mtx{A\Omega}$ by multiplying alternately with $\mtx{A}$ and $\mtx{A}^\adj$.\\
-
-\anum{3} \>Construct a matrix $\mtx{Q}$ whose columns form an orthonormal basis for \\
-         \>the range of $\mtx{Y}$.
-\end{tabbing}
-
+\item \textit{QR decomposition:}
 \lsp
-
-{\bf Stage B:}
-
-\begin{tabbing}
-\hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \hspace{5mm} \= \kill
-\anum{4}    \>Form $\mtx{B} = \mtx{Q}^{\adj}\mtx{A}$.\\
-
-\anum{5}    \>Compute an SVD of the small matrix: $\mtx{B} = \widetilde{\mtx{U}}\mtx{\Sigma}\mtx{V}^{\adj}$.\\
-
-\anum{6}    \>Set $\mtx{U} = \mtx{Q}\widetilde{\mtx{U}}$.
-\end{tabbing}
-
+\begin{enumerate}
+\item Compute a QR factorization of $\mtx{B}$ so that $\mtx{B} = \mtx{Q}_{1}\mtx{R}_{1}$.
+\item Form the product $\mtx{D} = \mtx{R}_{1}\mtx{C}$, and compute a QR factorization: $\mtx{D} = \mtx{Q}_{2}\mtx{R}$.
+\item Form the product $\mtx{Q} = \mtx{Q}_{1}\mtx{Q}_{2}$.
+\end{enumerate}
 \lsp
+The result is an orthonormal matrix  $\mtx{Q}$ and a weakly upper-triangular matrix $\mtx{R}$ such
+that $\norm{\mtx{A} - \mtx{Q}\mtx{R}} \leq \varepsilon$.
 
-{\bf Note:} The computation of $\mtx{Y}$ in Step 2 is vulnerable to round-off errors.
-When high accuracy is required, we must incorporate an orthonormalization
-step between each application of $\mtx{A}$
-and $\mtx{A}^{\adj}$; see Algorithm \ref{alg:subspaceiteration}.
-\end{minipage}}
-\end{center}
-\end{figure}
+\end{itemize}
 
-\begin{theorem}
-Suppose that $\mtx{A}$ is a real $m \times n$ matrix.  Select
-an exponent $q$ and a target number $k$ of singular vectors,
-where $2 \leq k \leq 0.5 \min\{m,n\}$.
-%$ \leq k \leq 0.5 \min\{m,n\}$.
-Execute the Randomized SVD algorithm to obtain a rank-$2k$
-factorization $\mtx{U\Sigma V}^\adj$.  Then
-\begin{equation}
-\label{eq:intro_pca_bd}
-\Expect \norm{ \mtx{A} - \mtx{U\Sigma V}^\adj }
-    \leq \left[ 1 + 4 \sqrt{\frac{2\min\{m,n\}}{k-1}} \right]^{1/(2q+1)} \sigma_{k+1},
-\end{equation}
-where $\Expect$ denotes expectation with respect to the
-random test matrix and $\sigma_{k+1}$ is the $(k+1)$th
-singular value of $\mtx{A}$.
-\end{theorem}
+\subsubsection{Factorizations based on forming $\mtx{Q}^\adj\mtx{A}$ directly}
+\subsubsection{Other Procedures}
 
-In practice, we can truncate the approximate SVD, retaining only the
-first $k$ singular values and vectors.  Equivalently, we
-replace the diagonal factor $\mtx{\Sigma}$ by the matrix
-$\mtx{\Sigma}_{(k)}$ formed by zeroing out all but the
-largest $k$ entries of $\mtx{\Sigma}$.  For this truncated SVD, we have the error bound
-\begin{equation} \label{eqn:pca_trunc}
-\Expect \norm{ \mtx{A} - \mtx{U} \mtx{\Sigma}_{(k)} \mtx{V}^\adj }
-  \leq \sigma_{k+1} + \left[ 1 + 4 \sqrt{\frac{2\min\{m,n\}}{k-1}} \right]^{1/(2q+1)} \sigma_{k+1}.
-\end{equation}
+\section{Full algorithms}

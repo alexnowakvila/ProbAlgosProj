@@ -1,4 +1,19 @@
 function [O] = SRFT(n, l)
+%
+% Subsampled Random Fourier Transform (SRFT).
+%   [O] = SRFT(n, l) computes the subsampled random fourier transform (SRFT)
+%   of size (n x l)
+%
+%   Input
+%   n:
+%     number of rows of the SRFT
+%   l:
+%     number of columns of the SRFT
+%
+%   Output
+%   O:
+%     SRFT of size (n x l)
+
 R = zeros(n, l);
 o = 1:l;
 for c = 1:l

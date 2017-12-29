@@ -124,27 +124,27 @@ disp('  Matrix Decompositions »');
 % hold off;
 
 % ------------------------------------------------------------------------
-disp('Testing adaptive_randomized_range_finder.m with gaussian matrices...');
-m = 500; n = 200; r = 10;
-% m = input('Number of rows m:\n');
-% n = input('Number of cols n:\n');
-A2 = randn(m, n)/(sqrt(m)+sqrt(n));
+% disp('Testing adaptive_randomized_range_finder.m with gaussian matrices...');
+% m = 500; n = 200; r = 10;
+% % m = input('Number of rows m:\n');
+% % n = input('Number of cols n:\n');
+% A0 = randn(m, n)/(sqrt(m)+sqrt(n));
 % A1 = (A0*A0')*A0;
 % A2 = (A0*A0')*A1;
-[U,S2,V] = svd(A2); 
-tols = 1:-0.1:0.1;
-error = []; rank = [];
-for tol = tols
-  Q2 = adaptive_randomized_range_finder(A2, tol, r);
-  error = [error norm(A2 - Q2*Q2'*A2)];
-  rnk = size(Q2)
-  rank = [rank rnk(2)];
-end
-figure(3); 
-subplot(1,2,1); plot(tols, error);
-title('error vs tol');
-subplot(1,2,2); plot(tols, rank);
-title('dim(Im(A_{app})) w.r.t tol');
+% [U,S2,V] = svd(A2); 
+% tols = 1:-0.1:0.1;
+% error = []; rank = [];
+% for tol = tols
+%   Q2 = adaptive_randomized_range_finder(A2, tol, r);
+%   error = [error norm(A2 - Q2*Q2'*A2)];
+%   rnk = size(Q2)
+%   rank = [rank rnk(2)];
+% end
+% figure(3); 
+% subplot(1,2,1); plot(tols, error);
+% title('error vs tol');
+% subplot(1,2,2); plot(tols, rank);
+% title('dim(Im(A_{app})) w.r.t tol');
 % ------------------------------------------------------------------------
 % disp('Testing randomized_subspace_iteration.m with gaussian matrices...')
 % m = 500; n = 200;
@@ -163,3 +163,34 @@ title('dim(Im(A_{app})) w.r.t tol');
 %   legend('show');
 % end
 % hold off;
+% ------------------------------------------------------------------------
+disp('Comparing theoretical bound with numerics with SRFT')
+m = 500; n = 200; p = 5; k = 150;
+% m = input('Number of rows m:\n');
+% n = input('Number of cols n:\n');
+% p = input('Oversampling parameter p:\n');
+A0 = randn(m, n)/(sqrt(m)+sqrt(n)); 
+A1 = (A0*A0')*A0;
+A0 = (A0*A0')*A1;
+[U,S0,V] = svd(A0);
+S0 = diag(S0);
+figure(5);
+Q0 = randomized_range_finder(A0, k ,p);
+% l = k + p;
+% [Q0, ~] = randomized_subspace_iteration(A0, l, q);
+A0_app = (Q0*Q0')*A0;
+[U,S,V] = svd(A0_app);
+specs = diag(S)';
+error1 = norm(A0 - A0_app);
+
+plot(specs); hold on;
+
+Q0 = randomized_range_finder_SRFT(A0, k ,p);
+% l = k + p;
+% [Q0, ~] = randomized_subspace_iteration(A0, l, q);
+A0_app = (Q0*Q0')*A0;
+[U,S,V] = svd(A0_app);
+specs = diag(S);
+error2 = norm(A0 - A0_app);
+plot(specs); hold on;
+plot(S0); hold off;

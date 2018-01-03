@@ -3,7 +3,9 @@
 This section focuses on assessing the quality of the basis given
 by Proto-Algorithm \ref{alg:proto-algorithm}. More precisely, we want to prove rigorous bounds on the
 approximation error
-$$ \|\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\| $$
+\begin{equation}\label{eq:range-error}
+\|\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\|
+\end{equation}
 where $\|\cdot\|$ denotes either the operator norm or Frobenius norm.
 
 We will split the argument into two parts \footnote{The authors
@@ -171,7 +173,7 @@ and afterwards we will confirm that the error does not oscillate too
 much around the mean by proving the corresponing bounds on the tails of the
 distribution.
 
-\begin{theorem}[Average Frobenius error] \label{thm:avg-frob-error-gauss}
+\begin{theorem}[Average error] \label{thm:avg-frob-error-gauss}
 The expected approximation error can be bounded as follows
 \begin{enumerate}
   \item
@@ -281,4 +283,27 @@ Similar bounds can also be proven for the power scheme
 \cite{halko2011finding} that give a high probability guarantee for 
 the bound \ref{thm:power-method}.
 
+Finally, let's analyze the error bounds on the 
+the Power Scheme \ref{alg:randomized-power-iteration} that are directly
+derived from Theorem \ref{thm:power-method} using H{\"o}lder's inequality
+and the bound $\smnorm{\rm F}{\Sigma_2^{2q+1}}$ by 
+$\left(\sqrt{ \min\{m,n\} - k }\right)\sigma_{k+1}^{1/(2q+1)}$.
 
+\begin{corollary}[Average spectral error for the power scheme]
+\label{cor:power-method-spec-gauss}
+Frame the hypotheses of Theorem~\ref{thm:avg-frob-error-gauss}.
+Define $\mtx{B} = {(\mtx{A}\mtx{A}^\adj)}^{q} \mtx{A}$ for a
+nonnegative integer $q$, and construct the sample matrix $\mtx{Z} =
+\mtx{B\Omega}$.  Then
+$$
+\Expect \norm{(\Id - \mtx{P}_{\mtx{Z}}) \mtx{A}}
+    \leq \left[ 1 + \sqrt{\frac{k}{p-1}}
+    + \frac{\econst\sqrt{k+p}}{p} \cdot \sqrt{ \min\{m,n\} - k } \right]^{1/(2q+1)}
+    \sigma_{k+1}.
+$$
+\end{corollary}
+
+From Corollary \ref{cor:power-method-spec-gauss} we observe how as we increase
+$q$, the power scheme drives the extra factor in the error to one
+exponentially fast.
+\newpage

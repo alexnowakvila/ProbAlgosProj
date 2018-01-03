@@ -1,7 +1,7 @@
-function [Q] = randomized_range_finder_SRFT(A, k, p)
+function [Q] = fast_randomized_range_finder(A, k, p)
 %
-% Randomized Range Finder Algorithm (Algorithm 4.1).
-%   [Q] = randomized_range_finder(A, k, p) with [m, n] = size(A)
+% Fast Randomized Range Finder Algorithm (Algorithm 4.1).
+%   [Q] = fast_randomized_range_finder(A, k, p) with [m, n] = size(A)
 %   returns a (m x (k+p)) matrix Q whose columns are orthonormal and 
 %   whose range approximates the range of A
 %
@@ -19,7 +19,7 @@ function [Q] = randomized_range_finder_SRFT(A, k, p)
 %     approximation of the image of A.
 
 [m, n] = size(A);
-Omega = real(SRFT(n, k+p));
+Omega = SRFT(n, k+p);
 Y = A * Omega;
 [Q, R] = qr(Y, 0);
 end

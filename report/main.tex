@@ -20,6 +20,7 @@
 \usepackage{citesort}
 \usepackage{rotating}
 \usepackage{geometry}
+\usepackage{float}
 \geometry{left=30mm, top=20mm}
 \usepackage{hyperref}
 \addbibresource{mainbib.bib} % The filename of the bibliography
@@ -27,6 +28,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -126,6 +128,28 @@ $\mathcal{O}(k)$ for classical algorithms.
 \input{sections/experiments}
 
 \section*{Conclusion}
+Randomization schemes for approximate matrix factorization are a powerful and 
+versatile tool that \textbf{every data scientist should know about}.
+These methods are more robust and scalable than classical algorithms,
+and despite not achieving the same level of accuracy, the error gap can be
+perfectly controlled.
+
+Moreover, these methods rely on theoretical bounds resulting from theorems
+on concentration of measure,
+although we have seen in Experiment \ref{fig:exp1-1} that the bounds on the
+expectation can be very loose for certain matrices. One interesting direction
+of research can be the sharpening of bounds like \ref{thm:avg-frob-error-gauss}
+under hypothesis on the matrix $\mtx{A}$.
+
+
+There are several variants in this set of methods that
+are designed for matrices with different properties. One drawback
+is that sometimes they can be not that easy to verify, for e.g, the decaying
+rate of the spectrum.
+
+From a more personal point of view, I have personally appreciated both the 
+theoretical and experimental section of this review. I think it is extremely 
+important to have nice experimental results always grounded by theory.
 
 \printbibliography[heading=bibintoc]
 % \bibliographystyle{siam}

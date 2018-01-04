@@ -1,14 +1,19 @@
-\section*{Algorithms}
+\section{Algorithms}
 
 In this section we will describe the randomized algorithms in detail, provide the
 corresponding computational complexity analysis, and state the main theoretical results
 that guarantee the accuracy of the approximation.
 
-\section{Stage 1}
+We split this section in three main parts: Stage 1 \ref{sec:stage1} and Stage 2
+\ref{sec:stage2} that will study in depth the algorithmic details of both stages,
+and Full Algorithms \ref{sec:full-algos} in which full algorithms will be presented
+for a diversity of matrices with certain properties.
+
+\subsection{Stage 1}
 \label{sec:stage1}
 In the introductory section, we provided some intuition on the randomized procedure
 and we developed a general Proto-Algorithm \ref{alg:proto-algorithm} to find
-the matrix $\mtx{Q}$. However, Proto-Algorithm \ref{alg:proto-algorithm} is very general and can be
+the range-approximating matrix $\mtx{Q}$. However, Proto-Algorithm \ref{alg:proto-algorithm} is very general and can be
 tunned depending on the problem requirements.
 The number $T_{\rm basic}$ of flops required by Proto-Algorithm \ref{alg:proto-algorithm} satisfies
 \begin{equation}
@@ -17,6 +22,7 @@ T_{\rm basic} \sim \ell n \, T_{\rm rand} + \ell\,T_{\rm mult} + \ell^{2}m %\,T_
 \end{equation}
 where $T_{\rm rand}$ is the cost of generating a Gaussian random number
 and $T_{\rm mult}$ is the cost of multiplying $\mtx{A}$ by a vector.
+The last term comes from the orthonormalization procedure of $\mtx{Y}$.
 
 We will now describe some specific realizations of Proto-Algorithm \ref{alg:proto-algorithm} 
 that will be intended for problems with different requirements.
@@ -62,7 +68,19 @@ T_{\text{Randomized Range Finder}}\sim \mathcal{O}(mn\ell)
 \end{equation}
 
 this is because generating a gaussian random number is $\mathcal{O}(1)$
-and computing a matrix vector multiplication is $\mathcal{O}(mn)$.
+and computing a matrix vector multiplication is $\mathcal{O}(mn)$
+\footnote{Note that parallel computation can be extremely helpful here
+to drastically reduce the effective complexity of the product $\mtx{A}\mtx{\Omega}$.}. 
+One important observation is that the complexity $\mathcal{O}(mn\ell)$
+can be prohibitive for massive datasets \footnote{Obviously, we can't hope
+to do better than $\mathcal{O}(mn)$ which is the size of the matrix
+we want to approximate. The term that we want to address is the linear term
+in $\ell$. Classical algorithms to compute the $\ell$-SVD cost 
+$\mathcal{O}(mn\ell)$, by first computing s rank-revealing QR factorization
+~\cite{gu1996efficient} and then manipulating the terms to get to the desired
+factorization.}. A variant of this procedure
+will be studied in \ref{alg:fast-randomized-range-finder}
+to get around this problem,
 
 %%%%%%%%%%%%%%%%%% ADAPTIVE RANDOMIZED RANGE FINDER %%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -72,7 +90,7 @@ and computing a matrix vector multiplication is $\mathcal{O}(mn)$.
 One important pitfall of the \textit{Randomized Range Finder}
 \ref{alg:randomized-range-finder} is that it
 requires to know in advance the target rank $k$. However, if we intend
-to solve the \textit{fixed-precision problem}, we need a scheme to estimate
+to solve the \textit{fixed-precision approximation problem}, we need a scheme to estimate
 the error $\|\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\|$ during the algorithm
 in order to match the requited tolerance $\epsilon$.
 
@@ -161,11 +179,11 @@ the optimal $l$ will be overestimated. This question will be addressed in the ex
 
 The \textit{Randomized Range Finder} \ref{alg:randomized-range-finder}
 algorithm assumes that the singular values
-of the matrix decay fast. This can be seen from equation \ref{eq:iter-range},
+of the matrix decay fast. This can be intuitively seen from equation \ref{eq:iter-range},
 where the small singular
 values interfere with the calculation of the range. This intuition is made precise 
-in Theorem REF, where the error of the approximation depends on
-the $k+1$-th singular value.
+in Theorem \ref{thm:avg-frob-error-gauss}, where the error of the approximation depends on
+the $\sigma_{k+1}$ and $\sum_{j>k}\sigma_j^2$.
 
 The goal here is to reduce the weight of the
 small singular values by taking powers of the matrix whose range we want
@@ -206,12 +224,14 @@ $\mtx{Y}=\mtx{A}\mtx{\Omega}$ by $\mtx{Y}=\mtx{B}\mtx{\Omega}$.
 \end{center}
 \end{figure}
 
-The computational complexity of the algorithm is essentially the same because
+The computational complexity of the Algorithm \ref{alg:randomized-power-iteration}
+is essentially the same because
 it only requires $2q+1$ as many matrix-multiplications as Algorithm
 \ref{alg:randomized-range-finder}
 but the number $q$ is in practice 2,3 or 4. This can be seen from 
-THEOREM, which shows that the power iteration drives the approximation
-gap to 1 exponentially fast.
+Corollary \ref{cor:power-method-spec-gauss},
+which shows that the power iteration drives the approximation
+gap to 1 exponentially fast as $q$ increases.
 
 
 %%%%%%%%%%%%%%%%%% FAST RANDOMIZED RANGE FINDER %%%%%%%%%%%%%%%%%%%%%%%%
@@ -222,9 +242,7 @@ gap to 1 exponentially fast.
 A simple inspection to equation \ref{eq:cost_basic} reveals the computational
 bottleneck of the sampling procedure. This is the matrix multiplication
 $\mtx{Y}=\mtx{A}\mtx{\Omega}$ that takes $\mathcal{O}(mn\ell)$ operations
-for dense matrices, which is the same as the $\ell$-SVD (computed
-after a prior rank-revealing QR factorization
-~\cite{gu1996efficient}).
+for dense matrices, which is the same as the $\ell$-SVD.
 
 The key idea is to use a \textit{structured} random matrix that allows us 
 to compute the product in $\mathcal{O}(mn\log(\ell))$ operations.
@@ -241,10 +259,10 @@ where
 \lsp
 \begin{itemize}
 \item   $\mtx{D}$ is an $n \times n$ diagonal matrix whose entries are
-independent random variables uniformly distributed on the complex unit circle,
+independent random variables uniformly distributed on the complex unit circle.
 
 \item   $\mtx{F}$ is the $n \times n$ unitary discrete Fourier transform (DFT),
-whose entries take the values $f_{pq} = n^{-1/2} \, \econst^{-2\pi\iunit (p-1)(q-1)/n}$ for $p, q = 1, 2, \dots, n$, and
+whose entries take the values $f_{pq} = n^{-1/2} \, \econst^{-2\pi\iunit (p-1)(q-1)/n}$ for $p, q = 1, 2, \dots, n$
 
 \item   $\mtx{R}$ is an $n \times \ell$ matrix that samples $\ell$ coordinates
 from $n$ uniformly at random, i.e., its $\ell$ columns are drawn randomly
@@ -291,9 +309,9 @@ $\mathcal{O}(mn \log(\ell))$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% STAGE 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Stage 2} \label{sec:stage2}
- The output of the Stage \ref{sec:stage1} produces an orthonormal matrix $\mtx{Q}$ whose
- range captures the action of the matrix $\mtx{A}$. The goal of Stage
+\subsection{Stage 2} \label{sec:stage2}
+ The output of the Stage 1 \ref{sec:stage1} produces an orthonormal matrix $\mtx{Q}$ whose
+ range captures the action of the matrix $\mtx{A}$. The goal of Stage 2
  \ref{sec:stage2} is 
  to produce standard approximate matrix factorizations of $\mtx{A}$
  using this $\mtx{Q}$.
@@ -311,7 +329,7 @@ product $\mtx{C}=\mtx{Q}^\adj\mtx{A}$.
 \subsubsection{Compute standard QR and SVD from a general factorization}
 Now we will specify how we can compute the standards SVD and QR decompositions
 from a general low rank decomposition $\|\mtx{A} - \mtx{B}\mtx{C}\|\leq\varepsilon$
-maintaining the tolerance $\epsilon$ from Stage \ref{sec:stage1}.
+maintaining the tolerance $\epsilon$ from Stage 1 \ref{sec:stage1}.
 
 \begin{itemize}
   \item \label{itm:SVD-from-C} \textit{SVD decomposition:} $\|\mtx{A}-\mtx{U}\mtx{\Sigma}\mtx{V}^\adj\|\leq\varepsilon$
@@ -373,20 +391,27 @@ $
 \end{figure}
 
 Although using \textit{Direct SVD} \ref{alg:direct-svd} algorithm for
-Stage \ref{sec:stage2} does not incur additional errors, the computation
+Stage 2 \ref{sec:stage2} does not incur additional errors, the computation
 of $\mtx{C}=\mtx{Q}^\adj\mtx{A}$ is in general too expensive for dense matrices.
 
 More concretely, the product costs $\mathcal{O}(mn\ell)$, even more
-expensive that the cost of Stage \ref{sec:stage1} when using Algorithm
+expensive that the cost of Stage 1 \ref{sec:stage1} when using
+the accelerated Algorithm
 \ref{alg:fast-randomized-range-finder}.
 
-\subsubsection{Faster Procedures}
-In order to match the complexity $\mathcal{O}(mn\log(\ell))$ from 
-Stage \ref{sec:stage1} we must avoid the product $\mtx{Q}^\adj\mtx{A}$.
+\subsubsection{Different Procedures} \label{sec:dif-app}
+
+\begin{itemize} 
+    \item \textit{Match the cost} $\mathcal{O}(mn\log(\ell))$ \textit{of accelerated
+    Stage 1} \ref{alg:fast-randomized-range-finder}.
+
+    In order to match the complexity $\mathcal{O}(mn\log(\ell))$ from 
+Stage 1 \ref{sec:stage1} we must avoid the product $\mtx{Q}^\adj\mtx{A}$.
 
 In \cite{halko2011finding}, the authors propose algorithms based
 on row extraction of $\mtx{Q}$ via its \textit{Interpolative Decomposition}
-$\mtx{Q}=\mtx{X}\mtx{Q}_{(J,:)}$ \cite{cheng2005compression}.The proposed
+$\mtx{Q}=\mtx{X}\mtx{Q}_{(J,:)}$ \cite{cheng2005compression}.
+Now, $\mtx{Q}_{(J,:)}$ is a $k\times k$ matrix. The proposed
 algorithm takes $\mtx{Q}$ as input and constructs a rank-$k$ matrix 
 factorization
 
@@ -396,8 +421,72 @@ factorization
 where $\mtx{B}$ is a $k \times n$ matrix consisting of $k$ rows
 extracted from $\mtx{A}$.
 
-The key here is that \ref{eq:via-row-extraction} can be produced without any
+The key here is that \ref{eq:via-row-extraction} can be produced without any large
 matrix-matrix multiplication resulting in a total of $\mathcal{O}(k^2(m+n))$
 operations. The drawback is that the initial error is larger than the one
-incurred by $\mtx{Q}^\adj\mtx{Q}\mtx{A}$. 
+incurred by $\mtx{Q}^\adj\mtx{Q}\mtx{A}$
+\footnote{In \cite{halko2011finding}, they prove that the error is increased at 
+most by $\left(\sqrt{1+4k(n-k)}\right)\varepsilon$, which can be large
+when $\varepsilon$ is not that small or $kn$ is large.}.
+
+\item \textit{Single-Pass algorithms}
+
+The previously described algorithms require revisit the matrix $\mtx{A}$
+multiple times. In \cite{halko2011finding} they propose single-pass
+algorithms relying on the observation that all the information
+you need to compute the decomposition is in the matrices $\mtx{\Omega},\mtx{Y}$
+and $\mtx{Q}$. They call the Algorithm \textit{Eigenvalue Decomposition in
+One-pass}. However, this algorithm too adds additional error to the Stage 1
+\footnote{Authors in \cite{halko2011finding} argue that this issue can be
+addressed with extra oversampling.}.
+\end{itemize}
+
+\subsection{Full Algorithms}\label{sec:full-algos}
+Let's now propose a full algorithm depending on the input matrix properties.
+
+\begin{itemize}
+\item \textit{General Matrices That Fit in Core Memory}
+
+In this case, the appropiate method for Stage 1 is the accelerated
+Algorithm \ref{alg:fast-randomized-range-finder} that uses structured random
+matrices. For Stage 2, use the \textit{row-extraction technique}
+described in \ref{sec:dif-app}. The overall cost $T_{\rm random}$ reduces to
+
+\begin{equation} \label{eq:cost-1}
+\boxed{T_{\rm random} \sim mn \log(k) + k^2 (m+n)}
+\end{equation}
+The overall approximation error satisfies
+\footnote{This can be derived by combining the error analysis
+of range approximation with SRFT (which can be found in \cite{halko2011finding})
+and the additional error incurred by the \textit{row-extraction technique}.}
+\begin{equation} \label{eq:totalerror-1}
+\norm{ \mtx{A} - \mtx{U\Sigma V}^\adj }
+    \lesssim n \cdot \sigma_{k+1},
+\end{equation}
+
+\item \textit{Matrices for which Matrix-Vector Products are Cheap.}
+
+In this set of matrices we include for example sparse and structured matrices for
+which the matrix-vector multiplication is substantially cheaper than the general case.
+
+The appropiate method for Stage 1 is Algorithm \ref{alg:randomized-range-finder}
+with $p$ constant \footnote{If we are dealing
+with the \textit{fixed-precision problem}, then we use 
+Algorithm \ref{alg:adaptive-randomized-range-finder}.}, or more generally
+Algorithm \ref{alg:randomized-power-iteration} with $q>0$. For Stage 2, we apply
+the \textit{Direct SVD} \ref{alg:direct-svd}. The total cost $T_{\rm sparse}$ satisfies
+\begin{equation}
+\label{eq:sparsealg-cost}
+\boxed{T_{\rm sparse} = (2q+2)\,(k + p) \, T_{\rm mult} + \bigO(k^2 (m + n))}
+\end{equation} 
+
+The overall approximation error satisfies (see Corollary \ref{cor:power-method-spec-gauss}).
+\begin{equation}
+\label{eq:sparsealg-error2}
+\norm{ \mtx{A} - \mtx{U\Sigma V}^\adj } \lesssim (kn)^{1/2(2q+1)} \cdot \sigma_{k+1}.
+\end{equation}
+
+\end{itemize}
+
+
 \newpage

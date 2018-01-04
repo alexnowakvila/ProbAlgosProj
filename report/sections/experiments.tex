@@ -1,4 +1,4 @@
-\section*{Experiments}
+\section{Experiments}
 In this section, we briefly present our experiments on some of the 
 algorithms presented at the previous sections. Two sets of experiments are presented.
 
@@ -10,15 +10,18 @@ In particular, the bound on the expectation of the error given
 by \ref{thm:avg-frob-error-gauss} and
 the error estimation procedure which was motivated by 
 Lemma \ref{thm:aposteriori}.
+We have used an \textit{oversampling parameter} $p=5$ for all of the experiments.
 
-The second set of experiments is ...
+The second set of experiments analyses the performance of the
+\textit{Randomized Power Method} \ref{alg:randomized-power-iteration} on MNIST
+and on a matrix appearing in image processing.
 
 \subsection{Details of the implementation}
-The experiments have been performed in \verb|Matlab|. The reproducible
+The experiments have been implemented in \verb|Matlab|. The reproducible
 source code can be found at the following 
 \href{https://github.com/alexnowakvila/ProbAlgosProj}{Github repository}
-together with the \LaTeX  of the report. Please read \verb|README| documentation
-to run the code from source.
+together with the \LaTeX~  of the report. Please read \verb|README| documentation
+to run the code on the \verb|Matlab| interactive command line.
 \subsection{Gaussian Matrices} \label{sec:gaussian-matrices}
 In this set of experiments, we test and analyze the performance of the 
 Algorithms \ref{alg:randomized-range-finder}, 
@@ -78,7 +81,7 @@ for $\mtx{A}$ and $q=1,2,3$}
 \ref{alg:adaptive-randomized-range-finder}}
 In this experiment, Algorithm \ref{alg:adaptive-randomized-range-finder} is applied
 to $(\mtx{A}\mtx{A}^\adj)^2\mtx{A}$ with pre-specified tolerances ranging
-from 0 to 1. We have fitted a line at the numerical
+from 0 to 1. We have fitted a line to the numerical
 error produced vs the tolerance (the dependence was close to linear). The slope of the
 resulting line
 is $\textbf{0.045}$, i.e, for the matrices used in the experiment, the 
@@ -86,7 +89,7 @@ bound \ref{eq:errorest} has a numerical suboptimality of 0.045.
 \subsubsection{Experiments on Fast Randomized Range Finder
 \ref{alg:fast-randomized-range-finder}}
 Algorithm \ref{alg:fast-randomized-range-finder} has been applied to several
-powers of $\mtx{A}$ (using SRFT test matrices) and the error for curve for 
+powers of $\mtx{A}$ (using SRFT test matrices) and the error curve for 
 different target ranks is essentially the same as the one found using
 Algorithm \ref{alg:randomized-range-finder}.
 
@@ -116,7 +119,7 @@ First, define $\widetilde{\mtx{W}}$ as
 where $\mtx{x}^{(i)}$ is a vector gathering the intensities of a neighborhood
 of a certain size of the pixel $i$. Here, $\sigma$ controls the level of
 sensitivity. We then define the sparse matrix $\mtx{W}$ constructed by
-zeroing out all the entries in $\widetilde{\mtx{W}}$ excepct the seven largest
+zeroing out all the entries in $\widetilde{\mtx{W}}$ except the 7 largest
 ones in each row. 
 Finally, the laplacian operator is defined as
 \begin{equation}\label{eq:graph-laplacian}
@@ -125,7 +128,7 @@ Finally, the laplacian operator is defined as
 where $\mtx{D}$ is the diagonal matrix with entries $d_{ii}=\sum_{j}w_{ij}$.
 
 In order to find the low-frequency eigenvectors of $\mtx{L}$,
-we must find the eigenvectors with dominant eigenvalue of
+we must find the eigenvectors with dominant eigenvalues of
 
 \begin{equation}\label{eq:adj}
 \mtx{A}=\mtx{D}^{-1/2}\mtx{W}\mtx{D}^{-1/2}
@@ -141,9 +144,9 @@ Algorithm \ref{alg:randomized-power-iteration} is very advantageous.
 
 \begin{figure}[H] \label{fig:exp2}
 \begin{center}
-\includegraphics[width=\textwidth, trim=0cm 8cm 0cm 7cm, clip=true]{figures/2-1.pdf}
+\includegraphics[width=\textwidth, trim=0cm 8cm 0cm 7cm, clip=true]{figures/2-2.pdf}
 \end{center}
 \caption{Approximation error \ref{eq:range-error} for the
 power scheme \ref{alg:randomized-power-iteration} for MNIST 
-(Left) and $\mtx{A}$ \ref{eq:adj} (Right).}
+(Left) and $\mtx{A}$ \ref{eq:adj} (Right) for $k$ ranging from $1$ to $100$.}
 \end{figure}

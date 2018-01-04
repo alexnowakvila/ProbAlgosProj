@@ -1,5 +1,5 @@
-\section*{Theory}
-\subsection{Analysis of Stage \ref{sec:stage1}} 
+\section{Theory}
+\subsection{Analysis of Stage 1 \ref{sec:stage1}} 
 This section focuses on assessing the quality of the basis given
 by Proto-Algorithm \ref{alg:proto-algorithm}. More precisely, we want to prove rigorous bounds on the
 approximation error
@@ -73,7 +73,6 @@ Frobenius norm.
 
 \begin{remark} \rm
  Note that $\mtx{\Sigma}_1$ does not appear in the error bound.
-EXPLAIN
 \end{remark}
 \begin{remark} \rm
 The first term is a deterministic
@@ -83,17 +82,18 @@ The second term is a random term that depends on the interaction of
 the right singular values of $\mtx{A}$ amplified by $\mtx{\Sigma}_2$.
 \end{remark}
 
-We would also like to be able to analyze the power scheme described in REF,
+We would also like to be able to analyze the power scheme described in 
+\ref{alg:randomized-power-iteration},
 i.e, 
 $\mtx{B}=(\mtx{A}\mtx{A}^\adj)\mtx{A}=\mtx{U}\mtx{\Sigma}^{2q+1}\mtx{V}^\adj$.
 The rationale behind the power scheme was that the random approximation
 of the $k$-dimensional gross action of $\mtx{A}$ can be improved if we amplify
 $\mtx{\Sigma}_1 - \mtx{\Sigma}_2$ by power iteration. This can be easily
-verified by this simple Theorem \ref{thm:power-method}.
+verified by the following Theorem \ref{thm:power-method}.
 \begin{theorem}[Power scheme] \label{thm:power-method}
 %Let $m$, $n$, and $\ell$ be positive integers such that $\ell < n \leq m$.
 Let $\mtx{A}$ be an $m\times n$ matrix, and let $\mtx{\Omega}$ be an $n\times \ell$
-matrix. Fix a nonnegative integer $q$, form $\mtx{B} = {(\mtx{A}^\adj \mtx{A})}^q \mtx{A}$,
+matrix. Fix a nonnegative integer $q$, form $\mtx{B} = {(\mtx{A}\mtx{A}^\adj)}^q \mtx{A}$,
 and compute the sample matrix $\mtx{Z} = \mtx{B\Omega}$.  Then
 $$
 \norm{ (\Id - \mtx{P}_{\mtx{Z}}) \mtx{A} }
@@ -129,7 +129,7 @@ the randomized setting.
 
 \subsubsection{(2) Bounds on the gaussian setting} 
 First we start by providing a bunch of results on gaussian matrices
-that will are key to prove the bounds on expectation and probability tails.
+that will be key to prove the bounds on expectation and probability tails.
 %% TECHNICAL BACKGROUND
 \begin{proposition}[Expected norm of a scaled Gaussian matrix] 
 \label{prop:scaled-gauss}
@@ -202,7 +202,7 @@ from \cite{halko2011finding} does not explicitly write $r(\mtx{\Sigma_2})$.
 However, given that we introduced the concept of numerical rank 
 \ref{eq:num-rank} and its interpretation, I found interesting to highlight its
 appearance in the theorem.}
-
+We will go through the proof for the sake of illustration.
 \begin{proof}
 H{\"o}lder's inequality and Theorem \ref{thm:main-error-bd} give 
 $$
@@ -286,8 +286,7 @@ the bound \ref{thm:power-method}.
 Finally, let's analyze the error bounds on the 
 the Power Scheme \ref{alg:randomized-power-iteration} that are directly
 derived from Theorem \ref{thm:power-method} using H{\"o}lder's inequality
-and the bound $\smnorm{\rm F}{\Sigma_2^{2q+1}}$ by 
-$\left(\sqrt{ \min\{m,n\} - k }\right)\sigma_{k+1}^{1/(2q+1)}$.
+and the bound $\smnorm{\rm F}{\Sigma_2^{2q+1}}\leq\left(\sqrt{ \min\{m,n\} - k }\right)\sigma_{k+1}^{1/(2q+1)}$.
 
 \begin{corollary}[Average spectral error for the power scheme]
 \label{cor:power-method-spec-gauss}

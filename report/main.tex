@@ -63,19 +63,20 @@
 
 \begin{document}
 
-\title{Probabilistic Algorithms for Finding \\ Matrix Decompositions}
+\title{Probabilistic algorithms for constructing \\ approximate matrix decompositions}
 
 %    Information for first author
 \author{Alex Nowak}
 %    Address of record for the research reported here
-\address{Department of Mathematics \\
+\address{Master "Math\'ematiques, Vision et Apprentissage" \\
 \'Ecole Normale Sup\'erieure de Cachan}
 %    Current address
 % \curraddr{Department of Mathematics and Statistics,
 % Case Western Reserve University, Cleveland, Ohio 43403}
 \email{alexnowakvila@gmail.com}
 %    \thanks will become a 1st page footnote.
-% \thanks{The first author was supported in part by NSF Grant \#000000.}
+\thanks{As a project of the course: \textit{Sparsity and Compressed Sensing}
+at ENS Cachan given by \href{http://www.gpeyre.com/}{Pr. Gabriel Peyr\'e}}
 
 % %    Information for second author
 % \author{Author Two}
@@ -108,11 +109,11 @@ of the decomposition and $m$ and $n$ are the corresponding dimensions of the
 matrix.
 In this review, we introduce to the reader randomized algorithms 
 that can achieve the aforementioned task with numerous advantadges compared
-to the classical algorithms. These algorithms are based on the fact that the
+to the classical algorithms. These randomized methods are based on the fact that the
 image of a low-rank matrix can be approximated by the action
 of the matrix to a reasonable amount of random vectors from the input space.
 Starting from this point, it is possible to develop
-algorithms that achieve a complexity of $\mathcal{O}(mn\log{k})$ for 
+algorithms that achieve a complexity of $\mathcal{O}(mn\log(k))$ for 
 dense-matrices, matches the flop count of classical
 Krylov subspace methods for sparse matrices with a gain in robustness, and
 for large matrices that can not be stored in memory (RAM), they
@@ -127,29 +128,32 @@ $\mathcal{O}(k)$ for classical algorithms.
 \input{sections/theory}
 \input{sections/experiments}
 
-\section*{Conclusion}
+\section{Conclusion}
 Randomization schemes for approximate matrix factorization are a powerful and 
 versatile tool that \textbf{every data scientist should know about}.
 These methods are more robust and scalable than classical algorithms,
 and despite not achieving the same level of accuracy, the error gap can be
-perfectly controlled.
+perfectly controlled with the \textit{oversampling parameter} $p$ and
+the number of power iterations $q$.
 
 Moreover, these methods rely on theoretical bounds resulting from theorems
-on concentration of measure,
-although we have seen in Experiment \ref{fig:exp1-1} that the bounds on the
+on concentration of measure. We have seen in Experiment \ref{fig:exp1-1}
+that the bounds on the
 expectation can be very loose for certain matrices. One interesting direction
 of research can be the sharpening of bounds like \ref{thm:avg-frob-error-gauss}
-under hypothesis on the matrix $\mtx{A}$.
+under additional hypothesis on the matrix $\mtx{A}$.
 
 
 There are several variants in this set of methods that
-are designed for matrices with different properties. One drawback
-is that sometimes they can be not that easy to verify, for e.g, the decaying
+are designed for matrices with different properties, see Section \ref{sec:full-algos}.
+One drawback is that sometimes they can be not that easy to verify before
+applying the algorithm, for e.g, the decaying
 rate of the spectrum.
 
 From a more personal point of view, I have personally appreciated both the 
-theoretical and experimental section of this review. I think it is extremely 
-important to have nice experimental results always grounded by theory.
+theoretical and experimental section of this project and how they complement each other.
+I think it is extremely important to have nice experimental results
+always grounded by theory.
 
 \printbibliography[heading=bibintoc]
 % \bibliographystyle{siam}

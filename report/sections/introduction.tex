@@ -1,4 +1,4 @@
-\section*{Introduction}
+\section{Introduction}
 
 Matrix factorization is listed as one of the most influential set
 of techniques during the 20th century ~\cite{dongarra2000guest}, among
@@ -11,7 +11,7 @@ Although the decompositional approach to matrix computation remains
 fundamental, nowadays in the era of big data, most of the classical algorithms
 are inadequate to tackle most of the problems.
 
-The empirical covariance matrices derived from datasets are now incredibly
+Data matrices are now incredibly
 big, making most of the classical approaches too expensive in terms
 of computation. Moreover, it is common in information sciences to have
 data which is missing or innaccurate. This gives the opportunity to sacrify
@@ -90,7 +90,7 @@ of the reduced matrix.
   The main idea is to approximate the range of the matrix via a randomized
   method. This can be accomplised by iteratively computing the image of
   random vectors from the input space and then orthogonalizing.
-  All the randomness of the algorithms will belong to this first stage.
+  All the randomness of these methods will belong to this first stage.
 
   \item\textbf{Stage 2:} Given a matrix $\mtx{Q}$ that satisfies \ref{eq:app-basis},
   compute a standard factorization (QR, SVD, etc.) of $\mtx{A}$.  Note that
@@ -108,7 +108,7 @@ which will be further studied in depth in the main body.
 \subsection{Approximating the range of a matrix via randomness}
 
 The problem of finding the best $\epsilon$-approximation of a given matrix $\mtx{A}$
- is called the \textit{fixed-precision problem}. More concretely, we are given
+ is called the \textit{fixed-precision approximation problem}. More concretely, we are given
  a tolerance $\epsilon$ and the goal is to find a matrix $\mtx{Q}$
  with $k=k(\epsilon)$ columns such that
 
@@ -119,7 +119,7 @@ The problem of finding the best $\epsilon$-approximation of a given matrix $\mtx
 The goal here is to find a $\mtx{Q}$ with the smaller number of columns
 possible.
 
-Another closely related problem is the so-called \textit{fixed-rank problem}, 
+Another closely related problem is the so-called \textit{fixed-rank approximation problem}, 
 which seeks to find the best rank-$k$ approximation of the matrix.
 
 \begin{equation}
@@ -127,7 +127,23 @@ which seeks to find the best rank-$k$ approximation of the matrix.
 \min_{{\rm rank}(\mtx{X}) \leq j}\norm{ \mtx{A} - \mtx{X} }.
 \end{equation}
 
-The Singular Value Decomposition (SVD) is key to analyze this problem. Recall that
+The Singular Value Decomposition (SVD)
+\footnote{The Singular Value Decomposition is a central tool for a data scientist.
+It is the algorithmic tool used to perform \textit{Principal Component Analysis} (PCA) on a dataset
+$\mtx{X}\in\Rspace{N\times d}$ of size $N$ and dimensionality $d$. PCA finds
+linear hidden linear structure in the data by looking at the eigenvectors with largest
+eigenvalues of the empirical covariance matrix of the data
+$\hat{\mtx{\Sigma}}_N = \mtx{X}^\transp\mtx{X}=\frac{1}{N}\sum_{j=1}^N\mtx{x}_j\mtx{x}_j^\transp$.
+These eigenvectors and eigenvalues can also be found by computing the SVD of the data matrix
+$\mtx{X}=\mtx{U}\mtx{D}\mtx{V}^\transp$, because $\hat{\mtx{\Sigma}}_N = \mtx{V}\mtx{D}^2\mtx{V}^\transp$.
+One important remark is that PCA does not suffer from the curse of dimensionality. For example,
+if we assume sub-gaussianity on the random variable $X$, then we have
+$\Expect\| \hat{\mtx{\Sigma}}_N - \mtx{\Sigma} \|\leq \varepsilon \|\mtx{\Sigma}\|$
+if we take a sample size of $N\sim\varepsilon^{-2}d$, i.e, the number of samples
+scales linearly with the dimensionality of the dataset. If instead of sub-gaussianity,
+we relax it to $\|X\|_2\leq K(\Expect\|X\|_2^2)^{1/2}$ we only get an extra log-term.
+This is one of the main reasons why PCA works!}
+is key to analyze this problem. Recall that
 the SVD of a matrix $\mtx{A}$ is the following decomposition
 
 \begin{equation}\label{eq:svd}
@@ -140,18 +156,18 @@ space respectively, $\sigma_1\geq\sigma_2,\ldots,\sigma_{\text{rank}(\mtx{A})}\g
 are the ordered singular values.
 
  The SVD provides an optimal answer to the
- \textit{fixed precision problem} ~\cite{mirsky1960symmetric} through the following
+ \textit{fixed-rank approximation problem} ~\cite{mirsky1960symmetric} through the following
  important observation
 
 \begin{equation}
 \label{eqn:mirsky}
-\min_{{\rm rank}(\mtx{X}) \leq k}\norm{ \mtx{A} - \mtx{X} } = \sigma_{j+1}.
+\min_{{\rm rank}(\mtx{X}) \leq k}\norm{ \mtx{A} - \mtx{X} } = \sigma_{k+1}.
 \end{equation}
 
 It is straightforward to check that the optimum is attained at
  $\mtx{X}_{*} = \sum_{j=1}^k\sigma_j\mtx{u}_j\mtx{v}_j^\adj$, namely, the $k$-truncated
- SVD of the matrix $\mtx{A}$. More precisely, we have that
-$\mtx{B}=\mtx{U}\mtx{\Sigma}_{[j]}^{1/2}$ and $\mtx{C} = \mtx{\Sigma}_{[j]}^{1/2}\mtx{V}^\adj$
+ SVD (k-SVD) of the matrix $\mtx{A}$. More precisely, we have that
+$\mtx{B}=\mtx{U}\mtx{\Sigma}_{[k]}^{1/2}$ and $\mtx{C} = \mtx{\Sigma}_{[k]}^{1/2}\mtx{V}^\adj$
 are the best solutions \ref{eq:lowrank} when the rank is fixed.
 
 Let's suppose now that we know the desired rank $k$ in advance. The goal is 
@@ -162,9 +178,9 @@ to find a matrix $\mtx{Q}$ with $k+p$ orthonormal columns such that
 \min_{{\rm rank}(\mtx{X}) \leq k}\norm{ \mtx{A} - \mtx{X} }
 \end{equation}
 
-where $p$ is called the oversampling parameter.
+where $p$ is called the \textit{oversampling parameter}.
 
-EXPLICACIO
+% EXPLICACIO
 
 \subsection{Intuition of the randomized method to find Q} \label{alg:proto-algorithm}
 
@@ -174,7 +190,7 @@ on how this can be done.
 
 Suppose we seek a basis for the range of a matrix $\mtx{A}$ with algebraic rank
 $k$. Random elements $\mtx{y}^{(i)}$ from the range can be computed by computing the image
-of random vectors $\mtx{w}^{(i)}$ of the input space. Let us repeat this
+of random vectors $\mtx{w}^{(i)}$ from the input space. Let us repeat this
 process $k$ times:
 
 \begin{equation}\label{eq:iter-range}
@@ -186,7 +202,8 @@ in general linear position and no vector will fall in $\ker\mtx{A}$
 if this is a set of measure zero under the probability measure we sampled from.
 Therefore, an orthogonalization procedure gives the desired orthonormal basis.
 
-What happens if the matrix $\mtx{A}$ has not exact algebraic rank equal to $k$?
+What happens if the matrix $\mtx{A}$ has not exact algebraic rank equal to $k$
+\footnote{In practice this is always the case.}?
 Write $\mtx{A} = \mtx{B} + \mtx{E}$ where $\mtx{B}$ is a rank-$k$ matrix containing
 the information we seek and $\mtx{E}$ a small perturbation.
 We want a basis that covers the range of $\mtx{B}$, however, if we repeat
@@ -203,9 +220,13 @@ To overcome this issue, the idea is to take $p$ more samples:
 
 The enriched set $\{\mtx{y}^{(i)}\}_{i=1}^{k+p}$ has much more chance
 of spanning the desired subspace, and this is grounded with some
-theoretical results holding in high probability. The theory also shows that
-$p$ can be quite small. In practice, $p=5$ is more than enough.
+theoretical results; see for example Theorem \ref{thm:avg-frob-error-gauss}.
+The theory also shows that
+$p$ can be quite small. In practice, $p=5$ is enough.
 
+Here in the box below, we illustrate the basic prodecure to
+find $\mtx{Q}$ that approximates the range of $\mtx{A}$ through randomization.
+We call it Proto-Algorithm.
 \begin{figure}[ht]
 \begin{center}
 \framebox{\begin{minipage}{.9\textwidth}
@@ -228,13 +249,16 @@ $p$ can be quite small. In practice, $p=5$ is more than enough.
 
 This corresponds to \textbf{Stage 2} of the algorithm. Once we have $\mtx{Q}$
 such that $\mtx{A}\approx\mtx{Q}\mtx{Q}^\adj\mtx{A}$, taking 
-$\mtx{B}=\mtx{Q}$ and $\mtx{C}=\mtx{Q}^\adj\mtx{A}$ we produce a low rank
-matrix decomposition $\mtx{A}\approx\mtx{B}\mtx{C}$.
+$\mtx{B}=\mtx{Q}$ and $\mtx{C}=\mtx{Q}^\adj\mtx{A}$ we directly produce a low rank
+matrix decomposition $\mtx{A}\approx\mtx{B}\mtx{C}$. However, 
+there are more involved methods to produce a decomposition from $\mtx{Q}$ with
+computational advantadges compared to the direct method. 
+
+One we have $\mtx{A}\approx\mtx{B}\mtx{C}$, standard matrix decompositions 
+(e.g. SVD, QR) can be easily derived as we show in \ref{itm:SVD-from-C}. \\
 
 
 
 A lot of questions need to be addressed in order to turn these methods into
-a technology or \textit{off-the-shelf} algorithms, namely, 
-theoretical guarantees on the accuracy of the approximate factorization and
-experimentally study the gap between theory and practice, i.e, how these
-methods perform in practice.
+a technology or \textit{off-the-shelf} algorithms. The following 
+sections will we devoted to this.

@@ -19,14 +19,6 @@ function Wtild = WeightMatrix(image, sigma, cropsize)
 %   similarities:
 %       (n x n) dimensional matrix containing the
 %       similarities between each pair of patches.
-%
-%   Parcimonie and Compressed Sensing (http://gpeyre.github.io/teaching/) project (Master MVA)
-%   Subject: Probabilistic algorithms for constructing approximate matrix decompositions,
-%   Advisor: Gabriel Peyré (http://gpeyre.github.io/teaching/) (Gabriel.Peyre at ceremade.dauphine.fr),
-%   Where: git repository on bitbucket.org (https://bitbucket.org/lbesson/mva15-project-parcimonie-compressed-sensing),
-%   Author: (C), 2015-16, Lilian Besson (http://perso.crans.org/besson/)
-%   MIT license (http://lbesson.mit-license.org/).
-%
     x = size(image, 1);
     y = size(image, 2);
     fullimagesize = x * y;
@@ -34,7 +26,6 @@ function Wtild = WeightMatrix(image, sigma, cropsize)
     X = cat(3, X{:});
     X = permute(X, [3, 1, 2]);
     X = reshape(X, [fullimagesize, cropsize^2]);
-    % % Compute manually this similarity Graph matrix
     Wtild = zeros(fullimagesize);
     for i = 1:fullimagesize
         for j = 1:fullimagesize

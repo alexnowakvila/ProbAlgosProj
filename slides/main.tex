@@ -239,14 +239,39 @@ matrix $\mtx{Y} = \mtx{A\Omega}$ in $\mathcal{O}(mn\log(\ell))$ operations via a
 \end{frame}
 
 \begin{frame}{Stage B: Construct $\mtx{A}\approx\mtx{B}\mtx{C}$ decomposition from $\mtx{Q}$.}
-\textbf{Obs:} Deterministic stage.
 \begin{itemize}
   \item \textbf{Direct SVD:} Set $\mtx{B}=\mtx{Q}$ and $\mtx{C}=\mtx{Q}^\adj\mtx{A}$.
+  Construct SVD of $\mtx{C}=\mtx{U}_1\mtx{\Sigma}\mtx{V}^\adj$ and set $\mtx{U}=\mtx{B}\mtx{U}_1$
   $$ \implies \text{Product }\mtx{Q}^\adj\mtx{A}\text{ costs }
-  \mathcal{O}(mnk)\text{, too expensive!} $$
+  \mathcal{O}(mnk)\text{, too expensive!} \bcsmmh$$
+  $$ \implies \text{SVD with } \textit{Direct SVD} 
+  \text{ requires } \mathcal{O}(k)\text{ passes over data!} \bcsmmh$$
 
-  \item \textit{Solution}: Can be reduced to $\mathcal{O}(k^2(m+n))$
-  via \textit{row extraction}, but an additive error term comes up.
+  \item \textit{Solution 1}: Complexity can be reduced to $\mathcal{O}(k^2(m+n))$
+  via \textit{row extraction}, but an additive error term comes up. \bcsmbh
+
+  \item \textit{Solution 2}: Use \textit{single-pass} algorithms.
+  Adds additional error too. \bcsmbh
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Full Algorithms}
+\begin{itemize}
+  \item \textbf{General Matrices That Fit in Core Memory}
+  \begin{enumerate}
+    \item Stage 1: Use \textit{Structured Random Matrix}.
+    \item Stage 2: Use \textit{row-extraction}.
+  \end{enumerate}
+
+  $$ \boxed{T_{\rm random} \sim mn \log(k) + k^2 (m+n)} $$
+  
+  \item \textbf{Matrices for which Matrix-Vector Products are Cheap.}
+  \begin{enumerate}
+    \item Stage 1: Use \textit{Randomized Power method}.
+    \item Stage 2: Use \textit{Direct SVD}
+  \end{enumerate}
+
+  $$ \boxed{T_{\rm sparse} = (2q+2)\,(k + p) \, T_{\rm mult} + \mathcal{O}(k^2 (m + n))} $$
 \end{itemize}
 \end{frame}
 
@@ -320,6 +345,11 @@ values.}
   additional hypothesis
   of matrix $\mtx{A}$.
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+
+$$\text{Gr\`acies!}$$
 \end{frame}
 
 % All of the following is optional and typically not needed. 

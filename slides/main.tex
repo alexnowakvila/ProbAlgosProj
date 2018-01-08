@@ -107,7 +107,7 @@
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 
-\date{Advised by: Gabriel Peyr\'e}
+\date{08/01/2018}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -205,8 +205,7 @@
 \end{figure}
 \begin{itemize}
   \item If we set $\ell=k+p$ with $p>0$ ($p<<k$) the \textit{oversampling parameter},
-  we can control the error $\| \mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\|$ with arbitrary
-  precision! \bcsmbh
+  we can control the error $\| \mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}\|$! \bcsmbh (See Bound)
   $$
 \Expect \norm{\mtx{A}-\mtx{Q}\mtx{Q}^\adj\mtx{A}}
     \leq \left(1 + \sqrt{\frac{k}{p-1}} \right) \sigma_{k+1}
@@ -344,12 +343,18 @@ values.}
   \item Possible future directions: Improve error bounds sharpness under
   additional hypothesis
   of matrix $\mtx{A}$.
+  \item Critics: In many applications, the target rank $k$ already
+  satisfies $k<<m,n$. (So $\log$-term not really necessary...)
+  \item Critics: Sometimes properties of matrix $\mtx{A}$ hard to know
+  in advance.
+
+
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 
-$$\text{Gr\`acies!}$$
+$$\Huge\text{Gr\`acies!}$$
 \end{frame}
 
 % All of the following is optional and typically not needed. 

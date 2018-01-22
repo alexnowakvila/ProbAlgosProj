@@ -107,3 +107,4 @@ ENV/
 *.run.xml
 *-blx.bib
 
+source_reference/*
